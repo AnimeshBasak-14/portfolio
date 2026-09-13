@@ -482,6 +482,19 @@ export const Projects: React.FC = () => {
                     className="flex items-center gap-2"
                     onClick={(e) => e.stopPropagation()}
                   >
+                    {project.liveUrl && project.liveUrl !== project.githubUrl && !project.liveUrl.includes("youtube.com") && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-500/40 bg-emerald-950/60 text-emerald-400 transition-all hover:border-emerald-400 hover:bg-emerald-900/60 hover:text-emerald-300 shadow-sm"
+                        title="Launch Live Application"
+                        aria-label="Launch Live Application"
+                      >
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+
                     <a
                       href={project.githubUrl}
                       target="_blank"
@@ -783,6 +796,20 @@ export const Projects: React.FC = () => {
 
               {/* Action Buttons Footer */}
               <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-slate-800 pt-6">
+                {selectedProject.liveUrl && selectedProject.liveUrl !== selectedProject.githubUrl && !selectedProject.liveUrl.includes("youtube.com") && (
+                  <Magnetic strength={0.25}>
+                    <a
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 rounded-full border border-emerald-500/50 bg-emerald-500/15 px-6 py-2.5 text-sm font-bold text-emerald-400 transition-all hover:bg-emerald-500/25 hover:border-emerald-400 shadow-glow-emerald"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      <span>Launch Live App</span>
+                    </a>
+                  </Magnetic>
+                )}
+
                 <Magnetic strength={0.25}>
                   <a
                     href={selectedProject.githubUrl}

@@ -72,7 +72,7 @@ export const projectsData: Project[] = [
     longDescription: "Constructed an efficient RAG system in Streamlit utilizing FAISS vector indexing and Hugging Face embedding models. Achieved an average response latency of 4.72 ms and reduced query turnaround time by 15% through LangSmith-monitored retrieval pipelines.",
     tags: ["RAG", "FAISS", "Hugging Face", "Streamlit", "LangChain", "Python"],
     githubUrl: "https://github.com/AnimeshBasak-14/ChatWithPDF-RAG",
-    liveUrl: "https://github.com/AnimeshBasak-14/ChatWithPDF-RAG",
+    liveUrl: "https://chatwithpdf-rag-b6wpkqmqhc29qwlcbadkry.streamlit.app/",
     featured: true,
     accentColor: "from-palette-sage/25 via-palette-moss/30 to-palette-forest/30",
     metrics: [
