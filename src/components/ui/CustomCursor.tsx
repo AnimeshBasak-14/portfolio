@@ -114,7 +114,7 @@ export const CustomCursor: React.FC = () => {
           width: 500,
           height: 500,
           background:
-            "radial-gradient(circle, rgba(0, 216, 255, 0.14) 0%, rgba(56, 189, 248, 0.06) 45%, transparent 70%)",
+            "radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(201, 201, 201, 0.02) 45%, transparent 70%)",
         }}
       />
 
@@ -128,7 +128,7 @@ export const CustomCursor: React.FC = () => {
             initial={{ scale: scale, opacity: opacity }}
             animate={{ scale: 0, opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/60 blur-[1px]"
+            className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/40 blur-[1px]"
             style={{
               left: t.x,
               top: t.y,
@@ -141,25 +141,25 @@ export const CustomCursor: React.FC = () => {
 
       {/* 3. Smooth elastic follower ring */}
       <motion.div
-        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/40 backdrop-blur-xs transition-colors duration-200"
+        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/25 backdrop-blur-xs transition-colors duration-200"
         style={{
           left: smoothX,
           top: smoothY,
           width: isPointer ? 48 : 28,
           height: isPointer ? 48 : 28,
           backgroundColor: isPointer
-            ? "rgba(0, 216, 255, 0.12)"
-            : "rgba(0, 216, 255, 0.05)",
+            ? "rgba(255, 255, 255, 0.12)"
+            : "rgba(255, 255, 255, 0.04)",
           boxShadow: isPointer
-            ? "0 0 20px rgba(0, 216, 255, 0.4)"
-            : "0 0 10px rgba(0, 216, 255, 0.2)",
+            ? "0 0 15px rgba(255, 255, 255, 0.2)"
+            : "0 0 8px rgba(255, 255, 255, 0.08)",
         }}
         transition={{ type: "spring", stiffness: 350, damping: 25 }}
       />
 
       {/* 4. Sharp center cursor dot */}
       <motion.div
-        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(0,216,255,0.8)]"
+        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F2F2ED] shadow-[0_0_8px_rgba(255,255,255,0.5)]"
         style={{
           left: mouseX,
           top: mouseY,

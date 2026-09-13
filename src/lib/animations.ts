@@ -16,49 +16,45 @@ export const springTransition = {
   mass: 0.8,
 };
 
-// Fade up stagger container
+// Fade up stagger container - Default opacity 1 to prevent gating content behind scroll
 export const containerVariants: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
     },
   },
 };
 
-// Item reveal with slight vertical translate and subtle scale
+// Item reveal with subtle vertical nudge while preserving initial opacity: 1
 export const itemVariants: Variants = {
   hidden: {
-    opacity: 0,
-    y: 32,
-    scale: 0.97,
+    opacity: 1,
+    y: 12,
   },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.85,
+      duration: 0.6,
       ease: EXPO_OUT,
     },
   },
 };
 
-// Hero letter reveal variant
+// Hero letter reveal variant - Initial opacity: 1 to ensure instant accessibility
 export const letterVariants: Variants = {
   hidden: {
-    opacity: 0,
-    y: 40,
-    rotateX: -30,
+    opacity: 1,
+    y: 0,
   },
   visible: {
     opacity: 1,
     y: 0,
-    rotateX: 0,
     transition: {
-      duration: 0.7,
+      duration: 0.5,
       ease: EXPO_OUT,
     },
   },

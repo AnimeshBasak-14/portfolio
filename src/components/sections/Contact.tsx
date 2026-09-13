@@ -83,12 +83,12 @@ export const Contact: React.FC = () => {
       );
       setFormData({ name: "", email: "", message: "", website_hp: "" });
 
-      // Celebratory confetti burst in electric cyan, azure, emerald, and white
+      // Celebratory confetti burst in monochrome silver and white
       confetti({
         particleCount: 90,
         spread: 75,
         origin: { y: 0.7 },
-        colors: ["#00d8ff", "#38bdf8", "#10b981", "#f8fafc"],
+        colors: ["#F2F2ED", "#C9C9C9", "#9A9A9A", "#FFFFFF", "#737373"],
       });
     } catch (err: any) {
       setState("error");
@@ -100,33 +100,33 @@ export const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="relative py-28 px-4 md:px-8">
-      {/* Background ambient glow in electric cyan & emerald */}
-      <div className="pointer-events-none absolute bottom-1/4 right-10 h-96 w-96 rounded-full bg-cyan-500/10 blur-[140px] -z-10" />
-      <div className="pointer-events-none absolute top-1/4 left-10 h-80 w-80 rounded-full bg-emerald-500/10 blur-[130px] -z-10" />
+      {/* Background ambient glow in subtle monochrome */}
+      <div className="pointer-events-none absolute bottom-1/4 right-10 h-96 w-96 rounded-full bg-white/[0.02] blur-[140px] -z-10" />
+      <div className="pointer-events-none absolute top-1/4 left-10 h-80 w-80 rounded-full bg-white/[0.02] blur-[130px] -z-10" />
 
       <div className="mx-auto max-w-6xl">
         {/* Section Header */}
         <div className="mb-16 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-mono tracking-widest text-cyan-400 uppercase shadow-sm"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs font-mono tracking-widest text-[#9A9A9A] uppercase shadow-sm"
           >
-            <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+            <Sparkles className="h-3.5 w-3.5 text-[#F2F2ED]" />
             <span>Direct Inquiries & Research Dialogue</span>
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl"
+            className="mt-4 text-3xl font-extrabold tracking-tight text-[#F2F2ED] sm:text-4xl md:text-5xl"
           >
-            Let&apos;s build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-emerald-400">extraordinary</span>.
+            Let&apos;s build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F2F2ED] via-[#C9C9C9] to-[#9A9A9A]">extraordinary</span>.
           </motion.h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-slate-300">
+          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-[#9A9A9A]">
             Interested in research collaborations, autonomous systems discussions, or engineering roles? Send a message below.
           </p>
         </div>
@@ -137,15 +137,15 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <TiltCard
               maxTilt={6}
-              spotlightColor="rgba(0, 216, 255, 0.18)"
-              className="p-8 h-full flex flex-col justify-between border border-slate-800 bg-slate-900/85 shadow-glass hover:border-cyan-500/30 hover:shadow-glass-lg transition-all"
+              spotlightColor="rgba(255, 255, 255, 0.05)"
+              className="p-8 h-full flex flex-col justify-between border border-white/[0.08] bg-[#141414] shadow-glass hover:border-white/20 hover:shadow-glass-lg transition-all"
             >
               <div>
-                <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                  <Terminal className="h-4 w-4 text-cyan-400" />
+                <h3 className="text-xl font-bold text-[#F2F2ED] mb-2 flex items-center gap-2">
+                  <Terminal className="h-4 w-4 text-[#F2F2ED]" />
                   <span>Canonical Channels</span>
                 </h3>
-                <p className="text-xs text-slate-400 mb-8 leading-relaxed">
+                <p className="text-xs text-[#9A9A9A] mb-8 leading-relaxed">
                   Fast response guaranteed. Feel free to connect directly via email, professional profiles, or open-source hubs.
                 </p>
 
@@ -154,41 +154,41 @@ export const Contact: React.FC = () => {
                   {/* Email */}
                   <a
                     href={`mailto:${personalData.email}`}
-                    className="group flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-4 transition-all hover:border-cyan-500/40 hover:bg-slate-800/80 shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#0A0A0A]/60 p-4 transition-all hover:border-white/20 hover:bg-[#0A0A0A]/90 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-slate-800 p-2.5 text-cyan-400 border border-slate-700/60 shadow-sm group-hover:border-cyan-500/40">
+                      <div className="rounded-xl bg-white/[0.05] p-2.5 text-[#F2F2ED] border border-white/10 shadow-sm">
                         <Mail className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-slate-400">Direct Email</span>
-                        <span className="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors">
+                        <span className="block text-[11px] font-mono text-[#9A9A9A]">Direct Email</span>
+                        <span className="text-sm font-semibold text-[#F2F2ED] group-hover:text-[#C9C9C9] transition-colors">
                           {personalData.email}
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-cyan-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-[#9A9A9A] group-hover:text-[#F2F2ED] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
-                  {/* Hugging Face (Replaces phone number) */}
+                  {/* Hugging Face */}
                   <a
                     href={personalData.huggingface}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-4 transition-all hover:border-yellow-500/40 hover:bg-slate-800/80 shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#0A0A0A]/60 p-4 transition-all hover:border-white/20 hover:bg-[#0A0A0A]/90 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-slate-800 p-2.5 text-yellow-400 border border-slate-700/60 shadow-sm group-hover:border-yellow-500/40">
+                      <div className="rounded-xl bg-white/[0.05] p-2.5 text-[#F2F2ED] border border-white/10 shadow-sm">
                         <HuggingFaceIcon className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-slate-400">Hugging Face</span>
-                        <span className="text-sm font-semibold text-white group-hover:text-yellow-400 transition-colors">
+                        <span className="block text-[11px] font-mono text-[#9A9A9A]">Hugging Face</span>
+                        <span className="text-sm font-semibold text-[#F2F2ED] group-hover:text-[#C9C9C9] transition-colors">
                           huggingface.co/rohan700
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-yellow-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-[#9A9A9A] group-hover:text-[#F2F2ED] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   {/* LinkedIn */}
@@ -196,20 +196,20 @@ export const Contact: React.FC = () => {
                     href={personalData.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-4 transition-all hover:border-sky-500/40 hover:bg-slate-800/80 shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#0A0A0A]/60 p-4 transition-all hover:border-white/20 hover:bg-[#0A0A0A]/90 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-slate-800 p-2.5 text-sky-400 border border-slate-700/60 shadow-sm group-hover:border-sky-500/40">
+                      <div className="rounded-xl bg-white/[0.05] p-2.5 text-[#F2F2ED] border border-white/10 shadow-sm">
                         <Linkedin className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-slate-400">LinkedIn Profile</span>
-                        <span className="text-sm font-semibold text-white group-hover:text-sky-400 transition-colors">
+                        <span className="block text-[11px] font-mono text-[#9A9A9A]">LinkedIn Profile</span>
+                        <span className="text-sm font-semibold text-[#F2F2ED] group-hover:text-[#C9C9C9] transition-colors">
                           in/animeshbasak03
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-sky-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-[#9A9A9A] group-hover:text-[#F2F2ED] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   {/* GitHub */}
@@ -217,27 +217,27 @@ export const Contact: React.FC = () => {
                     href={personalData.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-4 transition-all hover:border-cyan-500/40 hover:bg-slate-800/80 shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#0A0A0A]/60 p-4 transition-all hover:border-white/20 hover:bg-[#0A0A0A]/90 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-slate-800 p-2.5 text-cyan-400 border border-slate-700/60 shadow-sm group-hover:border-cyan-500/40">
+                      <div className="rounded-xl bg-white/[0.05] p-2.5 text-[#F2F2ED] border border-white/10 shadow-sm">
                         <Github className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-slate-400">GitHub Repositories</span>
-                        <span className="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors">
+                        <span className="block text-[11px] font-mono text-[#9A9A9A]">GitHub Repositories</span>
+                        <span className="text-sm font-semibold text-[#F2F2ED] group-hover:text-[#C9C9C9] transition-colors">
                           github.com/AnimeshBasak-14
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-cyan-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-[#9A9A9A] group-hover:text-[#F2F2ED] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 </div>
               </div>
 
               {/* Status Badge */}
-              <div className="mt-8 rounded-xl border border-slate-800 bg-slate-950/70 p-4 text-xs font-mono text-slate-300">
-                <span className="text-emerald-400 font-bold">● </span> Location: {personalData.location}
+              <div className="mt-8 rounded-xl border border-white/[0.08] bg-[#0A0A0A]/70 p-4 text-xs font-mono text-[#9A9A9A]">
+                <span className="text-[#F2F2ED] font-bold">● </span> Location: {personalData.location}
               </div>
             </TiltCard>
           </div>
@@ -246,8 +246,8 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-7">
             <TiltCard
               maxTilt={4}
-              spotlightColor="rgba(0, 216, 255, 0.15)"
-              className="p-8 sm:p-10 border border-slate-800 bg-slate-900/85 shadow-glass hover:border-cyan-500/30 hover:shadow-glass-lg transition-all"
+              spotlightColor="rgba(255, 255, 255, 0.05)"
+              className="p-8 sm:p-10 border border-white/[0.08] bg-[#141414] shadow-glass hover:border-white/20 hover:shadow-glass-lg transition-all"
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Honeypot field */}
@@ -272,11 +272,11 @@ export const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder=" "
-                    className="peer w-full rounded-xl border border-slate-800 bg-slate-950/70 px-4 pt-6 pb-2 text-sm text-white placeholder-transparent outline-none transition-all duration-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 shadow-sm"
+                    className="peer w-full rounded-xl border border-white/[0.08] bg-[#0A0A0A]/70 px-4 pt-6 pb-2 text-sm text-[#F2F2ED] placeholder-transparent outline-none transition-all duration-300 focus:border-[#C9C9C9] focus:ring-2 focus:ring-white/10 shadow-sm"
                   />
                   <label
                     htmlFor="name"
-                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-slate-400 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-500 peer-focus:top-2 peer-focus:text-xs peer-focus:text-cyan-400"
+                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-[#9A9A9A] transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#9A9A9A] peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#F2F2ED]"
                   >
                     Your Name *
                   </label>
@@ -292,11 +292,11 @@ export const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder=" "
-                    className="peer w-full rounded-xl border border-slate-800 bg-slate-950/70 px-4 pt-6 pb-2 text-sm text-white placeholder-transparent outline-none transition-all duration-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 shadow-sm"
+                    className="peer w-full rounded-xl border border-white/[0.08] bg-[#0A0A0A]/70 px-4 pt-6 pb-2 text-sm text-[#F2F2ED] placeholder-transparent outline-none transition-all duration-300 focus:border-[#C9C9C9] focus:ring-2 focus:ring-white/10 shadow-sm"
                   />
                   <label
                     htmlFor="email"
-                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-slate-400 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-500 peer-focus:top-2 peer-focus:text-xs peer-focus:text-cyan-400"
+                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-[#9A9A9A] transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#9A9A9A] peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#F2F2ED]"
                   >
                     Your Email Address *
                   </label>
@@ -312,11 +312,11 @@ export const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder=" "
-                    className="peer w-full resize-none rounded-xl border border-slate-800 bg-slate-950/70 px-4 pt-6 pb-2 text-sm text-white placeholder-transparent outline-none transition-all duration-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 shadow-sm"
+                    className="peer w-full resize-none rounded-xl border border-white/[0.08] bg-[#0A0A0A]/70 px-4 pt-6 pb-2 text-sm text-[#F2F2ED] placeholder-transparent outline-none transition-all duration-300 focus:border-[#C9C9C9] focus:ring-2 focus:ring-white/10 shadow-sm"
                   />
                   <label
                     htmlFor="message"
-                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-slate-400 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-500 peer-focus:top-2 peer-focus:text-xs peer-focus:text-cyan-400"
+                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-[#9A9A9A] transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#9A9A9A] peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#F2F2ED]"
                   >
                     Message or Collaboration Details *
                   </label>
@@ -329,44 +329,40 @@ export const Contact: React.FC = () => {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className={`flex items-center gap-2 rounded-xl p-3.5 text-xs font-medium ${
-                        state === "success"
-                          ? "border border-emerald-500/30 bg-emerald-950/50 text-emerald-300 shadow-sm"
-                          : "border border-rose-500/30 bg-rose-950/50 text-rose-300"
-                      }`}
+                      className="flex items-center gap-2 rounded-xl p-3.5 text-xs font-medium border border-white/20 bg-white/[0.06] text-[#F2F2ED] shadow-sm"
                     >
                       {state === "success" ? (
-                        <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                        <CheckCircle2 className="h-4 w-4 shrink-0 text-[#F2F2ED]" />
                       ) : (
-                        <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
+                        <AlertCircle className="h-4 w-4 shrink-0 text-[#F2F2ED]" />
                       )}
                       <span>{feedbackMessage}</span>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                {/* Submit button in Cyber-Physical styling */}
+                {/* Submit button in Editorial styling */}
                 <div className="pt-2">
                   <Magnetic strength={0.3}>
                     <button
                       type="submit"
                       disabled={state === "submitting"}
-                      className="relative group flex w-full items-center justify-center gap-2 rounded-xl border border-cyan-500/50 bg-cyan-500 px-8 py-3.5 text-sm font-bold text-slate-950 shadow-glow-cyan transition-all duration-300 hover:bg-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="relative group flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-[#F2F2ED] px-8 py-3.5 text-sm font-bold text-[#0A0A0A] shadow-sm transition-all duration-300 hover:bg-[#C9C9C9] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {state === "submitting" ? (
                         <>
-                          <Loader2 className="h-4 w-4 animate-spin text-slate-950" />
+                          <Loader2 className="h-4 w-4 animate-spin text-[#0A0A0A]" />
                           <span>Transmitting Signal...</span>
                         </>
                       ) : state === "success" ? (
                         <>
-                          <CheckCircle2 className="h-4 w-4 text-slate-950" />
+                          <CheckCircle2 className="h-4 w-4 text-[#0A0A0A]" />
                           <span>Transmission Dispatched</span>
                         </>
                       ) : (
                         <>
                           <span>Transmit Message</span>
-                          <Send className="h-4 w-4 text-slate-950 transition-transform group-hover:translate-x-1" />
+                          <Send className="h-4 w-4 text-[#0A0A0A] transition-transform group-hover:translate-x-1" />
                         </>
                       )}
                     </button>

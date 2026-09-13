@@ -9,8 +9,8 @@
 /* Base Body and Smooth Scrolling setup */
 html {
   scroll-behavior: initial;
-  background-color: #0f172a;
-  color: #f8fafc;
+  background-color: #0A0A0A;
+  color: #F2F2ED;
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
@@ -41,48 +41,43 @@ html.lenis body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
 }
 
-/* Liquid Glass Core Utilities with Cyber-Physical Scholar Dark Palette */
+/* Liquid Glass Core Utilities with Monochrome Editorial Palette */
 @layer components {
-  /* Terminal-grade frosted glassmorphism in deep slate tones */
+  /* Minimalist frosted glassmorphism */
   .liquid-glass {
     position: relative;
-    background: rgba(15, 23, 42, 0.78);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid rgba(0, 216, 255, 0.16);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 
-      0 12px 32px -4px rgba(0, 0, 0, 0.5),
-      inset 0 1px 1px 0 rgba(0, 216, 255, 0.15);
+      0 12px 32px -4px rgba(0, 0, 0, 0.7),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.06);
   }
 
   .liquid-glass-card {
     position: relative;
-    background: linear-gradient(
-      135deg,
-      rgba(22, 33, 58, 0.75) 0%,
-      rgba(15, 23, 42, 0.88) 100%
-    );
-    backdrop-filter: blur(32px) saturate(180%);
-    -webkit-backdrop-filter: blur(32px) saturate(180%);
-    border: 1px solid rgba(0, 216, 255, 0.14);
+    background: #141414;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 
-      0 16px 40px -8px rgba(0, 0, 0, 0.6),
-      0 0 0 1px rgba(0, 216, 255, 0.08),
-      inset 0 1.5px 1px 0 rgba(0, 216, 255, 0.18);
+      0 16px 40px -8px rgba(0, 0, 0, 0.8),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.04);
     transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .liquid-glass-card:hover {
-    border-color: rgba(0, 216, 255, 0.45);
+    border-color: rgba(201, 201, 201, 0.3);
     box-shadow: 
-      0 24px 50px -10px rgba(0, 0, 0, 0.75),
-      0 0 30px rgba(0, 216, 255, 0.25),
-      inset 0 1.5px 2px 0 rgba(0, 216, 255, 0.3);
+      0 24px 50px -10px rgba(0, 0, 0, 0.9),
+      0 0 25px rgba(255, 255, 255, 0.03),
+      inset 0 1px 2px 0 rgba(255, 255, 255, 0.08);
   }
 
-  /* Specular Highlight line along top edge with Electric Cyan sheen */
+  /* Specular Highlight line along top edge with subtle monochrome sheen */
   .specular-top::before {
     content: '';
     position: absolute;
@@ -93,49 +88,30 @@ html.lenis body {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(0, 216, 255, 0.85) 50%,
+      rgba(255, 255, 255, 0.25) 50%,
       transparent 100%
     );
     pointer-events: none;
   }
-
-  /* Ambient light glow behind cards in Cyan / Emerald */
-  .glow-ambient-cyan {
-    position: absolute;
-    inset: -15px;
-    background: radial-gradient(circle at 50% 50%, rgba(0, 216, 255, 0.22), transparent 70%);
-    z-index: -1;
-    pointer-events: none;
-    filter: blur(24px);
-  }
-
-  .glow-ambient-emerald {
-    position: absolute;
-    inset: -15px;
-    background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.22), transparent 70%);
-    z-index: -1;
-    pointer-events: none;
-    filter: blur(24px);
-  }
 }
 
-/* Custom scrollbar styling in cyan/slate tones */
+/* Custom scrollbar styling in monochrome editorial tones */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #0A0A0A;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 216, 255, 0.25);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 9999px;
-  border: 2px solid #0f172a;
+  border: 2px solid #0A0A0A;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 216, 255, 0.5);
+  background: #C9C9C9;
 }
 
 /* Reduced Motion preferences */

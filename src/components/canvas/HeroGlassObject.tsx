@@ -53,15 +53,15 @@ function AutonomousVehicle({
 
   return (
     <group>
-      {/* 1. Main Aerodynamic Chassis (Metallic Cyber Slate Clearcoat) */}
+      {/* 1. Main Aerodynamic Chassis (Matte Graphite & Chrome Clearcoat) */}
       <group position={[0, 0.16, 0]}>
         {/* Lower Main Body */}
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[0.56, 0.16, 1.25]} />
           <meshStandardMaterial
-            color="#182438"
-            roughness={0.2}
-            metalness={0.85}
+            color="#1C1C1C"
+            roughness={0.3}
+            metalness={0.75}
           />
         </mesh>
 
@@ -69,42 +69,42 @@ function AutonomousVehicle({
         <mesh position={[0, 0.04, 0.38]} rotation={[-0.12, 0, 0]}>
           <boxGeometry args={[0.52, 0.1, 0.46]} />
           <meshStandardMaterial
-            color="#1e2d46"
-            roughness={0.18}
-            metalness={0.85}
+            color="#262626"
+            roughness={0.25}
+            metalness={0.8}
           />
         </mesh>
 
         {/* Front Bumper Air Dam & Splitter */}
         <mesh position={[0, -0.06, 0.61]}>
           <boxGeometry args={[0.55, 0.04, 0.08]} />
-          <meshStandardMaterial color="#0b111c" roughness={0.5} metalness={0.5} />
+          <meshStandardMaterial color="#121212" roughness={0.6} metalness={0.4} />
         </mesh>
 
         {/* Rear Aerodynamic Trunk & Integrated Lip Spoiler */}
         <mesh position={[0, 0.04, -0.44]} rotation={[0.08, 0, 0]}>
           <boxGeometry args={[0.52, 0.1, 0.36]} />
-          <meshStandardMaterial color="#1e2d46" roughness={0.18} metalness={0.85} />
+          <meshStandardMaterial color="#262626" roughness={0.25} metalness={0.8} />
         </mesh>
         <mesh position={[0, 0.1, -0.6]}>
           <boxGeometry args={[0.5, 0.02, 0.06]} />
-          <meshStandardMaterial color="#00d8ff" emissive="#00d8ff" emissiveIntensity={0.6} roughness={0.3} metalness={0.8} />
+          <meshStandardMaterial color="#D4D4D4" emissive="#FFFFFF" emissiveIntensity={0.5} roughness={0.2} metalness={0.9} />
         </mesh>
 
         {/* Rear Aerodynamic Diffuser */}
         <mesh position={[0, -0.06, -0.6]}>
           <boxGeometry args={[0.54, 0.05, 0.06]} />
-          <meshStandardMaterial color="#090d16" roughness={0.7} metalness={0.3} />
+          <meshStandardMaterial color="#111111" roughness={0.7} metalness={0.3} />
         </mesh>
 
-        {/* Side Skirts with Cyan Underglow Edge */}
+        {/* Side Skirts with Hairline Edge */}
         <mesh position={[-0.285, -0.05, 0]}>
           <boxGeometry args={[0.02, 0.04, 0.9]} />
-          <meshStandardMaterial color="#0b111c" roughness={0.5} />
+          <meshStandardMaterial color="#141414" roughness={0.5} />
         </mesh>
         <mesh position={[0.285, -0.05, 0]}>
           <boxGeometry args={[0.02, 0.04, 0.9]} />
-          <meshStandardMaterial color="#0b111c" roughness={0.5} />
+          <meshStandardMaterial color="#141414" roughness={0.5} />
         </mesh>
       </group>
 
@@ -187,8 +187,8 @@ function AutonomousVehicle({
           <boxGeometry args={[0.1, 0.04, 0.02]} />
           <meshStandardMaterial
             color="#ffffff"
-            emissive="#f5f5d5"
-            emissiveIntensity={3.2}
+            emissive="#ffffff"
+            emissiveIntensity={3.0}
           />
         </mesh>
         {/* Right Headlight */}
@@ -196,17 +196,17 @@ function AutonomousVehicle({
           <boxGeometry args={[0.1, 0.04, 0.02]} />
           <meshStandardMaterial
             color="#ffffff"
-            emissive="#f5f5d5"
-            emissiveIntensity={3.2}
+            emissive="#ffffff"
+            emissiveIntensity={3.0}
           />
         </mesh>
 
-        {/* Left Blinker Indicator (Flashes when changing lane to the left) */}
+        {/* Left Blinker Indicator (Flashes silver/white light pulse when changing lane to the left) */}
         <mesh position={[-0.26, 0, 0]}>
           <sphereGeometry args={[0.022, 12, 12]} />
           <meshStandardMaterial
-            color="#f59e0b"
-            emissive="#f59e0b"
+            color="#FFFFFF"
+            emissive="#FFFFFF"
             emissiveIntensity={isBlinkingLeft ? 3.5 : 0.2}
           />
         </mesh>
@@ -215,9 +215,9 @@ function AutonomousVehicle({
         <mesh position={[0, -0.06, 0.85]} rotation={[Math.PI / 2, 0, 0]}>
           <coneGeometry args={[0.55, 1.6, 24, 1, true]} />
           <meshBasicMaterial
-            color="#f5f5d5"
+            color="#ffffff"
             transparent
-            opacity={0.15}
+            opacity={0.08}
             side={THREE.DoubleSide}
           />
         </mesh>
@@ -228,17 +228,17 @@ function AutonomousVehicle({
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[0.48, 0.03, 0.02]} />
           <meshStandardMaterial
-            color="#ef4444"
-            emissive="#ef4444"
-            emissiveIntensity={2.5}
+            color="#E0E0E0"
+            emissive="#FFFFFF"
+            emissiveIntensity={1.8}
           />
         </mesh>
         {/* Rear Left Indicator */}
         <mesh position={[-0.25, 0, 0]}>
           <sphereGeometry args={[0.02, 12, 12]} />
           <meshStandardMaterial
-            color="#f59e0b"
-            emissive="#f59e0b"
+            color="#FFFFFF"
+            emissive="#FFFFFF"
             emissiveIntensity={isBlinkingLeft ? 3.5 : 0.2}
           />
         </mesh>
@@ -249,39 +249,41 @@ function AutonomousVehicle({
         {/* Sensor Mount Baseplate */}
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[0.22, 0.02, 0.24]} />
-          <meshStandardMaterial color="#1a2517" roughness={0.4} metalness={0.8} />
+          <meshStandardMaterial color="#1E1E1E" roughness={0.4} metalness={0.8} />
         </mesh>
 
         {/* Velodyne / Hesai 360° LiDAR Puck */}
         <mesh position={[0, 0.04, 0]}>
           <cylinderGeometry args={[0.07, 0.07, 0.06, 24]} />
-          <meshStandardMaterial color="#2d3a29" roughness={0.3} metalness={0.8} />
+          <meshStandardMaterial color="#282828" roughness={0.3} metalness={0.8} />
         </mesh>
 
-        {/* High-Speed Rotating LiDAR Turret */}
+        {/* High-Speed Rotating LiDAR Turret in Matte Chrome */}
         <mesh ref={lidarRotor} position={[0, 0.085, 0]}>
           <cylinderGeometry args={[0.065, 0.065, 0.03, 24]} />
           <meshStandardMaterial
-            color="#00d8ff"
-            emissive="#00d8ff"
-            emissiveIntensity={2.5}
+            color="#E0E0E0"
+            emissive="#FFFFFF"
+            emissiveIntensity={2.0}
+            metalness={0.9}
+            roughness={0.2}
           />
         </mesh>
 
-        {/* Status Indicator LED */}
+        {/* Status Indicator LED in Pure White */}
         <mesh position={[0, 0.11, 0]}>
           <sphereGeometry args={[0.015, 12, 12]} />
-          <meshStandardMaterial color="#00d8ff" emissive="#00d8ff" emissiveIntensity={3.5} />
+          <meshStandardMaterial color="#FFFFFF" emissive="#FFFFFF" emissiveIntensity={3.0} />
         </mesh>
 
         {/* Forward Camera Pod Housing */}
         <mesh position={[0, -0.02, 0.18]}>
           <boxGeometry args={[0.08, 0.03, 0.06]} />
-          <meshStandardMaterial color="#0b111c" />
+          <meshStandardMaterial color="#141414" />
         </mesh>
         <mesh position={[0, -0.02, 0.215]} rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.012, 0.012, 0.01, 16]} />
-          <meshStandardMaterial color="#00d8ff" emissive="#00d8ff" emissiveIntensity={2.0} />
+          <meshStandardMaterial color="#FFFFFF" emissive="#FFFFFF" emissiveIntensity={1.8} />
         </mesh>
       </group>
 
@@ -313,9 +315,9 @@ function AutonomousVehicle({
       <mesh position={[0, 0.15, 1.4]} rotation={[Math.PI / 2, 0, 0]}>
         <coneGeometry args={[mode === "lidar" ? 1.4 : 0.95, 2.2, 32, 1, true]} />
         <meshBasicMaterial
-          color="#00d8ff"
+          color="#C9C9C9"
           transparent
-          opacity={mode === "lidar" ? 0.32 : 0.16}
+          opacity={mode === "lidar" ? 0.25 : 0.1}
           side={THREE.DoubleSide}
           wireframe
         />
@@ -325,9 +327,9 @@ function AutonomousVehicle({
       <mesh position={[0, 0.05, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[mode === "lidar" ? 2.4 : 1.7, mode === "lidar" ? 2.44 : 1.73, 64]} />
         <meshBasicMaterial
-          color="#00d8ff"
+          color="#FFFFFF"
           transparent
-          opacity={0.85}
+          opacity={0.7}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -590,71 +592,71 @@ function AutonomousVehicleScene({ mode }: VehicleSceneProps) {
         <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
           <planeGeometry args={[4.8, 12]} />
           <meshStandardMaterial
-            color="#090e1a"
-            roughness={0.8}
-            metalness={0.2}
+            color="#0D0D0D"
+            roughness={0.85}
+            metalness={0.15}
           />
         </mesh>
 
-        {/* Road Outer Solid Shoulder Lines in Electric Cyan */}
+        {/* Road Outer Solid Shoulder Lines in Muted Silver */}
         {/* @ts-ignore */}
         <line geometry={highwayMarkings.leftEdge}>
-          <lineBasicMaterial color="#00d8ff" linewidth={2} />
+          <lineBasicMaterial color="#737373" linewidth={2} />
         </line>
         {/* @ts-ignore */}
         <line geometry={highwayMarkings.rightEdge}>
-          <lineBasicMaterial color="#00d8ff" linewidth={2} />
+          <lineBasicMaterial color="#737373" linewidth={2} />
         </line>
 
-        {/* Dashed Lane Divider 1 in Azure */}
+        {/* Dashed Lane Divider 1 in Graphite */}
         {/* @ts-ignore */}
         <line geometry={highwayMarkings.divider1}>
-          <lineDashedMaterial color="#38bdf8" dashSize={0.3} gapSize={0.25} />
+          <lineDashedMaterial color="#4A4A4A" dashSize={0.3} gapSize={0.25} />
         </line>
 
-        {/* Dashed Lane Divider 2 in Azure */}
+        {/* Dashed Lane Divider 2 in Graphite */}
         {/* @ts-ignore */}
         <line geometry={highwayMarkings.divider2}>
-          <lineDashedMaterial color="#38bdf8" dashSize={0.3} gapSize={0.25} />
+          <lineDashedMaterial color="#4A4A4A" dashSize={0.3} gapSize={0.25} />
         </line>
 
-        {/* Reflective Electric Cyan Road Studs */}
+        {/* Reflective Road Studs with White Light Sheen */}
         {roadStuds.map((pos, i) => (
           <mesh key={i} position={pos}>
             <boxGeometry args={[0.03, 0.015, 0.03]} />
             <meshStandardMaterial
-              color="#00d8ff"
-              emissive="#00d8ff"
-              emissiveIntensity={2.5}
+              color="#CCCCCC"
+              emissive="#FFFFFF"
+              emissiveIntensity={1.8}
             />
           </mesh>
         ))}
 
-        {/* Highway Side Guardrails in Deep Slate */}
+        {/* Highway Side Guardrails in Graphite */}
         <mesh position={[-2.35, 0.12, 0]}>
           <boxGeometry args={[0.04, 0.16, 12]} />
-          <meshStandardMaterial color="#1e293b" roughness={0.4} metalness={0.7} />
+          <meshStandardMaterial color="#1F1F1F" roughness={0.4} metalness={0.7} />
         </mesh>
         <mesh position={[2.35, 0.12, 0]}>
           <boxGeometry args={[0.04, 0.16, 12]} />
-          <meshStandardMaterial color="#1e293b" roughness={0.4} metalness={0.7} />
+          <meshStandardMaterial color="#1F1F1F" roughness={0.4} metalness={0.7} />
         </mesh>
 
-        {/* Autonomous Planned S-Curve Trajectory Path Line in Muted Emerald */}
+        {/* Autonomous Planned S-Curve Trajectory Path Line in Clean Silver */}
         {/* @ts-ignore */}
         <line geometry={trajectoryGeometry}>
-          <lineBasicMaterial color="#10b981" linewidth={3} />
+          <lineBasicMaterial color="#C9C9C9" linewidth={3} />
         </line>
 
-        {/* Dynamic Waypoint Particles along the Trajectory */}
+        {/* Dynamic Waypoint Particles along Trajectory with Silver/White Light Pulses */}
         {trajectoryPoints
           .filter((_, i) => i % 3 === 0)
           .map((pt, i) => (
             <mesh key={`wp-${i}`} position={[pt.x, 0.05, pt.z]}>
               <sphereGeometry args={[0.04, 14, 14]} />
               <meshStandardMaterial
-                color="#10b981"
-                emissive="#34d399"
+                color="#E0E0E0"
+                emissive="#FFFFFF"
                 emissiveIntensity={2.5}
               />
             </mesh>
@@ -712,21 +714,21 @@ export const HeroGlassCanvas: React.FC = () => {
           gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
           dpr={[1, 2]}
         >
-          {/* Cyber-Physical Atmospheric Lighting in Electric Cyan & Slate */}
-          <ambientLight intensity={0.9} color="#94a3b8" />
+          {/* Monochrome Editorial Studio Lighting */}
+          <ambientLight intensity={1.1} color="#FFFFFF" />
           <directionalLight
             position={[8, 12, 6]}
-            intensity={2.4}
-            color="#00d8ff"
+            intensity={2.0}
+            color="#FFFFFF"
             castShadow
           />
           <directionalLight
             position={[-8, 6, -4]}
-            intensity={1.2}
-            color="#38bdf8"
+            intensity={1.0}
+            color="#D4D4D4"
           />
-          <pointLight position={[0, 4, 2]} intensity={2.0} color="#00d8ff" />
-          <pointLight position={[0, 1, -3]} intensity={1.6} color="#10b981" />
+          <pointLight position={[0, 4, 2]} intensity={1.5} color="#FFFFFF" />
+          <pointLight position={[0, 1, -3]} intensity={1.0} color="#E0E0E0" />
 
           {/* Gentle Floating Motion */}
           <Float
@@ -756,7 +758,7 @@ export const HeroGlassCanvas: React.FC = () => {
 
       {/* Interactive Mode Switcher & Non-Intrusive Guidance */}
       <div className="absolute bottom-2 z-30 flex flex-col items-center gap-2">
-        <div className="flex items-center gap-1.5 rounded-full border border-cyan-500/25 bg-slate-950/80 px-3 py-1.5 backdrop-blur-md shadow-glass-lg">
+        <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-[#141414]/90 px-3 py-1.5 backdrop-blur-md shadow-lg">
           <button
             type="button"
             onClick={(e) => {
@@ -765,8 +767,8 @@ export const HeroGlassCanvas: React.FC = () => {
             }}
             className={`rounded-full px-3.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-all ${
               activeMode === "drive"
-                ? "bg-cyan-500 text-slate-950 border border-cyan-400 shadow-glow-cyan font-bold"
-                : "text-slate-300 hover:text-cyan-400"
+                ? "bg-[#F2F2ED] text-[#0A0A0A] font-bold shadow-sm"
+                : "text-[#9A9A9A] hover:text-[#F2F2ED]"
             }`}
           >
             ● CARLA Lane Change
@@ -780,8 +782,8 @@ export const HeroGlassCanvas: React.FC = () => {
             }}
             className={`rounded-full px-3.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-all ${
               activeMode === "lidar"
-                ? "bg-cyan-500 text-slate-950 border border-cyan-400 shadow-glow-cyan font-bold"
-                : "text-slate-300 hover:text-cyan-400"
+                ? "bg-[#F2F2ED] text-[#0A0A0A] font-bold shadow-sm"
+                : "text-[#9A9A9A] hover:text-[#F2F2ED]"
             }`}
           >
             ● 360° LiDAR Perception
@@ -796,8 +798,8 @@ export const HeroGlassCanvas: React.FC = () => {
             }}
             className={`rounded-full px-3.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-all ${
               activeMode === "inspect"
-                ? "bg-cyan-500 text-slate-950 border border-cyan-400 shadow-glow-cyan font-bold"
-                : "text-slate-300 hover:text-cyan-400"
+                ? "bg-[#F2F2ED] text-[#0A0A0A] font-bold shadow-sm"
+                : "text-[#9A9A9A] hover:text-[#F2F2ED]"
             }`}
           >
             ● 3D Orbit View
@@ -811,8 +813,8 @@ export const HeroGlassCanvas: React.FC = () => {
             onClick={() => setIsInteractive((prev) => !prev)}
             className={`rounded-full px-3 py-0.5 font-mono text-[10px] tracking-wider transition-all border ${
               isInteractive
-                ? "border-emerald-500/40 bg-emerald-950/40 text-emerald-300 hover:bg-emerald-900/50"
-                : "border-cyan-500/30 bg-slate-900/80 text-cyan-300 hover:bg-slate-800"
+                ? "border-white/20 bg-white/10 text-[#F2F2ED] hover:bg-white/15"
+                : "border-white/10 bg-[#141414]/90 text-[#9A9A9A] hover:text-[#F2F2ED] hover:border-white/20"
             }`}
           >
             {isInteractive

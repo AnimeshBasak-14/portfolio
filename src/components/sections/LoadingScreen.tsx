@@ -42,37 +42,37 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
             scale: 1.05,
             transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
           }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0A0A0A]"
         >
           {/* Ambient background glow */}
-          <div className="pointer-events-none absolute h-[350px] w-[350px] rounded-full bg-gradient-to-tr from-cyan-500/15 via-sky-500/10 to-emerald-500/15 blur-3xl" />
+          <div className="pointer-events-none absolute h-[350px] w-[350px] rounded-full bg-white/[0.03] blur-3xl" />
 
           {/* Liquid Glass Orb Container */}
           <motion.div
             initial={{ scale: 0.85, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="liquid-glass specular-top relative flex h-36 w-36 flex-col items-center justify-center rounded-3xl p-6 shadow-glow-cyan border border-cyan-500/30 bg-slate-900/90"
+            className="liquid-glass specular-top relative flex h-36 w-36 flex-col items-center justify-center rounded-3xl p-6 shadow-glass border border-white/10 bg-[#141414]"
           >
             {/* Specular Edge Ring */}
-            <div className="absolute inset-0 rounded-3xl border border-cyan-500/20" />
+            <div className="absolute inset-0 rounded-3xl border border-white/10" />
 
-            {/* Glowing Monogram */}
+            {/* Monogram */}
             <div className="relative mb-2 flex items-center justify-center">
-              <span className="text-3xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-emerald-400">
+              <span className="text-3xl font-extrabold tracking-widest text-[#F2F2ED]">
                 AB
               </span>
             </div>
 
             {/* Progress Percentage */}
-            <span className="font-mono text-xs font-semibold text-cyan-400">
+            <span className="font-mono text-xs font-semibold text-[#9A9A9A]">
               {progress}%
             </span>
 
             {/* Liquid Progress Bar */}
-            <div className="mt-3 h-1 w-20 overflow-hidden rounded-full bg-slate-800">
+            <div className="mt-3 h-1 w-20 overflow-hidden rounded-full bg-white/[0.08]">
               <motion.div
-                className="h-full bg-gradient-to-r from-cyan-400 via-sky-300 to-emerald-400"
+                className="h-full bg-[#F2F2ED]"
                 style={{ width: `${progress}%` }}
                 transition={{ ease: "easeOut", duration: 0.2 }}
               />
@@ -83,7 +83,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 0.8, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-6 font-mono text-xs font-semibold tracking-widest text-slate-400 uppercase"
+            className="mt-6 font-mono text-xs font-semibold tracking-widest text-[#9A9A9A] uppercase"
           >
             Autonomous Driving • Continuous RL • IIT Roorkee
           </motion.p>

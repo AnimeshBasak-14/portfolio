@@ -8,7 +8,7 @@ import { personalData } from "@/data/personal";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://animeshbasak.vercel.app";
 
 export const viewport: Viewport = {
-  themeColor: "#0f172a",
+  themeColor: "#0A0A0A",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     default: `${personalData.name} — Ph.D. Scholar @ IIT Roorkee | Autonomous Driving, Continuous RL & Perception`,
     template: `%s | ${personalData.name}`,
   },
-  description: `${personalData.name} is a Direct Ph.D. Research Scholar at IIT Roorkee (supervised by Dr. Neetish Kumar), researching Deep Reinforcement Learning for Autonomous Vehicles, Continuous Control, and Multi-Modal Sensor Perception.`,
+  description: `${personalData.name} is a Direct Ph.D. Research Scholar at IIT Roorkee (supervised by Dr. Neetesh Kumar), researching Deep Reinforcement Learning for Autonomous Vehicles, Continuous Control, and Multi-Modal Sensor Perception.`,
   keywords: [
     "Animesh Basak",
     "IIT Roorkee",
     "IITR",
     "Department of Computer Science and Engineering",
-    "Dr. Neetish Kumar",
+    "Dr. Neetesh Kumar",
     "Ph.D. Scholar",
     "Autonomous Driving",
     "CARLA Simulator",
@@ -75,7 +75,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth dark">
-      <body className="bg-background text-cyber-text antialiased selection:bg-cyber-cyan/25 selection:text-cyber-cyan">
+      <body className="bg-background text-cyber-text antialiased selection:bg-white/20 selection:text-white">
         <SmoothScroll>
           {/* SVG liquid distortion filter definition */}
           <LiquidFilter />

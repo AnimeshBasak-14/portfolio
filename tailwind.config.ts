@@ -10,38 +10,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Cyber-Physical Scholar palette:
-        cyber: {
-          slate: "#0f172a",       // Deep Slate background
-          dark: "#090d16",        // Terminal Charcoal background
-          cyan: "#00d8ff",        // Electric Cyan (LIDAR Blue)
-          azure: "#38bdf8",       // Azure accent
-          blue: "#3b82f6",        // Deep Azure
-          emerald: "#10b981",     // Muted Emerald (Success Metrics)
-          text: "#f8fafc",        // Off-white primary text
-          muted: "#94a3b8",       // Slate-400 secondary text
-          subtle: "#64748b",      // Slate-500 muted text
-        },
-        palette: {
-          cream: "#f8fafc",      // Off-white primary text
-          sand: "#38bdf8",       // Azure accent
-          sage: "#10b981",       // Muted Emerald (Success Metrics)
-          moss: "#00d8ff",       // Electric Cyan (LIDAR Blue)
-          forest: "#0f172a",     // Deep Slate
-          cyan: "#00d8ff",
-          emerald: "#10b981",
+        // Monochrome Black-and-White Editorial palette:
+        editorial: {
+          bg: "#0A0A0A",          // Primary background
+          card: "#141414",        // Elevated/card background
+          text: "#F2F2ED",        // Primary text
+          muted: "#9A9A9A",       // Secondary/muted text
+          border: "rgba(255, 255, 255, 0.08)", // Hairline divider
+          accent: "#C9C9C9",      // Single accent for hover/focus/active
+          subtle: "#737373",      // Subtle text
         },
         background: {
-          DEFAULT: "#0f172a",    // Deep Slate
-          secondary: "#111a2e",  // Elevated Terminal Card surface
-          tertiary: "#1e293b",   // Slate-800 subtle
+          DEFAULT: "#0A0A0A",     // Primary background
+          secondary: "#141414",   // Elevated card background
+          tertiary: "#1C1C1C",    // Higher elevated surface
         },
         glass: {
-          border: "rgba(0, 216, 255, 0.16)",
-          "border-bright": "rgba(0, 216, 255, 0.45)",
-          surface: "rgba(15, 23, 42, 0.75)",
-          "surface-hover": "rgba(22, 33, 58, 0.85)",
-          highlight: "rgba(0, 216, 255, 0.08)",
+          border: "rgba(255, 255, 255, 0.08)",
+          "border-bright": "rgba(255, 255, 255, 0.16)",
+          surface: "rgba(255, 255, 255, 0.03)",
+          "surface-hover": "rgba(255, 255, 255, 0.06)",
+          highlight: "rgba(255, 255, 255, 0.05)",
         },
       },
       backdropBlur: {
@@ -50,14 +39,9 @@ const config: Config = {
         "glass-heavy": "40px",
       },
       boxShadow: {
-        glass: "0 10px 30px -5px rgba(0, 0, 0, 0.4), 0 4px 12px -2px rgba(0, 216, 255, 0.05)",
-        "glass-lg": "0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 8px 16px -4px rgba(0, 216, 255, 0.1)",
-        "glow-cyan": "0 0 35px -5px rgba(0, 216, 255, 0.45)",
-        "glow-emerald": "0 0 35px -5px rgba(16, 185, 129, 0.45)",
-        "glow-azure": "0 0 30px -5px rgba(56, 189, 248, 0.4)",
-        "glow-sage": "0 0 35px -5px rgba(16, 185, 129, 0.4)",
-        "glow-moss": "0 0 35px -5px rgba(0, 216, 255, 0.4)",
-        "glow-sand": "0 0 30px -5px rgba(56, 189, 248, 0.4)",
+        glass: "0 10px 30px -5px rgba(0, 0, 0, 0.7), 0 4px 12px -2px rgba(255, 255, 255, 0.02)",
+        "glass-lg": "0 20px 45px -10px rgba(0, 0, 0, 0.85), 0 8px 16px -4px rgba(255, 255, 255, 0.04)",
+        "glow-accent": "0 0 25px -5px rgba(201, 201, 201, 0.18)",
       },
       keyframes: {
         "blob-float": {

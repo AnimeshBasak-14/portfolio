@@ -20,8 +20,8 @@ export const researchData: ResearchPaper[] = [
     title: "Autonomous Lane-Changing in Dense Traffic Using Twin Delayed DDPG and Multi-Modal Sensor Fusion",
     status: "Under Review",
     venue: "International Journal / IEEE Conference Submission",
-    authors: ["Animesh Basak", "Dr. Neetish Kumar"],
-    supervisor: "Dr. Neetish Kumar",
+    authors: ["Animesh Basak", "Dr. Neetesh Kumar"],
+    supervisor: "Dr. Neetesh Kumar",
     affiliation: "Department of Computer Science and Engineering, Indian Institute of Technology Roorkee",
     abstract: "Autonomous vehicle lane changing in high-density corridors presents severe safety challenges due to continuous state-action spaces, dynamic surrounding vehicles, and value overestimation in standard actor-critic algorithms. In this work, we design a continuous reinforcement learning framework in the CARLA simulator integrating Twin Delayed DDPG (TD3) with multi-modal sensor fusion (radar, depth cameras, and obstacle proximity sensors). We demonstrate that TD3 significantly mitigates policy degradation and instability, achieving reliable, collision-free maneuvers in complex traffic conditions.",
     contributions: [

@@ -16,7 +16,7 @@ export const timelineData: TimelineEvent[] = [
     role: "Direct Ph.D. in Computer Science and Engineering",
     organization: "Indian Institute of Technology Roorkee (IIT Roorkee)",
     location: "Roorkee, Uttarakhand",
-    description: "Pursuing doctoral research under the supervision of Dr. Neetish Kumar in the Department of Computer Science and Engineering. Specializing in Artificial Intelligence, Deep Reinforcement Learning, and Autonomous Vehicles.",
+    description: "Pursuing doctoral research under the supervision of Dr. Neetesh Kumar in the Department of Computer Science and Engineering. Specializing in Artificial Intelligence, Deep Reinforcement Learning, and Autonomous Vehicles.",
     technologies: [
       "Reinforcement Learning",
       "CARLA Simulator",
