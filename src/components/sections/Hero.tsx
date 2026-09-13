@@ -13,7 +13,6 @@ import {
   Sparkles,
   FolderGit2,
   Youtube,
-  Database,
   GraduationCap,
 } from "lucide-react";
 import { containerVariants, itemVariants } from "@/lib/animations";
@@ -60,7 +59,7 @@ export const Hero: React.FC = () => {
             className="liquid-glass mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium text-cyan-300 shadow-sm"
           >
             <GraduationCap className="h-3.5 w-3.5 text-cyan-400" />
-            <span>Ph.D. Scholar @ IIT Roorkee under Dr. Neetish Kumar</span>
+            <span>Direct Ph.D. @ IIT Roorkee (Dept. of CSE) under Dr. Neetish Kumar</span>
           </motion.div>
 
           {/* Staggered Name Reveal */}
@@ -87,10 +86,17 @@ export const Hero: React.FC = () => {
           {/* Research Subtitle */}
           <motion.h2
             variants={itemVariants}
-            className="mb-6 max-w-2xl text-xl font-medium tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-cyan-200 to-purple-200 sm:text-2xl md:text-3xl"
+            className="mb-4 max-w-2xl text-xl font-medium tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-cyan-200 to-purple-200 sm:text-2xl md:text-3xl"
           >
             {personalData.title}
           </motion.h2>
+
+          <motion.p
+            variants={itemVariants}
+            className="mb-4 font-mono text-xs text-slate-400"
+          >
+            {personalData.department} · {personalData.institution}
+          </motion.p>
 
           {/* Tagline */}
           <motion.p
@@ -112,7 +118,7 @@ export const Hero: React.FC = () => {
                 className="liquid-glass specular-top group flex items-center gap-2 rounded-full border-cyan-500/30 bg-cyan-500/10 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_25px_rgba(56,189,248,0.25)] transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-500/20 hover:shadow-[0_0_35px_rgba(56,189,248,0.4)]"
               >
                 <FolderGit2 className="h-4 w-4 text-cyan-400 transition-transform group-hover:scale-110" />
-                <span>Research & Projects</span>
+                <span>Featured Projects</span>
               </a>
             </Magnetic>
 
@@ -125,20 +131,7 @@ export const Hero: React.FC = () => {
                 className="liquid-glass specular-top group flex items-center gap-2 rounded-full border-red-500/30 bg-red-500/10 px-5 py-3 text-sm font-medium text-red-300 transition-all duration-300 hover:border-red-400 hover:bg-red-500/20 hover:text-white"
               >
                 <Youtube className="h-4 w-4 text-red-400 transition-transform group-hover:scale-110" />
-                <span>48 RL Testcases</span>
-              </a>
-            </Magnetic>
-
-            {/* CTA 3: Google Drive Datasets & Models */}
-            <Magnetic strength={0.3}>
-              <a
-                href={personalData.driveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border-emerald-500/30 bg-emerald-500/10 px-5 py-3 text-sm font-medium text-emerald-300 transition-all duration-300 hover:border-emerald-400 hover:bg-emerald-500/20 hover:text-white"
-              >
-                <Database className="h-4 w-4 text-emerald-400 transition-transform group-hover:scale-110" />
-                <span>Drive Models & Data</span>
+                <span>48 RL Simulation Runs</span>
               </a>
             </Magnetic>
 
@@ -171,7 +164,7 @@ export const Hero: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right Column: 3D Connectome & LiDAR Canvas */}
+        {/* Right Column: 3D Autonomous Perception Canvas */}
         <div className="relative flex h-[400px] w-full flex-1 items-center justify-center sm:h-[480px] lg:h-[560px]">
           {/* Ambient background light beneath 3D canvas */}
           <div className="absolute h-72 w-72 rounded-full bg-gradient-to-tr from-cyan-500/20 via-purple-500/20 to-transparent blur-3xl" />
@@ -179,7 +172,7 @@ export const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Scroll indicator prompt */}
+      {/* Scroll prompt */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -187,7 +180,7 @@ export const Hero: React.FC = () => {
         className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden flex-col items-center gap-2 sm:flex"
       >
         <span className="font-mono text-[10px] tracking-widest text-slate-400 uppercase">
-          Explore Research & Engineering
+          Explore Research & Experience
         </span>
         <motion.div
           animate={{ y: [0, 6, 0] }}

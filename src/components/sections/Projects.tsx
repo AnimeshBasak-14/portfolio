@@ -13,8 +13,8 @@ import {
   ChevronRight,
   CheckCircle2,
   Youtube,
-  Database,
   Play,
+  FileCheck,
 } from "lucide-react";
 import { containerVariants, itemVariants } from "@/lib/animations";
 
@@ -24,11 +24,12 @@ export const Projects: React.FC = () => {
   const [showVideoModal, setShowVideoModal] = useState(false);
 
   const filterOptions = [
-    { label: "All Research", id: "all" },
+    { label: "All Projects", id: "all" },
     { label: "Reinforcement Learning", id: "Reinforcement Learning" },
-    { label: "Graph Neural Networks", id: "PyTorch Geometric" },
-    { label: "CARLA 0.9.8", id: "CARLA 0.9.8" },
-    { label: "Machine Learning", id: "Machine Learning" },
+    { label: "CARLA", id: "CARLA" },
+    { label: "RAG & LLMs", id: "RAG" },
+    { label: "AWS & Docker", id: "AWS (EC2, ECR)" },
+    { label: "Computer Vision", id: "Computer Vision" },
   ];
 
   const filteredProjects =
@@ -52,7 +53,7 @@ export const Projects: React.FC = () => {
               className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-1 text-xs font-mono tracking-widest text-purple-300 uppercase"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              <span>Research Portfolio & Codebases</span>
+              <span>Verified Engineering & Research Portfolio</span>
             </motion.div>
 
             <motion.h2
@@ -62,7 +63,7 @@ export const Projects: React.FC = () => {
               transition={{ delay: 0.1 }}
               className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl"
             >
-              Systems, <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">Models & Simulators</span>
+              Projects & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">Deployments</span>
             </motion.h2>
           </div>
 
@@ -84,7 +85,7 @@ export const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Highlight Banner for CARLA TD3 Simulation Videos & Google Drive */}
+        {/* Video Simulation Showcase Banner (Directly viewable without giving full drive access) */}
         <div className="mb-10 rounded-2xl liquid-glass specular-top border border-cyan-500/30 bg-gradient-to-r from-cyan-950/40 via-purple-950/30 to-[#0A0D14]/70 p-6 sm:p-7 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-glass-lg">
           <div className="flex items-start gap-4">
             <div className="hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-red-500/20 text-red-400 border border-red-500/30">
@@ -93,43 +94,31 @@ export const Projects: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs text-red-400 uppercase tracking-wider font-semibold">
-                  Live Research Visualizations
+                  CARLA Simulation Videos
                 </span>
                 <span className="rounded-full bg-cyan-500/20 px-2 py-0.2 text-[10px] font-mono text-cyan-300 border border-cyan-500/30">
-                  48 Videos Recorded
+                  48 Testcases Recorded
                 </span>
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-white mt-1">
-                CARLA Autonomous Driving & TD3-RCO Benchmark Suite
+                Autonomous Lane Changing & TD3 Policy Visualizations
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
-                Watch full continuous control runs across Emergency Braking, Intersections, Overtaking, and Lane Following recorded from the CARLA simulator.
+                Watch full continuous reinforcement learning runs across obstacle avoidance, emergency braking, and highway lane changes directly in the simulator.
               </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-start lg:justify-end">
-            <button
-              onClick={() => setShowVideoModal(true)}
-              className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-red-500/40 bg-red-500/20 px-5 py-2.5 text-xs font-semibold text-white transition-all hover:bg-red-500/30 hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]"
-            >
-              <Play className="h-3.5 w-3.5 fill-current" />
-              <span>Watch Simulations</span>
-            </button>
-
-            <a
-              href="https://drive.google.com/drive/folders/1qji_Hst-NsBfZy-zAt3dG4JcmXceFPLc?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/20 px-5 py-2.5 text-xs font-semibold text-emerald-200 transition-all hover:bg-emerald-500/30 hover:text-white"
-            >
-              <Database className="h-3.5 w-3.5" />
-              <span>Drive Datasets & Models</span>
-            </a>
-          </div>
+          <button
+            onClick={() => setShowVideoModal(true)}
+            className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-red-500/40 bg-red-500/20 px-6 py-3 text-xs font-semibold text-white transition-all hover:bg-red-500/30 hover:shadow-[0_0_25px_rgba(239,68,68,0.35)] shrink-0"
+          >
+            <Play className="h-4 w-4 fill-current" />
+            <span>Play Simulation Playlist</span>
+          </button>
         </div>
 
-        {/* Project Cards Grid */}
+        {/* Project Cards Grid — Clicking anywhere on the card opens the details */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -140,33 +129,32 @@ export const Projects: React.FC = () => {
           {filteredProjects.map((project) => (
             <motion.div key={project.id} variants={itemVariants}>
               <TiltCard
-                maxTilt={10}
+                maxTilt={8}
                 spotlightColor="rgba(56, 189, 248, 0.2)"
-                className="group flex h-full flex-col justify-between p-6 sm:p-7"
+                onClick={() => setSelectedProject(project)}
+                className="group flex h-full flex-col justify-between p-6 sm:p-7 cursor-pointer"
               >
                 <div>
-                  {/* Top Header & Visual Specular Banner */}
+                  {/* Visual Specular Header Banner */}
                   <div
                     className={`relative mb-6 h-40 w-full overflow-hidden rounded-xl bg-gradient-to-br ${project.accentColor} border border-white/10 flex flex-col justify-between p-4`}
                   >
-                    {/* Abstract Glass Geometric Shape */}
                     <div className="absolute -right-8 -bottom-8 h-32 w-32 rounded-full border border-white/20 bg-white/5 backdrop-blur-md transition-transform duration-500 group-hover:scale-125" />
-                    <div className="absolute top-4 right-4 flex items-center gap-2">
+                    
+                    <div className="relative z-10 flex items-center justify-between">
+                      <span className="font-mono text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                        {project.subtitle}
+                      </span>
                       {project.featured && (
-                        <span className="rounded-full border border-cyan-400/40 bg-cyan-500/20 px-2.5 py-0.5 text-[10px] font-mono font-medium text-cyan-300">
-                          Ph.D. / Featured
+                        <span className="rounded-full border border-cyan-400/40 bg-cyan-500/20 px-2 py-0.5 text-[10px] font-mono font-medium text-cyan-300">
+                          Featured
                         </span>
                       )}
                     </div>
 
-                    <div className="relative z-10">
-                      <span className="font-mono text-xs font-medium text-slate-300 uppercase tracking-wider">
-                        {project.subtitle}
-                      </span>
-                      <h3 className="mt-1 text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                        {project.title}
-                      </h3>
-                    </div>
+                    <h3 className="relative z-10 mt-1 text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                      {project.title}
+                    </h3>
 
                     {/* Metrics preview */}
                     {project.metrics && (
@@ -201,31 +189,30 @@ export const Projects: React.FC = () => {
 
                 {/* Card Action Footer */}
                 <div className="flex items-center justify-between border-t border-white/10 pt-4">
-                  {/* Detailed Modal Trigger */}
-                  <button
-                    onClick={() => setSelectedProject(project)}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-400 transition-colors hover:text-cyan-300"
-                  >
-                    <span>Inspect Architecture</span>
+                  <div className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-400 transition-colors group-hover:text-cyan-300">
+                    <span>View Details</span>
                     <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                  </button>
+                  </div>
 
-                  {/* Outgoing Links */}
-                  <div className="flex items-center gap-2">
+                  {/* External Links — stopPropagation prevents double opening modal */}
+                  <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-400 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
-                      title="View GitHub Repository"
-                      aria-label="View GitHub Repository"
+                      title="GitHub Repository"
+                      aria-label="GitHub Repository"
                     >
                       <Github className="h-3.5 w-3.5" />
                     </a>
 
                     {project.videoUrl && (
                       <button
-                        onClick={() => setShowVideoModal(true)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowVideoModal(true);
+                        }}
                         className="flex h-8 w-8 items-center justify-center rounded-full border border-red-500/30 bg-red-500/10 text-red-400 transition-colors hover:border-red-400 hover:text-white"
                         title="Watch Simulation Videos"
                         aria-label="Watch Simulation Videos"
@@ -234,16 +221,16 @@ export const Projects: React.FC = () => {
                       </button>
                     )}
 
-                    {project.driveUrl && (
+                    {project.certificateUrl && (
                       <a
-                        href={project.driveUrl}
+                        href={project.certificateUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 transition-colors hover:border-emerald-400 hover:text-white"
-                        title="Google Drive Files"
-                        aria-label="Google Drive Files"
+                        title="View Certificate"
+                        aria-label="View Certificate"
                       >
-                        <Database className="h-3.5 w-3.5" />
+                        <FileCheck className="h-3.5 w-3.5" />
                       </a>
                     )}
                   </div>
@@ -254,7 +241,7 @@ export const Projects: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Video Showcase Modal */}
+      {/* Video Simulation Modal */}
       <AnimatePresence>
         {showVideoModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
@@ -269,13 +256,15 @@ export const Projects: React.FC = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
+              data-lenis-prevent
+              onWheel={(e) => e.stopPropagation()}
               className="liquid-glass specular-top relative z-10 w-full max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-[#0A0D14] p-4 sm:p-6 shadow-glass-lg"
             >
               <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
                 <div className="flex items-center gap-2">
                   <Youtube className="h-5 w-5 text-red-400" />
                   <span className="text-base font-bold text-white">
-                    CARLA Autonomous Driving — TD3-RCO Testcase Playlist (48 Videos)
+                    CARLA Autonomous Lane Changing & TD3 Simulation Runs (48 Videos)
                   </span>
                 </div>
                 <button
@@ -287,12 +276,12 @@ export const Projects: React.FC = () => {
                 </button>
               </div>
 
-              {/* YouTube Iframe Player with playlist */}
+              {/* YouTube Player */}
               <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black">
                 <iframe
                   className="h-full w-full"
                   src="https://www.youtube-nocookie.com/embed/videoseries?list=PLNy_bKEJyhIM&autoplay=1"
-                  title="CARLA Autonomous Driving TD3RCO Scenarios"
+                  title="CARLA Autonomous Driving Simulation Videos"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
@@ -306,7 +295,7 @@ export const Projects: React.FC = () => {
                   rel="noreferrer"
                   className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
                 >
-                  <span>Open on YouTube</span>
+                  <span>Open Full Playlist on YouTube</span>
                   <ExternalLink className="h-3 w-3" />
                 </a>
               </div>
@@ -315,10 +304,11 @@ export const Projects: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Project Details Modal */}
+      {/* Project Details Modal with FULL MOUSE-WHEEL SCROLLING SUPPORT */}
       <AnimatePresence>
         {selectedProject && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -327,17 +317,20 @@ export const Projects: React.FC = () => {
               className="absolute inset-0 bg-black/75 backdrop-blur-md"
             />
 
+            {/* Modal Dialog with data-lenis-prevent to enable native mouse wheel scroll */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="liquid-glass specular-top relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/20 bg-[#0A0D14]/95 p-6 sm:p-8 shadow-glass-lg"
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              data-lenis-prevent
+              onWheel={(e) => e.stopPropagation()}
+              className="liquid-glass specular-top relative z-10 w-full max-w-2xl max-h-[85vh] overflow-y-auto overscroll-contain rounded-3xl border border-white/20 bg-[#0A0D14]/95 p-6 sm:p-8 shadow-glass-lg"
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-5 right-5 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-slate-400 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
+                className="sticky top-0 float-right -mr-2 -mt-2 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-[#0A0D14]/90 text-slate-300 backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
                 aria-label="Close dialog"
               >
                 <X className="h-4 w-4" />
@@ -373,9 +366,9 @@ export const Projects: React.FC = () => {
               {/* Key Technical Capabilities */}
               <div className="mb-6">
                 <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-3">
-                  Key Technical Capabilities
+                  Technical Architecture & Key Results
                 </h4>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {selectedProject.keyFeatures.map((feat, i) => (
                     <div key={i} className="flex items-start gap-2 text-sm text-slate-300">
                       <CheckCircle2 className="h-4 w-4 text-cyan-400 mt-0.5 shrink-0" />
@@ -407,20 +400,20 @@ export const Projects: React.FC = () => {
                     className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-white/20"
                   >
                     <Github className="h-4 w-4" />
-                    <span>Explore Codebase</span>
+                    <span>View GitHub Repository</span>
                   </a>
                 </Magnetic>
 
-                {selectedProject.driveUrl && (
+                {selectedProject.certificateUrl && (
                   <Magnetic strength={0.25}>
                     <a
-                      href={selectedProject.driveUrl}
+                      href={selectedProject.certificateUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/20 px-6 py-2.5 text-sm font-semibold text-emerald-200 transition-all hover:bg-emerald-500/30 hover:text-white"
                     >
-                      <Database className="h-4 w-4" />
-                      <span>Google Drive Datasets</span>
+                      <FileCheck className="h-4 w-4" />
+                      <span>View Official Certificate</span>
                     </a>
                   </Magnetic>
                 )}

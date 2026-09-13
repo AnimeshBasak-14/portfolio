@@ -3,33 +3,43 @@ export interface PersonalInfo {
   tagline: string;
   title: string;
   institution: string;
+  department: string;
   advisor: string;
+  specialization: string;
   bio: string[];
   email: string;
+  phone: string;
   linkedin: string;
   github: string;
+  leetcode: string;
+  gfg: string;
+  medium: string;
   location: string;
   status: string;
-  driveUrl: string;
   youtubePlaylistUrl: string;
 }
 
 export const personalData: PersonalInfo = {
   name: "Animesh Basak",
-  title: "Ph.D. Research Scholar in AI & Autonomous Systems",
-  institution: "Indian Institute of Technology Roorkee (IITR)",
+  title: "Direct Ph.D. in Computer Science and Engineering",
+  institution: "Indian Institute of Technology Roorkee (IIT Roorkee)",
+  department: "Department of Computer Science and Engineering",
   advisor: "Dr. Neetish Kumar",
-  tagline: "Pioneering Graph Neural Networks for Brain Connectomics and Deep Reinforcement Learning for Autonomous Cyber-Physical Systems.",
+  specialization: "Artificial Intelligence, Reinforcement Learning, and Autonomous Vehicles",
+  tagline: "Advancing Deep Reinforcement Learning for Autonomous Vehicles, Continuous Control in CARLA, and Production AI Systems.",
   bio: [
-    "I am a Ph.D. Research Scholar at the Indian Institute of Technology Roorkee (IIT Roorkee), working under the supervision of Dr. Neetish Kumar in the Mehta Family School of Data Science and Artificial Intelligence (MFSDSAI).",
-    "My research investigates the convergence of Geometric Deep Learning (Graph Neural Networks) and Continuous Deep Reinforcement Learning. I specialize in modeling complex relational topologies—from fMRI brain connectomes for early neurodegenerative biomarker discovery (Neuro-Neo4j) to robust multi-modal perception and control for autonomous vehicles in the CARLA simulator (TD3-RCO).",
-    "Prior to my doctoral studies, I graduated with a Bachelor of Technology (B.Tech) in Computer Science & Engineering from the National Institute of Technology Arunachal Pradesh (NITAP). I am deeply passionate about building transparent, physics-grounded AI architectures that bridge biological neural networks with autonomous robotics."
+    "I am pursuing a Direct Doctor of Philosophy (Ph.D.) in Computer Science and Engineering at the Indian Institute of Technology Roorkee (IIT Roorkee), working under the supervision of Dr. Neetish Kumar in the Department of Computer Science and Engineering.",
+    "My doctoral research focuses on Artificial Intelligence, Deep Reinforcement Learning, and Autonomous Cyber-Physical Systems. I specialize in designing and training continuous control models for autonomous vehicle navigation, lane-changing, and multi-modal sensor fusion (radar, depth cameras, obstacle sensors) in the CARLA simulator.",
+    "Previously, I graduated with a B.Tech in Computer Science & Engineering from NIT Arunachal Pradesh (CGPA: 8.19/10). My professional trajectory includes research and engineering roles at IIT Roorkee (Google Research Mentorship Program), L&T Construction PT&D, Datafoundry, Indian Oil Corporation Limited (IOCL), and IIT Guwahati, alongside authoring 20+ technical articles on Medium."
   ],
   email: "basakanimesh49@gmail.com",
-  linkedin: "https://linkedin.com/in/animeshbasak03/?skipRedirect=true",
+  phone: "+91 (700) 577-0872",
+  linkedin: "https://linkedin.com/in/animeshbasak03/",
   github: "https://github.com/AnimeshBasak-14",
-  location: "IIT Roorkee, Uttarakhand, India",
-  status: "Ph.D. Scholar @ IIT Roorkee under Dr. Neetish Kumar",
-  driveUrl: "https://drive.google.com/drive/folders/1qji_Hst-NsBfZy-zAt3dG4JcmXceFPLc?usp=sharing",
+  leetcode: "https://leetcode.com/u/basakanimesh16/",
+  gfg: "https://www.geeksforgeeks.org/user/basakanimesh49/",
+  medium: "https://medium.com/@basakanimesh16",
+  location: "IIT Roorkee, Uttarakhand / South Delhi, India",
+  status: "Direct Ph.D. @ IIT Roorkee (Dept. of CSE) under Dr. Neetish Kumar",
   youtubePlaylistUrl: "https://youtube.com/playlist?list=PLNy_bKEJyhIM&si=VP8HZBgkaJzIxzbY",
 };

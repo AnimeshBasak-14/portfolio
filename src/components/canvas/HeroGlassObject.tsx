@@ -2,205 +2,257 @@
 
 import React, { useRef, useMemo, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshTransmissionMaterial, OrbitControls, Text } from "@react-three/drei";
+import { Float, MeshTransmissionMaterial, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
 /**
- * Neural Connectome & Autonomous Sensor Field
+ * 3D Autonomous Vehicle Perception & Trajectory Field
  * 
- * Aligned with Animesh Basak's research:
- * 1. Graph Neural Networks (GNNs) & Brain Connectomics:
- *    - 3D interconnected node graph (AAL-116 brain atlas)
- *    - Synaptic edges with neural signal pulses traveling between nodes
- * 2. Autonomous Systems & CARLA Reinforcement Learning:
- *    - 360-degree LiDAR / Radar scanner rings
- *    - Multi-modal sensory range orbits and trajectory waypoints
- * 3. Optical Liquid Glass transmission core:
- *    - Refractive glass shell simulating spatial glass optics
+ * Specifically aligned with Animesh Basak's research:
+ * - Autonomous lane-changing with TD3 & DDPG in CARLA
+ * - Multi-modal sensor fusion: 360° LiDAR scanning rings, radar waves & obstacle sensors
+ * - Dynamic curving lane trajectory waypoints with moving vehicle particles
+ * - Apple-style frosted liquid glass transmission core
  */
 
-// Generate realistic 3D brain connectome graph nodes
-function generateConnectomeNodes(count = 28) {
-  const nodes: [number, number, number][] = [];
-  for (let i = 0; i < count; i++) {
-    // Ellipsoidal distribution mimicking human brain hemispheres
-    const u = Math.random();
-    const v = Math.random();
-    const theta = u * 2.0 * Math.PI;
-    const phi = Math.acos(2.0 * v - 1.0);
-    const r = Math.cbrt(Math.random()) * 1.3;
-
-    // Slight indentation between hemispheres along x axis
-    const x = r * Math.sin(phi) * Math.cos(theta) * 1.1 + (theta < Math.PI ? 0.15 : -0.15);
-    const y = r * Math.sin(phi) * Math.sin(theta) * 0.85;
-    const z = r * Math.cos(phi) * 1.25;
-
-    nodes.push([x, y, z]);
+// Generate 3D autonomous lane-changing spline curve
+function generateLaneChangePath() {
+  const points: THREE.Vector3[] = [];
+  // S-curve simulating an autonomous left lane change
+  for (let t = -3.5; t <= 3.5; t += 0.2) {
+    const progress = (t + 3.5) / 7.0; // 0 to 1
+    // Smooth step for lane transition
+    const laneOffset = Math.sin((progress - 0.5) * Math.PI) * 0.85;
+    const yOffset = Math.cos(t * 0.8) * 0.08;
+    points.push(new THREE.Vector3(laneOffset, yOffset, t));
   }
-  return nodes;
+  return points;
 }
 
-// Generate connectome edges based on distance threshold
-function generateConnectomeEdges(nodes: [number, number, number][], maxDist = 0.95) {
-  const edges: [number, number][] = [];
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      const dx = nodes[i][0] - nodes[j][0];
-      const dy = nodes[i][1] - nodes[j][1];
-      const dz = nodes[i][2] - nodes[j][2];
-      const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-      if (dist < maxDist) {
-        edges.push([i, j]);
-      }
-    }
+// Generate road boundary corridor
+function generateRoadBoundaries() {
+  const leftLane: THREE.Vector3[] = [];
+  const rightLane: THREE.Vector3[] = [];
+  const centerDivider: THREE.Vector3[] = [];
+
+  for (let z = -3.5; z <= 3.5; z += 0.4) {
+    leftLane.push(new THREE.Vector3(-1.4, -0.05, z));
+    rightLane.push(new THREE.Vector3(1.4, -0.05, z));
+    centerDivider.push(new THREE.Vector3(0, -0.05, z));
   }
-  return edges;
+
+  return {
+    left: new THREE.BufferGeometry().setFromPoints(leftLane),
+    right: new THREE.BufferGeometry().setFromPoints(rightLane),
+    center: new THREE.BufferGeometry().setFromPoints(centerDivider),
+  };
 }
 
-function ConnectomeGraph({ mode }: { mode: "connectome" | "lidar" }) {
+function AutonomousPerceptionModel({ mode }: { mode: "trajectory" | "lidar" }) {
   const groupRef = useRef<THREE.Group>(null);
   const radarSweepRef = useRef<THREE.Mesh>(null);
   const lidarRing1 = useRef<THREE.Mesh>(null);
   const lidarRing2 = useRef<THREE.Mesh>(null);
   const lidarRing3 = useRef<THREE.Mesh>(null);
+  const vehicleFollowerRef = useRef<THREE.Mesh>(null);
 
-  const nodes = useMemo(() => generateConnectomeNodes(32), []);
-  const edges = useMemo(() => generateConnectomeEdges(nodes, 1.1), [nodes]);
+  const pathPoints = useMemo(() => generateLaneChangePath(), []);
+  const pathGeometry = useMemo(
+    () => new THREE.BufferGeometry().setFromPoints(pathPoints),
+    [pathPoints]
+  );
+  const roadLines = useMemo(() => generateRoadBoundaries(), []);
 
-  // Create geometry for line edges
-  const edgeLineGeometry = useMemo(() => {
-    const points: THREE.Vector3[] = [];
-    edges.forEach(([i, j]) => {
-      points.push(new THREE.Vector3(...nodes[i]));
-      points.push(new THREE.Vector3(...nodes[j]));
-    });
-    return new THREE.BufferGeometry().setFromPoints(points);
-  }, [nodes, edges]);
+  // Obstacle vehicles in adjacent lane
+  const obstacles = useMemo(
+    () => [
+      { pos: [0.85, 0.1, 1.8] as [number, number, number], color: "#f43f5e" },
+      { pos: [-0.85, 0.1, -2.0] as [number, number, number], color: "#eab308" },
+    ],
+    []
+  );
 
-  // Dynamic animation frame
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
 
     if (groupRef.current) {
-      // Smooth organic rotation
-      groupRef.current.rotation.y = t * 0.2;
-      groupRef.current.rotation.x = Math.sin(t * 0.15) * 0.1;
+      // Base slow rotation
+      groupRef.current.rotation.y = t * 0.18;
+      groupRef.current.rotation.x = Math.sin(t * 0.12) * 0.08;
 
-      // Pointer parallax tracking
-      const targetX = (state.pointer.x * Math.PI) / 6;
-      const targetY = (state.pointer.y * Math.PI) / 6;
+      // Cursor parallax tracking
+      const targetX = (state.pointer.x * Math.PI) / 7;
+      const targetY = (state.pointer.y * Math.PI) / 7;
       groupRef.current.rotation.y += (targetX - groupRef.current.rotation.y) * 0.03;
       groupRef.current.rotation.x += (-targetY - groupRef.current.rotation.x) * 0.03;
     }
 
-    // LiDAR / Radar scanner rotation
-    if (radarSweepRef.current) {
-      radarSweepRef.current.rotation.z = -t * 1.5;
+    // Vehicle moving along the autonomous trajectory
+    if (vehicleFollowerRef.current) {
+      const loopTime = (t * 0.6) % 1;
+      const index = Math.floor(loopTime * (pathPoints.length - 1));
+      const nextIndex = Math.min(index + 1, pathPoints.length - 1);
+      const alpha = (loopTime * (pathPoints.length - 1)) % 1;
+
+      const currentPos = pathPoints[index];
+      const nextPos = pathPoints[nextIndex];
+      if (currentPos && nextPos) {
+        vehicleFollowerRef.current.position.lerpVectors(currentPos, nextPos, alpha);
+      }
     }
+
+    // Radar scanner sweeps 360 degrees
+    if (radarSweepRef.current) {
+      radarSweepRef.current.rotation.z = -t * 2.2;
+    }
+
+    // LiDAR multi-axis sensor rings
     if (lidarRing1.current) {
-      lidarRing1.current.rotation.x = t * 0.4;
-      lidarRing1.current.rotation.y = t * 0.3;
+      lidarRing1.current.rotation.x = t * 0.35;
+      lidarRing1.current.rotation.y = t * 0.25;
     }
     if (lidarRing2.current) {
-      lidarRing2.current.rotation.y = -t * 0.35;
-      lidarRing2.current.rotation.z = t * 0.25;
+      lidarRing2.current.rotation.y = -t * 0.3;
+      lidarRing2.current.rotation.z = t * 0.2;
     }
     if (lidarRing3.current) {
-      lidarRing3.current.rotation.z = t * 0.5;
+      lidarRing3.current.rotation.z = t * 0.45;
     }
   });
 
   return (
     <group ref={groupRef}>
-      {/* 1. Translucent Liquid Glass Core */}
-      <mesh scale={mode === "connectome" ? 1.05 : 0.9}>
-        <sphereGeometry args={[1, 32, 32]} />
+      {/* 1. Frosted Liquid Glass Core Perception Sensor */}
+      <mesh scale={0.95}>
+        <dodecahedronGeometry args={[0.9, 0]} />
         <MeshTransmissionMaterial
           samples={12}
           resolution={256}
-          transmission={0.92}
-          roughness={0.12}
-          thickness={1.4}
-          ior={1.48}
-          chromaticAberration={0.08}
-          distortion={0.25}
-          temporalDistortion={0.4}
-          color="#dbeafe"
+          transmission={0.93}
+          roughness={0.1}
+          thickness={1.5}
+          ior={1.5}
+          chromaticAberration={0.06}
+          distortion={0.2}
+          temporalDistortion={0.3}
+          color="#e0f2fe"
           attenuationDistance={0.8}
           attenuationColor="#38bdf8"
           transparent
-          opacity={0.7}
+          opacity={0.8}
         />
       </mesh>
 
-      {/* 2. Neural Connectome Graph Nodes & Synaptic Edges */}
-      <group>
-        {/* Synaptic Edges (LineSegments) */}
+      {/* 2. Autonomous Lane-Changing Trajectory (CARLA RL) */}
+      <group visible={mode === "trajectory" || mode === "lidar"}>
+        {/* Curving Trajectory Spline */}
         {/* @ts-ignore */}
-        <lineSegments geometry={edgeLineGeometry}>
+        <line geometry={pathGeometry}>
           <lineBasicMaterial
             color="#38bdf8"
             transparent
-            opacity={mode === "connectome" ? 0.45 : 0.2}
-            linewidth={1}
+            opacity={0.85}
+            linewidth={2}
           />
-        </lineSegments>
+        </line>
 
-        {/* Graph Nodes (Brain Regions / GNN Embeddings) */}
-        {nodes.map((pos, idx) => {
-          const isBiomarker = idx % 5 === 0;
-          return (
-            <mesh key={idx} position={pos}>
-              <sphereGeometry args={[isBiomarker ? 0.06 : 0.04, 16, 16]} />
+        {/* Road Corridor Boundaries */}
+        {/* @ts-ignore */}
+        <line geometry={roadLines.left}>
+          <lineBasicMaterial color="#64748b" transparent opacity={0.35} />
+        </line>
+        {/* @ts-ignore */}
+        <line geometry={roadLines.right}>
+          <lineBasicMaterial color="#64748b" transparent opacity={0.35} />
+        </line>
+        {/* @ts-ignore */}
+        <line geometry={roadLines.center}>
+          <lineDashedMaterial
+            color="#94a3b8"
+            dashSize={0.2}
+            gapSize={0.15}
+            transparent
+            opacity={0.4}
+          />
+        </line>
+
+        {/* Trajectory Waypoints */}
+        {pathPoints
+          .filter((_, idx) => idx % 4 === 0)
+          .map((pt, i) => (
+            <mesh key={`wp-${i}`} position={pt}>
+              <sphereGeometry args={[0.045, 12, 12]} />
               <meshStandardMaterial
-                color={isBiomarker ? "#a855f7" : "#38bdf8"}
-                emissive={isBiomarker ? "#c084fc" : "#0284c7"}
-                emissiveIntensity={1.8}
-                roughness={0.2}
+                color="#38bdf8"
+                emissive="#38bdf8"
+                emissiveIntensity={2}
               />
             </mesh>
-          );
-        })}
+          ))}
+
+        {/* Moving Autonomous Agent (Vehicle Indicator) */}
+        <mesh ref={vehicleFollowerRef}>
+          <boxGeometry args={[0.18, 0.08, 0.32]} />
+          <meshStandardMaterial
+            color="#10b981"
+            emissive="#10b981"
+            emissiveIntensity={2.5}
+          />
+        </mesh>
+
+        {/* Detected Obstacle Bounding Boxes */}
+        {obstacles.map((obs, i) => (
+          <mesh key={`obs-${i}`} position={obs.pos}>
+            <boxGeometry args={[0.22, 0.12, 0.36]} />
+            <meshStandardMaterial
+              color={obs.color}
+              emissive={obs.color}
+              emissiveIntensity={1.2}
+              transparent
+              opacity={0.8}
+            />
+          </mesh>
+        ))}
       </group>
 
-      {/* 3. Autonomous Driving LiDAR & Radar Scanner Rings (CARLA RL) */}
+      {/* 3. 360° LiDAR & Radar Scanning Rings (Sensor Fusion) */}
       <group>
         {/* Sweeping Radar Plane */}
         <mesh ref={radarSweepRef} rotation={[-Math.PI / 2, 0, 0]}>
-          <ringGeometry args={[0.2, 2.3, 32, 1, 0, Math.PI / 3]} />
+          <ringGeometry args={[0.1, 2.4, 32, 1, 0, Math.PI / 2.5]} />
           <meshBasicMaterial
             color="#38bdf8"
             transparent
-            opacity={0.18}
+            opacity={0.2}
             side={THREE.DoubleSide}
           />
         </mesh>
 
-        {/* Horizontal Primary LiDAR Range Ring */}
+        {/* Primary Horizon LiDAR Detection Ring */}
         <mesh rotation={[-Math.PI / 2, 0, 0]}>
-          <ringGeometry args={[2.2, 2.22, 64]} />
+          <ringGeometry args={[2.35, 2.38, 64]} />
           <meshBasicMaterial
             color="#38bdf8"
             transparent
-            opacity={0.5}
+            opacity={0.55}
             side={THREE.DoubleSide}
           />
         </mesh>
 
-        {/* Dynamic Multi-Axis Radar Orbit Rings */}
+        {/* Multi-Axis Depth Perception Orbits */}
         <mesh ref={lidarRing1}>
-          <torusGeometry args={[2.4, 0.012, 16, 100]} />
+          <torusGeometry args={[2.5, 0.012, 16, 100]} />
           <meshStandardMaterial
             color="#a855f7"
             emissive="#a855f7"
-            emissiveIntensity={0.6}
+            emissiveIntensity={0.7}
             transparent
             opacity={0.4}
           />
         </mesh>
 
         <mesh ref={lidarRing2}>
-          <torusGeometry args={[2.6, 0.01, 16, 100]} />
+          <torusGeometry args={[2.7, 0.01, 16, 100]} />
           <meshStandardMaterial
             color="#38bdf8"
             emissive="#38bdf8"
@@ -210,42 +262,23 @@ function ConnectomeGraph({ mode }: { mode: "connectome" | "lidar" }) {
           />
         </mesh>
 
-        <mesh ref={lidarRing3} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
-          <torusGeometry args={[2.0, 0.008, 16, 80]} />
+        <mesh ref={lidarRing3} rotation={[Math.PI / 3, Math.PI / 4, 0]}>
+          <torusGeometry args={[2.1, 0.008, 16, 80]} />
           <meshStandardMaterial
             color="#10b981"
             emissive="#10b981"
-            emissiveIntensity={0.7}
+            emissiveIntensity={0.8}
             transparent
             opacity={0.3}
           />
         </mesh>
-
-        {/* Waypoint Sensor Points Orbiting */}
-        {[0, 1, 2, 3, 4, 5].map((i) => {
-          const angle = (i / 6) * Math.PI * 2;
-          const radius = 2.2;
-          return (
-            <mesh
-              key={`wp-${i}`}
-              position={[Math.cos(angle) * radius, 0, Math.sin(angle) * radius]}
-            >
-              <sphereGeometry args={[0.035, 12, 12]} />
-              <meshStandardMaterial
-                color="#38bdf8"
-                emissive="#38bdf8"
-                emissiveIntensity={1.5}
-              />
-            </mesh>
-          );
-        })}
       </group>
     </group>
   );
 }
 
 export const HeroGlassCanvas: React.FC = () => {
-  const [activeMode, setActiveMode] = useState<"connectome" | "lidar">("connectome");
+  const [activeMode, setActiveMode] = useState<"trajectory" | "lidar">("trajectory");
 
   return (
     <div className="relative h-full w-full flex flex-col items-center justify-center">
@@ -264,12 +297,12 @@ export const HeroGlassCanvas: React.FC = () => {
           <pointLight position={[0, 8, 0]} intensity={1.5} color="#10b981" />
 
           <Float
-            speed={2.2}
-            rotationIntensity={0.8}
-            floatIntensity={1.2}
+            speed={2.0}
+            rotationIntensity={0.6}
+            floatIntensity={1.0}
             floatingRange={[-0.15, 0.15]}
           >
-            <ConnectomeGraph mode={activeMode} />
+            <AutonomousPerceptionModel mode={activeMode} />
           </Float>
 
           <OrbitControls
@@ -281,27 +314,27 @@ export const HeroGlassCanvas: React.FC = () => {
         </Canvas>
       </div>
 
-      {/* Interactive Research Dimension Selector Pills */}
+      {/* Mode Switcher Pill */}
       <div className="absolute bottom-2 z-20 flex items-center gap-2 rounded-full border border-white/15 bg-[#05070B]/80 px-3 py-1.5 backdrop-blur-md shadow-glass">
         <button
-          onClick={() => setActiveMode("connectome")}
+          onClick={() => setActiveMode("trajectory")}
           className={`rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-wider transition-all ${
-            activeMode === "connectome"
-              ? "bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-[0_0_10px_rgba(168,85,247,0.3)]"
+            activeMode === "trajectory"
+              ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_10px_rgba(56,189,248,0.3)]"
               : "text-slate-400 hover:text-white"
           }`}
         >
-          ● GNN Connectome
+          ● CARLA Lane Trajectory
         </button>
         <button
           onClick={() => setActiveMode("lidar")}
           className={`rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-wider transition-all ${
             activeMode === "lidar"
-              ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_10px_rgba(56,189,248,0.3)]"
+              ? "bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-[0_0_10px_rgba(168,85,247,0.3)]"
               : "text-slate-400 hover:text-white"
           }`}
         >
-          ● Autonomous LiDAR
+          ● 360° LiDAR Perception
         </button>
       </div>
     </div>
