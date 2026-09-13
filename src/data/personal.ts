@@ -9,7 +9,7 @@ export interface PersonalInfo {
   specialization: string;
   bio: string[];
   email: string;
-  phone: string;
+  huggingface: string;
   linkedin: string;
   github: string;
   leetcode: string;
@@ -35,7 +35,7 @@ export const personalData: PersonalInfo = {
     "Previously, I graduated with a B.Tech in Computer Science & Engineering from NIT Arunachal Pradesh (CGPA: 8.19/10). My professional trajectory includes research and engineering roles at IIT Roorkee (Google Research Mentorship Program), L&T Construction PT&D, Datafoundry, Indian Oil Corporation Limited (IOCL), and IIT Guwahati, alongside authoring 20+ technical articles on Medium."
   ],
   email: "basakanimesh49@gmail.com",
-  phone: "+91 (700) 577-0872",
+  huggingface: "https://huggingface.co/rohan700",
   linkedin: "https://linkedin.com/in/animeshbasak03/",
   github: "https://github.com/AnimeshBasak-14",
   leetcode: "https://leetcode.com/u/basakanimesh16/",

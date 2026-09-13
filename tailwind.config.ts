@@ -10,25 +10,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // User-specified botanical & luxury organic palette:
+        // Cyber-Physical Scholar palette:
+        cyber: {
+          slate: "#0f172a",       // Deep Slate background
+          dark: "#090d16",        // Terminal Charcoal background
+          cyan: "#00d8ff",        // Electric Cyan (LIDAR Blue)
+          azure: "#38bdf8",       // Azure accent
+          blue: "#3b82f6",        // Deep Azure
+          emerald: "#10b981",     // Muted Emerald (Success Metrics)
+          text: "#f8fafc",        // Off-white primary text
+          muted: "#94a3b8",       // Slate-400 secondary text
+          subtle: "#64748b",      // Slate-500 muted text
+        },
         palette: {
-          cream: "#f5f5d5",      // (245, 245, 213)
-          sand: "#c7b793",       // (199, 183, 147)
-          sage: "#a3b68a",       // (163, 182, 138)
-          moss: "#5c724a",       // (92, 114, 74)
-          forest: "#354a2f",     // (53, 74, 47)
+          cream: "#f8fafc",      // Off-white primary text
+          sand: "#38bdf8",       // Azure accent
+          sage: "#10b981",       // Muted Emerald (Success Metrics)
+          moss: "#00d8ff",       // Electric Cyan (LIDAR Blue)
+          forest: "#0f172a",     // Deep Slate
+          cyan: "#00d8ff",
+          emerald: "#10b981",
         },
         background: {
-          DEFAULT: "#fafaf7",    // Clean warm white gallery canvas
-          secondary: "#f4f3ec",  // Warm cream card surface
-          tertiary: "#eae8de",   // Subtle muted stone
+          DEFAULT: "#0f172a",    // Deep Slate
+          secondary: "#111a2e",  // Elevated Terminal Card surface
+          tertiary: "#1e293b",   // Slate-800 subtle
         },
         glass: {
-          border: "rgba(92, 114, 74, 0.16)",
-          "border-bright": "rgba(163, 182, 138, 0.35)",
-          surface: "rgba(255, 255, 255, 0.75)",
-          "surface-hover": "rgba(255, 255, 255, 0.92)",
-          highlight: "rgba(255, 255, 255, 0.95)",
+          border: "rgba(0, 216, 255, 0.16)",
+          "border-bright": "rgba(0, 216, 255, 0.45)",
+          surface: "rgba(15, 23, 42, 0.75)",
+          "surface-hover": "rgba(22, 33, 58, 0.85)",
+          highlight: "rgba(0, 216, 255, 0.08)",
         },
       },
       backdropBlur: {
@@ -37,11 +50,14 @@ const config: Config = {
         "glass-heavy": "40px",
       },
       boxShadow: {
-        glass: "0 10px 30px -5px rgba(53, 74, 47, 0.07), 0 4px 12px -2px rgba(53, 74, 47, 0.04)",
-        "glass-lg": "0 20px 45px -10px rgba(53, 74, 47, 0.12), 0 8px 16px -4px rgba(53, 74, 47, 0.05)",
-        "glow-sage": "0 0 35px -5px rgba(163, 182, 138, 0.4)",
-        "glow-moss": "0 0 35px -5px rgba(92, 114, 74, 0.35)",
-        "glow-sand": "0 0 30px -5px rgba(199, 183, 147, 0.4)",
+        glass: "0 10px 30px -5px rgba(0, 0, 0, 0.4), 0 4px 12px -2px rgba(0, 216, 255, 0.05)",
+        "glass-lg": "0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 8px 16px -4px rgba(0, 216, 255, 0.1)",
+        "glow-cyan": "0 0 35px -5px rgba(0, 216, 255, 0.45)",
+        "glow-emerald": "0 0 35px -5px rgba(16, 185, 129, 0.45)",
+        "glow-azure": "0 0 30px -5px rgba(56, 189, 248, 0.4)",
+        "glow-sage": "0 0 35px -5px rgba(16, 185, 129, 0.4)",
+        "glow-moss": "0 0 35px -5px rgba(0, 216, 255, 0.4)",
+        "glow-sand": "0 0 30px -5px rgba(56, 189, 248, 0.4)",
       },
       keyframes: {
         "blob-float": {

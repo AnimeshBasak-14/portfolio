@@ -15,9 +15,21 @@ import {
   Loader2,
   Sparkles,
   ArrowUpRight,
-  Phone,
+  Terminal,
 } from "lucide-react";
 import confetti from "canvas-confetti";
+
+// Custom Hugging Face Icon
+const HuggingFaceIcon: React.FC<{ className?: string }> = ({ className = "h-4 w-4" }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-3.5 7.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5S7 11.83 7 11s.67-1.5 1.5-1.5zm7 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-3.5 8c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z" />
+  </svg>
+);
 
 type SubmissionState = "idle" | "submitting" | "success" | "error";
 
@@ -71,12 +83,12 @@ export const Contact: React.FC = () => {
       );
       setFormData({ name: "", email: "", message: "", website_hp: "" });
 
-      // Celebratory confetti burst in warm cream and sage tones
+      // Celebratory confetti burst in electric cyan, azure, emerald, and white
       confetti({
-        particleCount: 80,
-        spread: 70,
+        particleCount: 90,
+        spread: 75,
         origin: { y: 0.7 },
-        colors: ["#f5f5d5", "#c7b793", "#a3b68a", "#5c724a"],
+        colors: ["#00d8ff", "#38bdf8", "#10b981", "#f8fafc"],
       });
     } catch (err: any) {
       setState("error");
@@ -88,8 +100,9 @@ export const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="relative py-28 px-4 md:px-8">
-      {/* Background ambient glow in soft sage tone */}
-      <div className="pointer-events-none absolute bottom-1/4 right-10 h-96 w-96 rounded-full bg-palette-sage/15 blur-[130px] -z-10" />
+      {/* Background ambient glow in electric cyan & emerald */}
+      <div className="pointer-events-none absolute bottom-1/4 right-10 h-96 w-96 rounded-full bg-cyan-500/10 blur-[140px] -z-10" />
+      <div className="pointer-events-none absolute top-1/4 left-10 h-80 w-80 rounded-full bg-emerald-500/10 blur-[130px] -z-10" />
 
       <div className="mx-auto max-w-6xl">
         {/* Section Header */}
@@ -98,9 +111,9 @@ export const Contact: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full border border-palette-moss/20 bg-white/80 px-4 py-1 text-xs font-mono tracking-widest text-palette-forest uppercase shadow-sm"
+            className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-mono tracking-widest text-cyan-400 uppercase shadow-sm"
           >
-            <Sparkles className="h-3.5 w-3.5 text-palette-moss" />
+            <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
             <span>Direct Inquiries & Research Dialogue</span>
           </motion.div>
 
@@ -109,11 +122,11 @@ export const Contact: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-3xl font-extrabold tracking-tight text-palette-forest sm:text-4xl md:text-5xl"
+            className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl"
           >
-            Let&apos;s build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-palette-forest via-palette-moss to-palette-sage">extraordinary</span>.
+            Let&apos;s build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-emerald-400">extraordinary</span>.
           </motion.h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-palette-forest/80">
+          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-slate-300">
             Interested in research collaborations, autonomous systems discussions, or engineering roles? Send a message below.
           </p>
         </div>
@@ -124,55 +137,58 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <TiltCard
               maxTilt={6}
-              spotlightColor="rgba(163, 182, 138, 0.25)"
-              className="p-8 h-full flex flex-col justify-between border border-palette-moss/15 bg-white/85 shadow-glass hover:shadow-glass-lg transition-all"
+              spotlightColor="rgba(0, 216, 255, 0.18)"
+              className="p-8 h-full flex flex-col justify-between border border-slate-800 bg-slate-900/85 shadow-glass hover:border-cyan-500/30 hover:shadow-glass-lg transition-all"
             >
               <div>
-                <h3 className="text-xl font-bold text-palette-forest mb-2">
-                  Direct Channels
+                <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                  <Terminal className="h-4 w-4 text-cyan-400" />
+                  <span>Canonical Channels</span>
                 </h3>
-                <p className="text-xs text-palette-forest/80 mb-8 leading-relaxed">
-                  Fast response guaranteed. Feel free to connect directly via email, phone, or professional networks.
+                <p className="text-xs text-slate-400 mb-8 leading-relaxed">
+                  Fast response guaranteed. Feel free to connect directly via email, professional profiles, or open-source hubs.
                 </p>
 
                 {/* Channels List */}
-                <div className="space-y-4">
+                <div className="space-y-3.5">
                   {/* Email */}
                   <a
                     href={`mailto:${personalData.email}`}
-                    className="group flex items-center justify-between rounded-xl border border-palette-moss/15 bg-palette-cream/40 p-4 transition-all hover:border-palette-moss/35 hover:bg-white shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-4 transition-all hover:border-cyan-500/40 hover:bg-slate-800/80 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white p-2.5 text-palette-forest border border-palette-moss/20 shadow-sm">
-                        <Mail className="h-4 w-4 text-palette-moss" />
+                      <div className="rounded-xl bg-slate-800 p-2.5 text-cyan-400 border border-slate-700/60 shadow-sm group-hover:border-cyan-500/40">
+                        <Mail className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-palette-forest/60">Email</span>
-                        <span className="text-sm font-semibold text-palette-forest group-hover:text-palette-moss">
+                        <span className="block text-[11px] font-mono text-slate-400">Direct Email</span>
+                        <span className="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors">
                           {personalData.email}
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-palette-forest/60 group-hover:text-palette-forest transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-cyan-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
-                  {/* Phone */}
+                  {/* Hugging Face (Replaces phone number) */}
                   <a
-                    href={`tel:${personalData.phone.replace(/\s+/g, "")}`}
-                    className="group flex items-center justify-between rounded-xl border border-palette-moss/15 bg-palette-cream/40 p-4 transition-all hover:border-palette-moss/35 hover:bg-white shadow-sm"
+                    href={personalData.huggingface}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-4 transition-all hover:border-yellow-500/40 hover:bg-slate-800/80 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white p-2.5 text-palette-forest border border-palette-moss/20 shadow-sm">
-                        <Phone className="h-4 w-4 text-palette-moss" />
+                      <div className="rounded-xl bg-slate-800 p-2.5 text-yellow-400 border border-slate-700/60 shadow-sm group-hover:border-yellow-500/40">
+                        <HuggingFaceIcon className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-palette-forest/60">Phone</span>
-                        <span className="text-sm font-semibold text-palette-forest group-hover:text-palette-moss">
-                          {personalData.phone}
+                        <span className="block text-[11px] font-mono text-slate-400">Hugging Face</span>
+                        <span className="text-sm font-semibold text-white group-hover:text-yellow-400 transition-colors">
+                          huggingface.co/rohan700
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-palette-forest/60 group-hover:text-palette-forest transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-yellow-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   {/* LinkedIn */}
@@ -180,20 +196,20 @@ export const Contact: React.FC = () => {
                     href={personalData.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-palette-moss/15 bg-palette-cream/40 p-4 transition-all hover:border-palette-moss/35 hover:bg-white shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-4 transition-all hover:border-sky-500/40 hover:bg-slate-800/80 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white p-2.5 text-palette-forest border border-palette-moss/20 shadow-sm">
-                        <Linkedin className="h-4 w-4 text-palette-moss" />
+                      <div className="rounded-xl bg-slate-800 p-2.5 text-sky-400 border border-slate-700/60 shadow-sm group-hover:border-sky-500/40">
+                        <Linkedin className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-palette-forest/60">LinkedIn</span>
-                        <span className="text-sm font-semibold text-palette-forest group-hover:text-palette-moss">
+                        <span className="block text-[11px] font-mono text-slate-400">LinkedIn Profile</span>
+                        <span className="text-sm font-semibold text-white group-hover:text-sky-400 transition-colors">
                           in/animeshbasak03
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-palette-forest/60 group-hover:text-palette-forest transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-sky-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   {/* GitHub */}
@@ -201,27 +217,27 @@ export const Contact: React.FC = () => {
                     href={personalData.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-palette-moss/15 bg-palette-cream/40 p-4 transition-all hover:border-palette-moss/35 hover:bg-white shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-4 transition-all hover:border-cyan-500/40 hover:bg-slate-800/80 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white p-2.5 text-palette-forest border border-palette-moss/20 shadow-sm">
-                        <Github className="h-4 w-4 text-palette-moss" />
+                      <div className="rounded-xl bg-slate-800 p-2.5 text-cyan-400 border border-slate-700/60 shadow-sm group-hover:border-cyan-500/40">
+                        <Github className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-palette-forest/60">GitHub</span>
-                        <span className="text-sm font-semibold text-palette-forest group-hover:text-palette-moss">
+                        <span className="block text-[11px] font-mono text-slate-400">GitHub Repositories</span>
+                        <span className="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors">
                           github.com/AnimeshBasak-14
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-palette-forest/60 group-hover:text-palette-forest transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-cyan-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 </div>
               </div>
 
               {/* Status Badge */}
-              <div className="mt-8 rounded-xl border border-palette-moss/20 bg-palette-cream/50 p-4 text-xs font-mono text-palette-forest">
-                <span className="text-palette-moss font-bold">● </span> Location: {personalData.location}
+              <div className="mt-8 rounded-xl border border-slate-800 bg-slate-950/70 p-4 text-xs font-mono text-slate-300">
+                <span className="text-emerald-400 font-bold">● </span> Location: {personalData.location}
               </div>
             </TiltCard>
           </div>
@@ -230,8 +246,8 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-7">
             <TiltCard
               maxTilt={4}
-              spotlightColor="rgba(199, 183, 147, 0.2)"
-              className="p-8 sm:p-10 border border-palette-moss/15 bg-white/85 shadow-glass hover:shadow-glass-lg transition-all"
+              spotlightColor="rgba(0, 216, 255, 0.15)"
+              className="p-8 sm:p-10 border border-slate-800 bg-slate-900/85 shadow-glass hover:border-cyan-500/30 hover:shadow-glass-lg transition-all"
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Honeypot field */}
@@ -256,11 +272,11 @@ export const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder=" "
-                    className="peer w-full rounded-xl border border-palette-moss/25 bg-white px-4 pt-6 pb-2 text-sm text-palette-forest placeholder-transparent outline-none transition-all duration-300 focus:border-palette-forest focus:ring-2 focus:ring-palette-moss/20 shadow-sm"
+                    className="peer w-full rounded-xl border border-slate-800 bg-slate-950/70 px-4 pt-6 pb-2 text-sm text-white placeholder-transparent outline-none transition-all duration-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 shadow-sm"
                   />
                   <label
                     htmlFor="name"
-                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-palette-forest/60 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-palette-forest/60 peer-focus:top-2 peer-focus:text-xs peer-focus:text-palette-forest"
+                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-slate-400 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-500 peer-focus:top-2 peer-focus:text-xs peer-focus:text-cyan-400"
                   >
                     Your Name *
                   </label>
@@ -276,11 +292,11 @@ export const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder=" "
-                    className="peer w-full rounded-xl border border-palette-moss/25 bg-white px-4 pt-6 pb-2 text-sm text-palette-forest placeholder-transparent outline-none transition-all duration-300 focus:border-palette-forest focus:ring-2 focus:ring-palette-moss/20 shadow-sm"
+                    className="peer w-full rounded-xl border border-slate-800 bg-slate-950/70 px-4 pt-6 pb-2 text-sm text-white placeholder-transparent outline-none transition-all duration-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 shadow-sm"
                   />
                   <label
                     htmlFor="email"
-                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-palette-forest/60 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-palette-forest/60 peer-focus:top-2 peer-focus:text-xs peer-focus:text-palette-forest"
+                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-slate-400 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-500 peer-focus:top-2 peer-focus:text-xs peer-focus:text-cyan-400"
                   >
                     Your Email Address *
                   </label>
@@ -296,11 +312,11 @@ export const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder=" "
-                    className="peer w-full resize-none rounded-xl border border-palette-moss/25 bg-white px-4 pt-6 pb-2 text-sm text-palette-forest placeholder-transparent outline-none transition-all duration-300 focus:border-palette-forest focus:ring-2 focus:ring-palette-moss/20 shadow-sm"
+                    className="peer w-full resize-none rounded-xl border border-slate-800 bg-slate-950/70 px-4 pt-6 pb-2 text-sm text-white placeholder-transparent outline-none transition-all duration-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 shadow-sm"
                   />
                   <label
                     htmlFor="message"
-                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-palette-forest/60 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-palette-forest/60 peer-focus:top-2 peer-focus:text-xs peer-focus:text-palette-forest"
+                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-slate-400 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-500 peer-focus:top-2 peer-focus:text-xs peer-focus:text-cyan-400"
                   >
                     Message or Collaboration Details *
                   </label>
@@ -315,42 +331,42 @@ export const Contact: React.FC = () => {
                       exit={{ opacity: 0, y: -10 }}
                       className={`flex items-center gap-2 rounded-xl p-3.5 text-xs font-medium ${
                         state === "success"
-                          ? "border border-palette-moss/30 bg-palette-cream text-palette-forest shadow-sm"
-                          : "border border-rose-300 bg-rose-50 text-rose-800"
+                          ? "border border-emerald-500/30 bg-emerald-950/50 text-emerald-300 shadow-sm"
+                          : "border border-rose-500/30 bg-rose-950/50 text-rose-300"
                       }`}
                     >
                       {state === "success" ? (
-                        <CheckCircle2 className="h-4 w-4 shrink-0 text-palette-moss" />
+                        <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
                       ) : (
-                        <AlertCircle className="h-4 w-4 shrink-0" />
+                        <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
                       )}
                       <span>{feedbackMessage}</span>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                {/* Submit button in botanical palette */}
+                {/* Submit button in Cyber-Physical styling */}
                 <div className="pt-2">
                   <Magnetic strength={0.3}>
                     <button
                       type="submit"
                       disabled={state === "submitting"}
-                      className="relative group flex w-full items-center justify-center gap-2 rounded-xl border border-palette-forest bg-palette-forest px-8 py-3.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-palette-moss disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="relative group flex w-full items-center justify-center gap-2 rounded-xl border border-cyan-500/50 bg-cyan-500 px-8 py-3.5 text-sm font-bold text-slate-950 shadow-glow-cyan transition-all duration-300 hover:bg-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {state === "submitting" ? (
                         <>
-                          <Loader2 className="h-4 w-4 animate-spin text-white" />
+                          <Loader2 className="h-4 w-4 animate-spin text-slate-950" />
                           <span>Transmitting Signal...</span>
                         </>
                       ) : state === "success" ? (
                         <>
-                          <CheckCircle2 className="h-4 w-4 text-palette-cream" />
+                          <CheckCircle2 className="h-4 w-4 text-slate-950" />
                           <span>Transmission Dispatched</span>
                         </>
                       ) : (
                         <>
                           <span>Transmit Message</span>
-                          <Send className="h-4 w-4 text-white transition-transform group-hover:translate-x-1" />
+                          <Send className="h-4 w-4 text-slate-950 transition-transform group-hover:translate-x-1" />
                         </>
                       )}
                     </button>
