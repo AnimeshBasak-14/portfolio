@@ -5,10 +5,20 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { personalData } from "@/data/personal";
 import { Magnetic } from "@/components/ui/Magnetic";
-import { ArrowDown, Github, Linkedin, Mail, Sparkles, FolderGit2 } from "lucide-react";
+import {
+  ArrowDown,
+  Github,
+  Linkedin,
+  Mail,
+  Sparkles,
+  FolderGit2,
+  Youtube,
+  Database,
+  GraduationCap,
+} from "lucide-react";
 import { containerVariants, itemVariants } from "@/lib/animations";
 
-// Dynamically import 3D Canvas with ssr: false to prevent SSR hydration mismatches
+// Dynamically import 3D Canvas with ssr: false
 const HeroGlassCanvas = dynamic(
   () => import("@/components/canvas/HeroGlassObject"),
   {
@@ -29,7 +39,7 @@ export const Hero: React.FC = () => {
       id="hero"
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-4 pt-28 pb-16 md:px-8 md:pt-32"
     >
-      {/* Dynamic Ambient Background Blobs that never stop moving */}
+      {/* Dynamic Ambient Background Blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 h-[550px] w-[550px] rounded-full bg-gradient-to-tr from-cyan-600/15 to-blue-700/10 blur-[130px] animate-blob-float-1" />
         <div className="absolute bottom-1/4 right-1/4 h-[600px] w-[600px] rounded-full bg-gradient-to-br from-purple-600/15 via-indigo-600/10 to-pink-600/10 blur-[140px] animate-blob-float-2" />
@@ -44,16 +54,13 @@ export const Hero: React.FC = () => {
           animate="visible"
           className="flex flex-1 flex-col items-center text-center lg:items-start lg:text-left z-10"
         >
-          {/* Status Capsule Badge */}
+          {/* Institutional Status Capsule */}
           <motion.div
             variants={itemVariants}
             className="liquid-glass mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium text-cyan-300 shadow-sm"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-500" />
-            </span>
-            <span>{personalData.status}</span>
+            <GraduationCap className="h-3.5 w-3.5 text-cyan-400" />
+            <span>Ph.D. Scholar @ IIT Roorkee under Dr. Neetish Kumar</span>
           </motion.div>
 
           {/* Staggered Name Reveal */}
@@ -77,7 +84,7 @@ export const Hero: React.FC = () => {
             </span>
           </h1>
 
-          {/* Subtitle / Role with Gradient */}
+          {/* Research Subtitle */}
           <motion.h2
             variants={itemVariants}
             className="mb-6 max-w-2xl text-xl font-medium tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-cyan-200 to-purple-200 sm:text-2xl md:text-3xl"
@@ -88,35 +95,50 @@ export const Hero: React.FC = () => {
           {/* Tagline */}
           <motion.p
             variants={itemVariants}
-            className="mb-10 max-w-xl text-base text-slate-400 sm:text-lg leading-relaxed"
+            className="mb-8 max-w-xl text-base text-slate-300/90 sm:text-lg leading-relaxed"
           >
             {personalData.tagline}
           </motion.p>
 
-          {/* Glass CTA Buttons & Canonical Socials */}
+          {/* Primary Action Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-4 lg:justify-start"
+            className="flex flex-wrap items-center justify-center gap-3.5 lg:justify-start"
           >
             {/* CTA 1: View Projects */}
             <Magnetic strength={0.3}>
               <a
                 href="#projects"
-                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border-cyan-500/30 bg-cyan-500/10 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(56,189,248,0.25)] transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-500/20 hover:shadow-[0_0_35px_rgba(56,189,248,0.4)]"
+                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border-cyan-500/30 bg-cyan-500/10 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_25px_rgba(56,189,248,0.25)] transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-500/20 hover:shadow-[0_0_35px_rgba(56,189,248,0.4)]"
               >
                 <FolderGit2 className="h-4 w-4 text-cyan-400 transition-transform group-hover:scale-110" />
-                <span>View Projects</span>
+                <span>Research & Projects</span>
               </a>
             </Magnetic>
 
-            {/* CTA 2: Get in Touch */}
+            {/* CTA 2: CARLA RL Videos (YouTube Playlist) */}
             <Magnetic strength={0.3}>
               <a
-                href="#contact"
-                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border-white/15 bg-white/5 px-7 py-3.5 text-sm font-medium text-slate-200 transition-all duration-300 hover:border-white/30 hover:bg-white/10 hover:text-white"
+                href={personalData.youtubePlaylistUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border-red-500/30 bg-red-500/10 px-5 py-3 text-sm font-medium text-red-300 transition-all duration-300 hover:border-red-400 hover:bg-red-500/20 hover:text-white"
               >
-                <Mail className="h-4 w-4 text-slate-300 transition-transform group-hover:translate-x-0.5" />
-                <span>Get in Touch</span>
+                <Youtube className="h-4 w-4 text-red-400 transition-transform group-hover:scale-110" />
+                <span>48 RL Testcases</span>
+              </a>
+            </Magnetic>
+
+            {/* CTA 3: Google Drive Datasets & Models */}
+            <Magnetic strength={0.3}>
+              <a
+                href={personalData.driveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border-emerald-500/30 bg-emerald-500/10 px-5 py-3 text-sm font-medium text-emerald-300 transition-all duration-300 hover:border-emerald-400 hover:bg-emerald-500/20 hover:text-white"
+              >
+                <Database className="h-4 w-4 text-emerald-400 transition-transform group-hover:scale-110" />
+                <span>Drive Models & Data</span>
               </a>
             </Magnetic>
 
@@ -128,9 +150,9 @@ export const Hero: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Animesh Basak GitHub"
-                  className="liquid-glass flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/5 text-slate-300 transition-all duration-300 hover:border-cyan-400 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]"
+                  className="liquid-glass flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-slate-300 transition-all duration-300 hover:border-cyan-400 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]"
                 >
-                  <Github className="h-5 w-5" />
+                  <Github className="h-4 w-4" />
                 </a>
               </Magnetic>
 
@@ -140,17 +162,17 @@ export const Hero: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Animesh Basak LinkedIn"
-                  className="liquid-glass flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/5 text-slate-300 transition-all duration-300 hover:border-purple-400 hover:text-white hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+                  className="liquid-glass flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-slate-300 transition-all duration-300 hover:border-purple-400 hover:text-white hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
                 >
-                  <Linkedin className="h-5 w-5" />
+                  <Linkedin className="h-4 w-4" />
                 </a>
               </Magnetic>
             </div>
           </motion.div>
         </motion.div>
 
-        {/* Right Column: 3D React Three Fiber Floating Glass Crystal */}
-        <div className="relative flex h-[380px] w-full flex-1 items-center justify-center sm:h-[460px] lg:h-[540px]">
+        {/* Right Column: 3D Connectome & LiDAR Canvas */}
+        <div className="relative flex h-[400px] w-full flex-1 items-center justify-center sm:h-[480px] lg:h-[560px]">
           {/* Ambient background light beneath 3D canvas */}
           <div className="absolute h-72 w-72 rounded-full bg-gradient-to-tr from-cyan-500/20 via-purple-500/20 to-transparent blur-3xl" />
           <HeroGlassCanvas />
@@ -165,7 +187,7 @@ export const Hero: React.FC = () => {
         className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden flex-col items-center gap-2 sm:flex"
       >
         <span className="font-mono text-[10px] tracking-widest text-slate-400 uppercase">
-          Scroll to explore
+          Explore Research & Engineering
         </span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
