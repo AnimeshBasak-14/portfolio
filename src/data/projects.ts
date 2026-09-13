@@ -28,7 +28,7 @@ export const projectsData: Project[] = [
     videoUrl: "https://www.youtube.com/embed/W_Zf6kfbKO4?list=PLNy_bKEJyhIM",
     certificateUrl: "https://drive.google.com/file/d/1qKYa1k7J43_SlgI0YeybKruXTh_WqBZZ/view?usp=drive_link",
     featured: true,
-    accentColor: "from-cyan-500/25 via-blue-600/20 to-indigo-600/25",
+    accentColor: "from-palette-moss/30 via-palette-forest/30 to-palette-sand/20",
     metrics: [
       { label: "Reward Gain", value: "+577.7%" },
       { label: "Success Rate", value: "85%+" },
@@ -51,7 +51,7 @@ export const projectsData: Project[] = [
     githubUrl: "https://github.com/AnimeshBasak-14/MLProjects",
     liveUrl: "https://github.com/AnimeshBasak-14/MLProjects",
     featured: true,
-    accentColor: "from-blue-500/25 via-indigo-600/20 to-purple-600/25",
+    accentColor: "from-palette-forest/35 via-palette-moss/25 to-palette-sand/20",
     metrics: [
       { label: "Accuracy", value: "87.76%" },
       { label: "Cost Reduced", value: "40%" },
@@ -74,7 +74,7 @@ export const projectsData: Project[] = [
     githubUrl: "https://github.com/AnimeshBasak-14/ChatWithPDF-RAG",
     liveUrl: "https://github.com/AnimeshBasak-14/ChatWithPDF-RAG",
     featured: true,
-    accentColor: "from-purple-500/25 via-pink-600/20 to-cyan-600/25",
+    accentColor: "from-palette-sage/25 via-palette-moss/30 to-palette-forest/30",
     metrics: [
       { label: "Latency", value: "4.72 ms" },
       { label: "Retrieval", value: "FAISS Vector" },
@@ -97,7 +97,7 @@ export const projectsData: Project[] = [
     githubUrl: "https://github.com/AnimeshBasak-14/Enhanced-Q-A-Chatbot-with-OpenAI",
     liveUrl: "https://github.com/AnimeshBasak-14/Enhanced-Q-A-Chatbot-with-OpenAI",
     featured: false,
-    accentColor: "from-emerald-500/20 via-teal-500/20 to-cyan-500/20",
+    accentColor: "from-palette-moss/25 via-palette-forest/25 to-palette-sand/20",
     metrics: [
       { label: "P50 Latency", value: "1.28s" },
       { label: "API Errors", value: "0.0%" },
@@ -121,7 +121,7 @@ export const projectsData: Project[] = [
     liveUrl: "https://github.com/AnimeshBasak-14/SignSense",
     certificateUrl: "https://drive.google.com/file/d/1in79FJbNS_-q_D2LmV4ZjrHp9aD2FfFn/view",
     featured: false,
-    accentColor: "from-amber-500/20 via-orange-500/20 to-red-500/20",
+    accentColor: "from-palette-sand/30 via-palette-moss/25 to-palette-forest/25",
     metrics: [
       { label: "Accuracy", value: "99.0%" },
       { label: "Speed Gain", value: "+25%" },
@@ -144,7 +144,7 @@ export const projectsData: Project[] = [
     githubUrl: "https://github.com/AnimeshBasak-14/NetworkSecurity",
     liveUrl: "https://github.com/AnimeshBasak-14/NetworkSecurity",
     featured: false,
-    accentColor: "from-rose-500/20 via-pink-500/20 to-purple-500/20",
+    accentColor: "from-palette-forest/30 via-palette-moss/25 to-palette-sage/20",
     metrics: [
       { label: "Accuracy", value: "98.7%" },
       { label: "Latency", value: "< 5ms" },

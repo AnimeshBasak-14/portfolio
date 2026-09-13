@@ -42,37 +42,37 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
             scale: 1.05,
             transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
           }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#05070B]"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background"
         >
           {/* Ambient background glow */}
-          <div className="pointer-events-none absolute h-[350px] w-[350px] rounded-full bg-gradient-to-tr from-cyan-500/20 via-purple-500/20 to-blue-500/20 blur-3xl" />
+          <div className="pointer-events-none absolute h-[350px] w-[350px] rounded-full bg-gradient-to-tr from-palette-forest/40 via-palette-moss/30 to-palette-sage/20 blur-3xl" />
 
           {/* Liquid Glass Orb Container */}
           <motion.div
             initial={{ scale: 0.85, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="liquid-glass specular-top relative flex h-36 w-36 flex-col items-center justify-center rounded-3xl p-6 shadow-2xl"
+            className="liquid-glass specular-top relative flex h-36 w-36 flex-col items-center justify-center rounded-3xl p-6 shadow-glass-lg border border-palette-sand/20 bg-background-secondary/80"
           >
             {/* Specular Edge Ring */}
-            <div className="absolute inset-0 rounded-3xl border border-white/20" />
+            <div className="absolute inset-0 rounded-3xl border border-palette-sand/20" />
 
             {/* Glowing Monogram */}
             <div className="relative mb-2 flex items-center justify-center">
-              <span className="text-3xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-400">
+              <span className="text-3xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-palette-cream via-palette-sand to-palette-sage">
                 AB
               </span>
             </div>
 
             {/* Progress Percentage */}
-            <span className="font-mono text-xs text-slate-400">
+            <span className="font-mono text-xs text-palette-sand">
               {progress}%
             </span>
 
             {/* Liquid Progress Bar */}
-            <div className="mt-3 h-1 w-20 overflow-hidden rounded-full bg-white/10">
+            <div className="mt-3 h-1 w-20 overflow-hidden rounded-full bg-palette-sand/15">
               <motion.div
-                className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500"
+                className="h-full bg-gradient-to-r from-palette-moss via-palette-sage to-palette-cream"
                 style={{ width: `${progress}%` }}
                 transition={{ ease: "easeOut", duration: 0.2 }}
               />
@@ -81,11 +81,11 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
 
           <motion.p
             initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 0.6, y: 0 }}
+            animate={{ opacity: 0.7, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-6 font-mono text-xs tracking-widest text-slate-400 uppercase"
+            className="mt-6 font-mono text-xs tracking-widest text-palette-sand uppercase"
           >
-            Liquid Glass Experience
+            Autonomous Driving • Continuous RL
           </motion.p>
         </motion.div>
       )}

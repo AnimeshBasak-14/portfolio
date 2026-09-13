@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { personalData } from "@/data/personal";
-import { Github, Linkedin, Mail, Sparkles, Menu, X } from "lucide-react";
+import { Github, Linkedin, Mail, Sparkles, Menu, X, BookOpen } from "lucide-react";
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -16,7 +16,7 @@ export const Navbar: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const sections = ["hero", "about", "projects", "skills", "timeline", "contact"];
+      const sections = ["hero", "about", "research", "projects", "skills", "timeline", "contact"];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
@@ -37,11 +37,12 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navItems = [
-    { label: "About", href: "#about", id: "about" },
-    { label: "Projects", href: "#projects", id: "projects" },
-    { label: "Skills", href: "#skills", id: "skills" },
-    { label: "Timeline", href: "#timeline", id: "timeline" },
-    { label: "Contact", href: "#contact", id: "contact" },
+    { label: "About", href: "/#about", id: "about" },
+    { label: "Research", href: "/#research", id: "research", badge: "Review" },
+    { label: "Projects", href: "/#projects", id: "projects" },
+    { label: "Skills", href: "/#skills", id: "skills" },
+    { label: "Experience", href: "/#timeline", id: "timeline" },
+    { label: "Contact", href: "/#contact", id: "contact" },
   ];
 
   return (
@@ -52,23 +53,23 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`liquid-glass specular-top relative flex items-center justify-between rounded-full px-5 py-2.5 transition-all duration-300 md:px-7 md:py-3 ${
           scrolled
-            ? "w-full max-w-4xl border-white/20 bg-black/40 shadow-glass-lg backdrop-blur-glass-heavy"
-            : "w-full max-w-5xl border-white/10 bg-white/[0.03] backdrop-blur-glass"
+            ? "w-full max-w-4xl border-palette-sand/30 bg-background/90 shadow-glass-lg backdrop-blur-glass-heavy"
+            : "w-full max-w-5xl border-palette-sand/20 bg-background-secondary/80 backdrop-blur-glass"
         }`}
       >
         {/* Brand / Logo */}
         <Magnetic strength={0.25}>
-          <a
-            href="#hero"
-            className="group flex items-center space-x-2 text-sm font-semibold tracking-wide text-white transition-colors"
+          <Link
+            href="/"
+            className="group flex items-center space-x-2 text-sm font-semibold tracking-wide text-palette-cream transition-colors"
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-cyan-400 to-purple-500 text-xs font-bold text-white shadow-inner">
-              A
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-palette-forest text-xs font-bold text-palette-cream border border-palette-sand/40 shadow-inner">
+              AB
             </div>
-            <span className="hidden font-medium text-slate-200 group-hover:text-white sm:inline-block">
+            <span className="hidden font-medium text-palette-cream/90 group-hover:text-palette-cream sm:inline-block">
               {personalData.name}
             </span>
-          </a>
+          </Link>
         </Magnetic>
 
         {/* Desktop Nav Links */}
@@ -77,33 +78,38 @@ export const Navbar: React.FC = () => {
             <Magnetic key={item.id} strength={0.3}>
               <a
                 href={item.href}
-                className={`relative px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase transition-colors duration-200 ${
+                className={`relative px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase transition-colors duration-200 flex items-center gap-1.5 ${
                   activeSection === item.id
-                    ? "text-white"
-                    : "text-slate-400 hover:text-white"
+                    ? "text-palette-cream font-bold"
+                    : "text-palette-sand hover:text-palette-cream"
                 }`}
               >
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="activeNavIndicator"
-                    className="absolute inset-0 -z-10 rounded-full bg-white/10 backdrop-blur-xs border border-white/20"
+                    className="absolute inset-0 -z-10 rounded-full bg-palette-moss/30 backdrop-blur-xs border border-palette-sand/40"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-                {item.label}
+                <span>{item.label}</span>
+                {item.badge && (
+                  <span className="rounded-full bg-amber-500/20 px-1.5 py-0.2 text-[8px] font-mono font-semibold text-amber-200 border border-amber-500/40">
+                    {item.badge}
+                  </span>
+                )}
               </a>
             </Magnetic>
           ))}
         </div>
 
-        {/* Social / Direct Action Links */}
+        {/* Social / Direct Actions */}
         <div className="flex items-center space-x-2">
           <Magnetic strength={0.3}>
             <a
               href={personalData.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-cream transition-colors hover:border-palette-sage hover:bg-palette-moss/30"
               aria-label="GitHub Profile"
             >
               <Github className="h-3.5 w-3.5" />
@@ -115,7 +121,7 @@ export const Navbar: React.FC = () => {
               href={personalData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-cream transition-colors hover:border-palette-sage hover:bg-palette-moss/30"
               aria-label="LinkedIn Profile"
             >
               <Linkedin className="h-3.5 w-3.5" />
@@ -124,18 +130,18 @@ export const Navbar: React.FC = () => {
 
           <Magnetic strength={0.3}>
             <a
-              href="#contact"
-              className="hidden items-center space-x-1.5 rounded-full border border-cyan-500/30 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 px-3.5 py-1 text-xs font-medium text-cyan-300 shadow-[0_0_15px_rgba(56,189,248,0.2)] transition-all duration-300 hover:border-cyan-400 hover:text-white sm:flex"
+              href="/#contact"
+              className="hidden items-center space-x-1.5 rounded-full border border-palette-sand/40 bg-palette-moss/30 px-3.5 py-1 text-xs font-medium text-palette-cream shadow-glow-sage transition-all duration-300 hover:border-palette-sage hover:bg-palette-moss/50 sm:flex"
             >
-              <Sparkles className="h-3 w-3" />
-              <span>Hire Me</span>
+              <Sparkles className="h-3 w-3 text-palette-sage" />
+              <span>Get in Touch</span>
             </a>
           </Magnetic>
 
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 md:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-cream md:hidden"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -149,7 +155,7 @@ export const Navbar: React.FC = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="liquid-glass specular-top fixed top-20 left-4 right-4 z-40 rounded-3xl p-6 md:hidden shadow-glass-lg"
+          className="liquid-glass specular-top fixed top-20 left-4 right-4 z-40 rounded-3xl p-6 md:hidden shadow-glass-lg border border-palette-sand/30 bg-background/95"
         >
           <div className="flex flex-col space-y-4">
             {navItems.map((item) => (
@@ -157,23 +163,28 @@ export const Navbar: React.FC = () => {
                 key={item.id}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-base font-medium tracking-wide transition-colors ${
-                  activeSection === item.id ? "text-cyan-400" : "text-slate-300"
+                className={`text-base font-medium tracking-wide transition-colors flex items-center justify-between ${
+                  activeSection === item.id ? "text-palette-sage font-bold" : "text-palette-cream/80"
                 }`}
               >
-                {item.label}
+                <span>{item.label}</span>
+                {item.badge && (
+                  <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[9px] font-mono text-amber-200 border border-amber-500/40">
+                    {item.badge}
+                  </span>
+                )}
               </a>
             ))}
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-              <span className="text-xs text-slate-400">Canonical Links</span>
+            <div className="pt-4 border-t border-palette-sand/20 flex items-center justify-between">
+              <span className="text-xs text-palette-sand">Verified Profiles</span>
               <div className="flex space-x-3">
-                <a href={personalData.github} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-white">
+                <a href={personalData.github} target="_blank" rel="noreferrer" className="text-palette-cream hover:text-palette-sage">
                   <Github className="h-4 w-4" />
                 </a>
-                <a href={personalData.linkedin} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-white">
+                <a href={personalData.linkedin} target="_blank" rel="noreferrer" className="text-palette-cream hover:text-palette-sage">
                   <Linkedin className="h-4 w-4" />
                 </a>
-                <a href={`mailto:${personalData.email}`} className="text-slate-300 hover:text-white">
+                <a href={`mailto:${personalData.email}`} className="text-palette-cream hover:text-palette-sage">
                   <Mail className="h-4 w-4" />
                 </a>
               </div>

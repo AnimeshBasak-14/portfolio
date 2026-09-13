@@ -10,24 +10,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: {
-          DEFAULT: "#05070B",
-          secondary: "#0B0F19",
-          tertiary: "#111726",
+        // User-specified botanical & luxury organic palette:
+        palette: {
+          cream: "#f5f5d5",      // (245, 245, 213)
+          sand: "#c7b793",       // (199, 183, 147)
+          sage: "#a3b68a",       // (163, 182, 138)
+          moss: "#5c724a",       // (92, 114, 74)
+          forest: "#354a2f",     // (53, 74, 47)
         },
-        accent: {
-          cyan: "#38bdf8",
-          blue: "#3b82f6",
-          indigo: "#6366f1",
-          purple: "#a855f7",
-          pink: "#ec4899",
+        background: {
+          DEFAULT: "#090d08",    // Deep obsidian forest
+          secondary: "#10170e",  // Deep pine card surface
+          tertiary: "#182316",   // Muted moss acrylic
         },
         glass: {
-          border: "rgba(255, 255, 255, 0.12)",
-          "border-bright": "rgba(255, 255, 255, 0.28)",
-          surface: "rgba(255, 255, 255, 0.04)",
-          "surface-hover": "rgba(255, 255, 255, 0.08)",
-          highlight: "rgba(255, 255, 255, 0.18)",
+          border: "rgba(199, 183, 147, 0.18)",
+          "border-bright": "rgba(245, 245, 213, 0.35)",
+          surface: "rgba(53, 74, 47, 0.15)",
+          "surface-hover": "rgba(92, 114, 74, 0.22)",
+          highlight: "rgba(245, 245, 213, 0.25)",
         },
       },
       backdropBlur: {
@@ -36,11 +37,11 @@ const config: Config = {
         "glass-heavy": "40px",
       },
       boxShadow: {
-        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
-        "glass-lg": "0 12px 48px 0 rgba(0, 0, 0, 0.5)",
-        "glow-cyan": "0 0 40px -10px rgba(56, 189, 248, 0.3)",
-        "glow-purple": "0 0 40px -10px rgba(168, 85, 247, 0.3)",
-        "inner-specular": "inset 0 1px 1px 0 rgba(255, 255, 255, 0.25)",
+        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.45)",
+        "glass-lg": "0 16px 48px 0 rgba(0, 0, 0, 0.6)",
+        "glow-sage": "0 0 40px -10px rgba(163, 182, 138, 0.35)",
+        "glow-moss": "0 0 40px -10px rgba(92, 114, 74, 0.35)",
+        "glow-sand": "0 0 35px -8px rgba(199, 183, 147, 0.3)",
       },
       keyframes: {
         "blob-float": {
@@ -48,28 +49,27 @@ const config: Config = {
             transform: "translate(0px, 0px) scale(1)",
           },
           "33%": {
-            transform: "translate(30px, -50px) scale(1.1)",
+            transform: "translate(25px, -45px) scale(1.08)",
           },
           "66%": {
-            transform: "translate(-20px, 20px) scale(0.95)",
+            transform: "translate(-20px, 25px) scale(0.96)",
           },
         },
         "blob-pulse": {
           "0%, 100%": {
-            opacity: "0.4",
+            opacity: "0.35",
             transform: "scale(1)",
           },
           "50%": {
-            opacity: "0.7",
-            transform: "scale(1.15)",
+            opacity: "0.65",
+            transform: "scale(1.12)",
           },
         },
       },
       animation: {
-        "blob-float-1": "blob-float 18s ease-in-out infinite",
-        "blob-float-2": "blob-float 24s ease-in-out infinite reverse",
-        "blob-float-3": "blob-float 20s ease-in-out infinite 2s",
-        "blob-pulse": "blob-pulse 10s ease-in-out infinite",
+        "blob-float-1": "blob-float 20s ease-in-out infinite",
+        "blob-float-2": "blob-float 26s ease-in-out infinite reverse",
+        "blob-pulse": "blob-pulse 12s ease-in-out infinite",
       },
     },
   },

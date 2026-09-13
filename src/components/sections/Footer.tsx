@@ -3,7 +3,7 @@
 import React from "react";
 import { personalData } from "@/data/personal";
 import { Magnetic } from "@/components/ui/Magnetic";
-import { Github, Linkedin, Mail, ArrowUp, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -13,21 +13,21 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-white/10 bg-[#05070B] px-4 py-12 md:px-8">
+    <footer className="relative border-t border-palette-sand/15 bg-background px-4 py-12 md:px-8">
       {/* Ambient background light beneath footer */}
-      <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-40 w-3/4 rounded-full bg-cyan-500/5 blur-3xl -z-10" />
+      <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-40 w-3/4 rounded-full bg-palette-moss/10 blur-3xl -z-10" />
 
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
         {/* Identity & Copyright */}
         <div className="flex flex-col items-center text-center md:items-start md:text-left">
-          <span className="text-base font-bold tracking-wider text-white">
+          <span className="text-base font-bold tracking-wider text-palette-cream">
             {personalData.name}
           </span>
-          <p className="mt-1 text-xs text-slate-400">
-            Crafted with Liquid Glass aesthetics, Next.js & Three.js.
+          <p className="mt-1 text-xs text-palette-sand/80">
+            Autonomous Driving Perception & Continuous RL • IIT Roorkee
           </p>
-          <p className="mt-1 text-[11px] font-mono text-slate-400">
-            © {currentYear} Animesh Basak. All rights reserved.
+          <p className="mt-1 text-[11px] font-mono text-palette-sand/60">
+            © {currentYear} Animesh Basak. Supervised by Dr. Neetish Kumar.
           </p>
         </div>
 
@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
           <Magnetic strength={0.3}>
             <a
               href={`mailto:${personalData.email}`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-sand transition-all hover:border-palette-sage hover:bg-palette-moss/30 hover:text-palette-cream"
               title="Email Animesh Basak"
               aria-label="Email"
             >
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
               href={personalData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-sand transition-all hover:border-palette-sage hover:bg-palette-moss/30 hover:text-palette-cream"
               title="LinkedIn Profile"
               aria-label="LinkedIn"
             >
@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
               href={personalData.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all hover:border-purple-400/40 hover:bg-purple-500/10 hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-sand transition-all hover:border-palette-sage hover:bg-palette-moss/30 hover:text-palette-cream"
               title="GitHub Profile"
               aria-label="GitHub"
             >
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
           <Magnetic strength={0.3}>
             <button
               onClick={scrollToTop}
-              className="liquid-glass flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-slate-300 transition-all hover:border-cyan-400 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] ml-2"
+              className="liquid-glass flex h-10 w-10 items-center justify-center rounded-full border border-palette-sand/30 bg-palette-forest/30 text-palette-sand transition-all hover:border-palette-sage hover:text-palette-cream hover:shadow-glow-sage ml-2"
               title="Return to top"
               aria-label="Return to top"
             >

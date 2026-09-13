@@ -8,7 +8,7 @@ import { personalData } from "@/data/personal";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://animeshbasak.vercel.app";
 
 export const viewport: Viewport = {
-  themeColor: "#05070B",
+  themeColor: "#090d08",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -17,25 +17,25 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${personalData.name} — Ph.D. Scholar @ IIT Roorkee | AI, GNNs & Autonomous Systems`,
+    default: `${personalData.name} — Ph.D. Scholar @ IIT Roorkee | Autonomous Driving, Continuous RL & Perception`,
     template: `%s | ${personalData.name}`,
   },
-  description: `${personalData.name} is a Ph.D. Research Scholar at IIT Roorkee (advised by Dr. Neetish Kumar), researching Graph Neural Networks for Brain Connectomics and Deep Reinforcement Learning for Autonomous Vehicles.`,
+  description: `${personalData.name} is a Direct Ph.D. Research Scholar at IIT Roorkee (supervised by Dr. Neetish Kumar), researching Deep Reinforcement Learning for Autonomous Vehicles, Continuous Control, and Multi-Modal Sensor Perception.`,
   keywords: [
     "Animesh Basak",
     "IIT Roorkee",
     "IITR",
+    "Department of Computer Science and Engineering",
     "Dr. Neetish Kumar",
     "Ph.D. Scholar",
-    "Graph Neural Networks",
-    "Brain Connectomics",
-    "Neuro-Neo4j",
-    "CARLA Simulator",
     "Autonomous Driving",
+    "CARLA Simulator",
     "Reinforcement Learning",
     "TD3",
+    "DDPG",
+    "Continuous Control",
+    "Sensor Fusion",
     "NIT Arunachal Pradesh",
-    "Liquid Glass",
     "Portfolio",
   ],
   authors: [{ name: personalData.name, url: personalData.github }],
@@ -75,7 +75,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark scroll-smooth">
-      <body className="bg-[#05070B] text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+      <body className="bg-background text-palette-cream antialiased selection:bg-palette-moss/50 selection:text-palette-cream">
         <SmoothScroll>
           {/* SVG liquid distortion filter definition */}
           <LiquidFilter />

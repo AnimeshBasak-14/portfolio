@@ -4,7 +4,8 @@ export interface PersonalInfo {
   title: string;
   institution: string;
   department: string;
-  advisor: string;
+  supervisor: string;
+  advisor?: string;
   specialization: string;
   bio: string[];
   email: string;
@@ -24,6 +25,7 @@ export const personalData: PersonalInfo = {
   title: "Direct Ph.D. in Computer Science and Engineering",
   institution: "Indian Institute of Technology Roorkee (IIT Roorkee)",
   department: "Department of Computer Science and Engineering",
+  supervisor: "Dr. Neetish Kumar",
   advisor: "Dr. Neetish Kumar",
   specialization: "Artificial Intelligence, Reinforcement Learning, and Autonomous Vehicles",
   tagline: "Advancing Deep Reinforcement Learning for Autonomous Vehicles, Continuous Control in CARLA, and Production AI Systems.",

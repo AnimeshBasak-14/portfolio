@@ -9,8 +9,8 @@
 /* Base Body and Smooth Scrolling setup */
 html {
   scroll-behavior: initial;
-  background-color: #05070b;
-  color: #f1f5f9;
+  background-color: #090d08;
+  color: #f5f5d5;
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
@@ -41,47 +41,48 @@ html.lenis body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
 }
 
-/* Liquid Glass Core Utilities */
+/* Liquid Glass Core Utilities with the Botanical Palette */
 @layer components {
-  /* Apple-inspired frosted glassmorphism */
+  /* Apple-inspired frosted glassmorphism in warm forest / sage tones */
   .liquid-glass {
     position: relative;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(53, 74, 47, 0.2);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid rgba(199, 183, 147, 0.2);
     box-shadow: 
-      0 20px 40px -15px rgba(0, 0, 0, 0.5),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.22);
+      0 20px 40px -15px rgba(0, 0, 0, 0.6),
+      inset 0 1px 1px 0 rgba(245, 245, 213, 0.25);
   }
 
   .liquid-glass-card {
     position: relative;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.02) 100%
+      rgba(92, 114, 74, 0.2) 0%,
+      rgba(53, 74, 47, 0.1) 100%
     );
-    backdrop-filter: blur(32px) saturate(190%);
-    -webkit-backdrop-filter: blur(32px) saturate(190%);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(32px) saturate(160%);
+    -webkit-backdrop-filter: blur(32px) saturate(160%);
+    border: 1px solid rgba(199, 183, 147, 0.22);
     box-shadow: 
-      0 24px 48px -12px rgba(0, 0, 0, 0.6),
-      0 0 0 1px rgba(255, 255, 255, 0.06),
-      inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.3);
+      0 24px 48px -12px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(163, 182, 138, 0.1),
+      inset 0 1.5px 1px 0 rgba(245, 245, 213, 0.35);
     transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .liquid-glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.28);
+    border-color: rgba(245, 245, 213, 0.45);
     box-shadow: 
-      0 30px 60px -15px rgba(0, 0, 0, 0.7),
-      0 0 25px rgba(56, 189, 248, 0.15),
-      inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.45);
+      0 30px 60px -15px rgba(0, 0, 0, 0.8),
+      0 0 30px rgba(163, 182, 138, 0.25),
+      inset 0 1.5px 2px 0 rgba(245, 245, 213, 0.55);
   }
 
-  /* Specular Highlight line along top edge */
+  /* Specular Highlight line along top edge with warm cream sheen */
   .specular-top::before {
     content: '';
     position: absolute;
@@ -92,54 +93,49 @@ html.lenis body {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.6) 50%,
+      rgba(245, 245, 213, 0.7) 50%,
       transparent 100%
     );
     pointer-events: none;
   }
 
-  /* Optional SVG Refraction distortion effect */
-  .liquid-refraction {
-    filter: url(#liquid-distortion-subtle);
-  }
-
-  /* Ambient light glow behind cards */
-  .glow-ambient-cyan {
+  /* Ambient light glow behind cards in Sage / Moss */
+  .glow-ambient-sage {
     position: absolute;
     inset: -15px;
-    background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15), transparent 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(163, 182, 138, 0.2), transparent 70%);
     z-index: -1;
     pointer-events: none;
-    filter: blur(20px);
+    filter: blur(24px);
   }
 
-  .glow-ambient-purple {
+  .glow-ambient-moss {
     position: absolute;
     inset: -15px;
-    background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15), transparent 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(92, 114, 74, 0.25), transparent 70%);
     z-index: -1;
     pointer-events: none;
-    filter: blur(20px);
+    filter: blur(24px);
   }
 }
 
-/* Custom scrollbar styling */
+/* Custom scrollbar styling in sage/cream tones */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #05070b;
+  background: #090d08;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(199, 183, 147, 0.25);
   border-radius: 9999px;
-  border: 2px solid #05070b;
+  border: 2px solid #090d08;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(163, 182, 138, 0.5);
 }
 
 /* Reduced Motion preferences */
@@ -151,9 +147,5 @@ html.lenis body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  
-  .liquid-refraction {
-    filter: none !important;
   }
 }

@@ -40,7 +40,7 @@ export const Projects: React.FC = () => {
   return (
     <section id="projects" className="relative py-28 px-4 md:px-8">
       {/* Ambient background glow */}
-      <div className="pointer-events-none absolute bottom-10 left-10 h-96 w-96 rounded-full bg-purple-600/10 blur-[130px] -z-10" />
+      <div className="pointer-events-none absolute bottom-10 left-10 h-96 w-96 rounded-full bg-palette-forest/20 blur-[130px] -z-10" />
 
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
@@ -50,9 +50,9 @@ export const Projects: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-1 text-xs font-mono tracking-widest text-purple-300 uppercase"
+              className="inline-flex items-center gap-2 rounded-full border border-palette-sand/30 bg-palette-forest/20 px-4 py-1 text-xs font-mono tracking-widest text-palette-sand uppercase"
             >
-              <Sparkles className="h-3.5 w-3.5" />
+              <Sparkles className="h-3.5 w-3.5 text-palette-sage" />
               <span>Verified Engineering & Research Portfolio</span>
             </motion.div>
 
@@ -61,9 +61,9 @@ export const Projects: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl"
+              className="mt-3 text-3xl font-extrabold tracking-tight text-palette-cream sm:text-4xl md:text-5xl"
             >
-              Projects & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">Deployments</span>
+              Projects & <span className="text-transparent bg-clip-text bg-gradient-to-r from-palette-cream via-palette-sand to-palette-sage">Deployments</span>
             </motion.h2>
           </div>
 
@@ -75,8 +75,8 @@ export const Projects: React.FC = () => {
                 onClick={() => setActiveFilter(filter.id)}
                 className={`rounded-full px-4 py-1.5 text-xs font-medium tracking-wide transition-all ${
                   activeFilter === filter.id
-                    ? "liquid-glass border-cyan-400 bg-cyan-500/20 text-cyan-300 shadow-[0_0_15px_rgba(56,189,248,0.25)]"
-                    : "border border-white/10 bg-white/5 text-slate-400 hover:border-white/20 hover:text-white"
+                    ? "liquid-glass border-palette-sand/60 bg-palette-moss/40 text-palette-cream shadow-glow-sage font-semibold"
+                    : "border border-palette-sand/20 bg-background-secondary/40 text-palette-sand hover:border-palette-sand/40 hover:text-palette-cream"
                 }`}
               >
                 {filter.label}
@@ -86,24 +86,24 @@ export const Projects: React.FC = () => {
         </div>
 
         {/* Video Simulation Showcase Banner (Directly viewable without giving full drive access) */}
-        <div className="mb-10 rounded-2xl liquid-glass specular-top border border-cyan-500/30 bg-gradient-to-r from-cyan-950/40 via-purple-950/30 to-[#0A0D14]/70 p-6 sm:p-7 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-glass-lg">
+        <div className="mb-10 rounded-2xl liquid-glass specular-top border border-palette-sand/25 bg-background-secondary/80 p-6 sm:p-7 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-glass-lg">
           <div className="flex items-start gap-4">
-            <div className="hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-red-500/20 text-red-400 border border-red-500/30">
-              <Youtube className="h-6 w-6" />
+            <div className="hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-palette-moss/20 text-palette-cream border border-palette-sand/30">
+              <Youtube className="h-6 w-6 text-palette-sand" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs text-red-400 uppercase tracking-wider font-semibold">
+                <span className="font-mono text-xs text-palette-sand uppercase tracking-wider font-semibold">
                   CARLA Simulation Videos
                 </span>
-                <span className="rounded-full bg-cyan-500/20 px-2 py-0.2 text-[10px] font-mono text-cyan-300 border border-cyan-500/30">
+                <span className="rounded-full bg-palette-forest/40 px-2 py-0.2 text-[10px] font-mono text-palette-sand border border-palette-sand/30">
                   48 Testcases Recorded
                 </span>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-white mt-1">
+              <h3 className="text-lg sm:text-xl font-bold text-palette-cream mt-1">
                 Autonomous Lane Changing & TD3 Policy Visualizations
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-palette-sand/85 mt-1 max-w-2xl leading-relaxed">
                 Watch full continuous reinforcement learning runs across obstacle avoidance, emergency braking, and highway lane changes directly in the simulator.
               </p>
             </div>
@@ -130,39 +130,39 @@ export const Projects: React.FC = () => {
             <motion.div key={project.id} variants={itemVariants}>
               <TiltCard
                 maxTilt={8}
-                spotlightColor="rgba(56, 189, 248, 0.2)"
+                spotlightColor="rgba(163, 182, 138, 0.2)"
                 onClick={() => setSelectedProject(project)}
-                className="group flex h-full flex-col justify-between p-6 sm:p-7 cursor-pointer"
+                className="group flex h-full flex-col justify-between p-6 sm:p-7 cursor-pointer border border-palette-sand/20 bg-background-secondary/60 hover:border-palette-sand/40"
               >
                 <div>
                   {/* Visual Specular Header Banner */}
                   <div
-                    className={`relative mb-6 h-40 w-full overflow-hidden rounded-xl bg-gradient-to-br ${project.accentColor} border border-white/10 flex flex-col justify-between p-4`}
+                    className={`relative mb-6 h-40 w-full overflow-hidden rounded-xl bg-gradient-to-br ${project.accentColor} border border-palette-sand/20 flex flex-col justify-between p-4`}
                   >
-                    <div className="absolute -right-8 -bottom-8 h-32 w-32 rounded-full border border-white/20 bg-white/5 backdrop-blur-md transition-transform duration-500 group-hover:scale-125" />
+                    <div className="absolute -right-8 -bottom-8 h-32 w-32 rounded-full border border-palette-sand/20 bg-palette-forest/20 backdrop-blur-md transition-transform duration-500 group-hover:scale-125" />
                     
                     <div className="relative z-10 flex items-center justify-between">
-                      <span className="font-mono text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                      <span className="font-mono text-xs font-semibold text-palette-sand uppercase tracking-wider">
                         {project.subtitle}
                       </span>
                       {project.featured && (
-                        <span className="rounded-full border border-cyan-400/40 bg-cyan-500/20 px-2 py-0.5 text-[10px] font-mono font-medium text-cyan-300">
+                        <span className="rounded-full border border-palette-sand/40 bg-palette-moss/30 px-2 py-0.5 text-[10px] font-mono font-medium text-palette-cream">
                           Featured
                         </span>
                       )}
                     </div>
 
-                    <h3 className="relative z-10 mt-1 text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    <h3 className="relative z-10 mt-1 text-xl font-bold text-palette-cream group-hover:text-palette-sand transition-colors">
                       {project.title}
                     </h3>
 
                     {/* Metrics preview */}
                     {project.metrics && (
-                      <div className="relative z-10 flex gap-4 border-t border-white/10 pt-2 text-[11px] font-mono text-slate-300">
+                      <div className="relative z-10 flex gap-4 border-t border-palette-sand/20 pt-2 text-[11px] font-mono text-palette-sand">
                         {project.metrics.slice(0, 2).map((m, i) => (
                           <div key={i}>
-                            <span className="text-slate-400">{m.label}: </span>
-                            <span className="text-white font-semibold">{m.value}</span>
+                            <span className="text-palette-sand/70">{m.label}: </span>
+                            <span className="text-palette-cream font-semibold">{m.value}</span>
                           </div>
                         ))}
                       </div>
@@ -170,7 +170,7 @@ export const Projects: React.FC = () => {
                   </div>
 
                   {/* Project Description */}
-                  <p className="mb-6 text-sm text-slate-300/90 leading-relaxed">
+                  <p className="mb-6 text-sm text-palette-sand/90 leading-relaxed">
                     {project.description}
                   </p>
 
@@ -179,7 +179,7 @@ export const Projects: React.FC = () => {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] font-mono text-slate-300"
+                        className="rounded-md border border-palette-sand/20 bg-palette-forest/20 px-2 py-0.5 text-[11px] font-mono text-palette-sand"
                       >
                         {tag}
                       </span>
@@ -188,8 +188,8 @@ export const Projects: React.FC = () => {
                 </div>
 
                 {/* Card Action Footer */}
-                <div className="flex items-center justify-between border-t border-white/10 pt-4">
-                  <div className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-400 transition-colors group-hover:text-cyan-300">
+                <div className="flex items-center justify-between border-t border-palette-sand/15 pt-4">
+                  <div className="inline-flex items-center gap-1 text-xs font-semibold text-palette-cream transition-colors group-hover:text-palette-sand">
                     <span>View Details</span>
                     <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                   </div>
@@ -200,7 +200,7 @@ export const Projects: React.FC = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-400 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-sand transition-colors hover:border-palette-sage hover:bg-palette-moss/30 hover:text-palette-cream"
                       title="GitHub Repository"
                       aria-label="GitHub Repository"
                     >
@@ -213,7 +213,7 @@ export const Projects: React.FC = () => {
                           e.stopPropagation();
                           setShowVideoModal(true);
                         }}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-red-500/30 bg-red-500/10 text-red-400 transition-colors hover:border-red-400 hover:text-white"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-sand/30 bg-palette-forest/30 text-palette-sand transition-colors hover:border-palette-sage hover:bg-palette-moss/40 hover:text-palette-cream"
                         title="Watch Simulation Videos"
                         aria-label="Watch Simulation Videos"
                       >
@@ -226,7 +226,7 @@ export const Projects: React.FC = () => {
                         href={project.certificateUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 transition-colors hover:border-emerald-400 hover:text-white"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-sand/30 bg-palette-forest/30 text-palette-sand transition-colors hover:border-palette-sage hover:bg-palette-moss/40 hover:text-palette-cream"
                         title="View Certificate"
                         aria-label="View Certificate"
                       >
@@ -258,18 +258,18 @@ export const Projects: React.FC = () => {
               exit={{ opacity: 0, scale: 0.95 }}
               data-lenis-prevent
               onWheel={(e) => e.stopPropagation()}
-              className="liquid-glass specular-top relative z-10 w-full max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-[#0A0D14] p-4 sm:p-6 shadow-glass-lg"
+              className="liquid-glass specular-top relative z-10 w-full max-w-4xl overflow-hidden rounded-3xl border border-palette-sand/30 bg-background-secondary p-4 sm:p-6 shadow-glass-lg"
             >
-              <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+              <div className="flex items-center justify-between pb-4 border-b border-palette-sand/20 mb-4">
                 <div className="flex items-center gap-2">
-                  <Youtube className="h-5 w-5 text-red-400" />
-                  <span className="text-base font-bold text-white">
+                  <Youtube className="h-5 w-5 text-palette-sand" />
+                  <span className="text-base font-bold text-palette-cream">
                     CARLA Autonomous Lane Changing & TD3 Simulation Runs (48 Videos)
                   </span>
                 </div>
                 <button
                   onClick={() => setShowVideoModal(false)}
-                  className="rounded-full p-1.5 text-slate-400 hover:bg-white/10 hover:text-white"
+                  className="rounded-full p-1.5 text-palette-sand hover:bg-palette-moss/30 hover:text-palette-cream transition-colors"
                   aria-label="Close video player"
                 >
                   <X className="h-5 w-5" />
@@ -277,7 +277,7 @@ export const Projects: React.FC = () => {
               </div>
 
               {/* YouTube Player */}
-              <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black">
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-palette-sand/20 bg-black">
                 <iframe
                   className="h-full w-full"
                   src="https://www.youtube-nocookie.com/embed/videoseries?list=PLNy_bKEJyhIM&autoplay=1"
@@ -287,13 +287,13 @@ export const Projects: React.FC = () => {
                 />
               </div>
 
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400 font-mono">
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-palette-sand font-mono">
                 <span>Playlist: TD3RCO TESTCASE SCENARIOS</span>
                 <a
                   href="https://youtube.com/playlist?list=PLNy_bKEJyhIM&si=VP8HZBgkaJzIxzbY"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+                  className="text-palette-cream hover:text-palette-sand flex items-center gap-1 font-semibold"
                 >
                   <span>Open Full Playlist on YouTube</span>
                   <ExternalLink className="h-3 w-3" />
@@ -314,7 +314,7 @@ export const Projects: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-black/75 backdrop-blur-md"
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
             />
 
             {/* Modal Dialog with data-lenis-prevent to enable native mouse wheel scroll */}
@@ -325,12 +325,12 @@ export const Projects: React.FC = () => {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               data-lenis-prevent
               onWheel={(e) => e.stopPropagation()}
-              className="liquid-glass specular-top relative z-10 w-full max-w-2xl max-h-[85vh] overflow-y-auto overscroll-contain rounded-3xl border border-white/20 bg-[#0A0D14]/95 p-6 sm:p-8 shadow-glass-lg"
+              className="liquid-glass specular-top relative z-10 w-full max-w-2xl max-h-[85vh] overflow-y-auto overscroll-contain rounded-3xl border border-palette-sand/30 bg-background-secondary/95 p-6 sm:p-8 shadow-glass-lg"
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="sticky top-0 float-right -mr-2 -mt-2 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-[#0A0D14]/90 text-slate-300 backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
+                className="sticky top-0 float-right -mr-2 -mt-2 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-palette-sand/20 bg-background text-palette-sand backdrop-blur-md transition-colors hover:border-palette-sand/40 hover:bg-palette-moss/30 hover:text-palette-cream"
                 aria-label="Close dialog"
               >
                 <X className="h-4 w-4" />
@@ -338,26 +338,26 @@ export const Projects: React.FC = () => {
 
               {/* Modal Header */}
               <div className="mb-4 pr-10">
-                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400">
+                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-palette-sand">
                   {selectedProject.subtitle}
                 </span>
-                <h3 className="mt-1 text-2xl sm:text-3xl font-extrabold text-white">
+                <h3 className="mt-1 text-2xl sm:text-3xl font-extrabold text-palette-cream">
                   {selectedProject.title}
                 </h3>
               </div>
 
               {/* Long Description */}
-              <p className="mb-6 text-sm sm:text-base text-slate-300 leading-relaxed">
+              <p className="mb-6 text-sm sm:text-base text-palette-sand/90 leading-relaxed">
                 {selectedProject.longDescription}
               </p>
 
               {/* Metrics Grid */}
               {selectedProject.metrics && (
-                <div className="mb-6 grid grid-cols-3 gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
+                <div className="mb-6 grid grid-cols-3 gap-3 rounded-2xl border border-palette-sand/20 bg-background/50 p-4 text-center">
                   {selectedProject.metrics.map((metric, i) => (
                     <div key={i}>
-                      <div className="text-xs text-slate-400 font-mono">{metric.label}</div>
-                      <div className="mt-1 text-lg font-bold text-white">{metric.value}</div>
+                      <div className="text-xs text-palette-sand/70 font-mono">{metric.label}</div>
+                      <div className="mt-1 text-lg font-bold text-palette-cream">{metric.value}</div>
                     </div>
                   ))}
                 </div>
@@ -365,13 +365,13 @@ export const Projects: React.FC = () => {
 
               {/* Key Technical Capabilities */}
               <div className="mb-6">
-                <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-3">
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-palette-sand mb-3">
                   Technical Architecture & Key Results
                 </h4>
                 <div className="space-y-2.5">
                   {selectedProject.keyFeatures.map((feat, i) => (
-                    <div key={i} className="flex items-start gap-2 text-sm text-slate-300">
-                      <CheckCircle2 className="h-4 w-4 text-cyan-400 mt-0.5 shrink-0" />
+                    <div key={i} className="flex items-start gap-2 text-sm text-palette-sand/90">
+                      <CheckCircle2 className="h-4 w-4 text-palette-sage mt-0.5 shrink-0" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -383,7 +383,7 @@ export const Projects: React.FC = () => {
                 {selectedProject.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-lg border border-white/15 bg-white/5 px-3 py-1 font-mono text-xs text-cyan-300"
+                    className="rounded-lg border border-palette-sand/25 bg-palette-forest/25 px-3 py-1 font-mono text-xs text-palette-cream"
                   >
                     {tag}
                   </span>
@@ -397,7 +397,7 @@ export const Projects: React.FC = () => {
                     href={selectedProject.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-white/20"
+                    className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-palette-sand/30 bg-palette-moss/20 px-6 py-2.5 text-sm font-semibold text-palette-cream transition-all hover:bg-palette-moss/40 hover:border-palette-sand"
                   >
                     <Github className="h-4 w-4" />
                     <span>View GitHub Repository</span>
@@ -410,7 +410,7 @@ export const Projects: React.FC = () => {
                       href={selectedProject.certificateUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/20 px-6 py-2.5 text-sm font-semibold text-emerald-200 transition-all hover:bg-emerald-500/30 hover:text-white"
+                      className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-palette-sand/40 bg-palette-moss/30 px-6 py-2.5 text-sm font-semibold text-palette-cream transition-all hover:bg-palette-moss/50 hover:border-palette-sage"
                     >
                       <FileCheck className="h-4 w-4" />
                       <span>View Official Certificate</span>
@@ -424,9 +424,9 @@ export const Projects: React.FC = () => {
                       setSelectedProject(null);
                       setShowVideoModal(true);
                     }}
-                    className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-red-500/40 bg-red-500/20 px-6 py-2.5 text-sm font-semibold text-red-200 transition-all hover:bg-red-500/30 hover:text-white"
+                    className="liquid-glass specular-top flex items-center gap-2 rounded-full border border-palette-sand/40 bg-palette-forest/40 px-6 py-2.5 text-sm font-semibold text-palette-cream transition-all hover:bg-palette-moss/40 hover:border-palette-sand"
                   >
-                    <Play className="h-4 w-4 fill-current" />
+                    <Play className="h-4 w-4 fill-current text-palette-sand" />
                     <span>Watch Simulation Videos</span>
                   </button>
                 )}

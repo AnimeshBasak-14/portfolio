@@ -26,7 +26,7 @@ export const TiltCard: React.FC<TiltCardProps> = ({
   children,
   className = "",
   maxTilt = 10,
-  spotlightColor = "rgba(56, 189, 248, 0.15)",
+  spotlightColor = "rgba(163, 182, 138, 0.18)",
   onClick,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);

@@ -20,7 +20,7 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "space-between",
-          backgroundColor: "#05070B",
+          backgroundColor: "#090d08",
           padding: "80px",
           fontFamily: "sans-serif",
           position: "relative",
@@ -35,7 +35,7 @@ export default async function Image() {
             width: "600px",
             height: "600px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(163, 182, 138, 0.3) 0%, transparent 70%)",
           }}
         />
         <div
@@ -46,7 +46,7 @@ export default async function Image() {
             width: "600px",
             height: "600px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(92, 114, 74, 0.3) 0%, transparent 70%)",
           }}
         />
 
@@ -57,15 +57,15 @@ export default async function Image() {
             alignItems: "center",
             padding: "10px 24px",
             borderRadius: "9999px",
-            backgroundColor: "rgba(255, 255, 255, 0.08)",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            color: "#38bdf8",
+            backgroundColor: "rgba(53, 74, 47, 0.4)",
+            border: "1px solid rgba(199, 183, 147, 0.3)",
+            color: "#c7b793",
             fontSize: "18px",
             letterSpacing: "2px",
             textTransform: "uppercase",
           }}
         >
-          Liquid Glass Experience
+          Direct Ph.D. Scholar • IIT Roorkee
         </div>
 
         {/* Center Typography */}
@@ -74,7 +74,7 @@ export default async function Image() {
             style={{
               fontSize: "76px",
               fontWeight: 900,
-              color: "#ffffff",
+              color: "#f5f5d5",
               lineHeight: 1.1,
             }}
           >
@@ -84,7 +84,7 @@ export default async function Image() {
             style={{
               fontSize: "32px",
               fontWeight: 600,
-              color: "#94a3b8",
+              color: "#a3b68a",
             }}
           >
             {personalData.title}
@@ -97,9 +97,9 @@ export default async function Image() {
             display: "flex",
             alignItems: "center",
             gap: "30px",
-            color: "#64748b",
+            color: "#c7b793",
             fontSize: "20px",
-            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            borderTop: "1px solid rgba(199, 183, 147, 0.2)",
             paddingTop: "24px",
             width: "100%",
           }}

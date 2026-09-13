@@ -5,6 +5,7 @@ import { LoadingScreen } from "@/components/sections/LoadingScreen";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
+import { Research } from "@/components/sections/Research";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { Timeline } from "@/components/sections/Timeline";
@@ -24,26 +25,29 @@ export default function Home() {
 
       {/* Main Sections */}
       <main className="relative flex flex-col">
-        {/* Section 1: Hero */}
+        {/* Section 1: Hero with Autonomous Vehicle 3D Perception Simulator */}
         <Hero />
 
-        {/* Section 2: About */}
+        {/* Section 2: About & Academic Background */}
         <About />
 
-        {/* Section 3: Projects */}
+        {/* Section 3: Research Section (Papers Currently Under Review) */}
+        <Research />
+
+        {/* Section 4: Projects & Systems */}
         <Projects />
 
-        {/* Section 4: Skills / Tech Stack */}
+        {/* Section 5: Skills / Tech Stack */}
         <Skills />
 
-        {/* Section 5: Experience / Timeline */}
+        {/* Section 6: Experience / Timeline */}
         <Timeline />
 
-        {/* Section 6: Contact */}
+        {/* Section 7: Contact Form */}
         <Contact />
       </main>
 
-      {/* Section 7: Footer */}
+      {/* Section 8: Footer */}
       <Footer />
     </>
   );
