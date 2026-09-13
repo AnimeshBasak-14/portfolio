@@ -8,8 +8,8 @@ import { personalData } from "@/data/personal";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://animeshbasak.vercel.app";
 
 export const viewport: Viewport = {
-  themeColor: "#090d08",
-  colorScheme: "dark",
+  themeColor: "#fafaf7",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };
@@ -74,8 +74,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className="bg-background text-palette-cream antialiased selection:bg-palette-moss/50 selection:text-palette-cream">
+    <html lang="en" className="scroll-smooth">
+      <body className="bg-background text-palette-forest antialiased selection:bg-palette-moss/20 selection:text-palette-forest">
         <SmoothScroll>
           {/* SVG liquid distortion filter definition */}
           <LiquidFilter />

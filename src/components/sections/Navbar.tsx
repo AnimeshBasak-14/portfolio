@@ -38,7 +38,6 @@ export const Navbar: React.FC = () => {
 
   const navItems = [
     { label: "About", href: "/#about", id: "about" },
-    { label: "Research", href: "/#research", id: "research", badge: "Review" },
     { label: "Projects", href: "/#projects", id: "projects" },
     { label: "Skills", href: "/#skills", id: "skills" },
     { label: "Experience", href: "/#timeline", id: "timeline" },
@@ -53,20 +52,20 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`liquid-glass specular-top relative flex items-center justify-between rounded-full px-5 py-2.5 transition-all duration-300 md:px-7 md:py-3 ${
           scrolled
-            ? "w-full max-w-4xl border-palette-sand/30 bg-background/90 shadow-glass-lg backdrop-blur-glass-heavy"
-            : "w-full max-w-5xl border-palette-sand/20 bg-background-secondary/80 backdrop-blur-glass"
+            ? "w-full max-w-4xl border-palette-moss/25 bg-white/90 shadow-glass-lg backdrop-blur-glass-heavy"
+            : "w-full max-w-5xl border-palette-sand/40 bg-white/80 backdrop-blur-glass shadow-glass"
         }`}
       >
         {/* Brand / Logo */}
         <Magnetic strength={0.25}>
           <Link
             href="/"
-            className="group flex items-center space-x-2 text-sm font-semibold tracking-wide text-palette-cream transition-colors"
+            className="group flex items-center space-x-2 text-sm font-semibold tracking-wide text-palette-forest transition-colors"
           >
             <div className="flex h-7 w-7 items-center justify-center rounded-full bg-palette-forest text-xs font-bold text-palette-cream border border-palette-sand/40 shadow-inner">
               AB
             </div>
-            <span className="hidden font-medium text-palette-cream/90 group-hover:text-palette-cream sm:inline-block">
+            <span className="hidden font-semibold text-palette-forest group-hover:text-palette-moss sm:inline-block">
               {personalData.name}
             </span>
           </Link>
@@ -80,23 +79,18 @@ export const Navbar: React.FC = () => {
                 href={item.href}
                 className={`relative px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase transition-colors duration-200 flex items-center gap-1.5 ${
                   activeSection === item.id
-                    ? "text-palette-cream font-bold"
-                    : "text-palette-sand hover:text-palette-cream"
+                    ? "text-palette-forest font-bold"
+                    : "text-palette-forest/75 hover:text-palette-forest"
                 }`}
               >
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="activeNavIndicator"
-                    className="absolute inset-0 -z-10 rounded-full bg-palette-moss/30 backdrop-blur-xs border border-palette-sand/40"
+                    className="absolute inset-0 -z-10 rounded-full bg-palette-moss/15 backdrop-blur-xs border border-palette-moss/30"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
                 <span>{item.label}</span>
-                {item.badge && (
-                  <span className="rounded-full bg-amber-500/20 px-1.5 py-0.2 text-[8px] font-mono font-semibold text-amber-200 border border-amber-500/40">
-                    {item.badge}
-                  </span>
-                )}
               </a>
             </Magnetic>
           ))}
@@ -109,7 +103,7 @@ export const Navbar: React.FC = () => {
               href={personalData.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-cream transition-colors hover:border-palette-sage hover:bg-palette-moss/30"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-moss/20 bg-palette-forest/5 text-palette-forest transition-colors hover:border-palette-moss hover:bg-palette-moss/20"
               aria-label="GitHub Profile"
             >
               <Github className="h-3.5 w-3.5" />
@@ -121,7 +115,7 @@ export const Navbar: React.FC = () => {
               href={personalData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-cream transition-colors hover:border-palette-sage hover:bg-palette-moss/30"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-moss/20 bg-palette-forest/5 text-palette-forest transition-colors hover:border-palette-moss hover:bg-palette-moss/20"
               aria-label="LinkedIn Profile"
             >
               <Linkedin className="h-3.5 w-3.5" />
@@ -131,9 +125,9 @@ export const Navbar: React.FC = () => {
           <Magnetic strength={0.3}>
             <a
               href="/#contact"
-              className="hidden items-center space-x-1.5 rounded-full border border-palette-sand/40 bg-palette-moss/30 px-3.5 py-1 text-xs font-medium text-palette-cream shadow-glow-sage transition-all duration-300 hover:border-palette-sage hover:bg-palette-moss/50 sm:flex"
+              className="hidden items-center space-x-1.5 rounded-full border border-palette-moss/40 bg-palette-moss px-3.5 py-1 text-xs font-semibold text-white shadow-glow-moss transition-all duration-300 hover:bg-palette-forest sm:flex"
             >
-              <Sparkles className="h-3 w-3 text-palette-sage" />
+              <Sparkles className="h-3 w-3 text-palette-cream" />
               <span>Get in Touch</span>
             </a>
           </Magnetic>
@@ -141,7 +135,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-cream md:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-palette-moss/20 bg-palette-forest/5 text-palette-forest md:hidden"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -155,7 +149,7 @@ export const Navbar: React.FC = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="liquid-glass specular-top fixed top-20 left-4 right-4 z-40 rounded-3xl p-6 md:hidden shadow-glass-lg border border-palette-sand/30 bg-background/95"
+          className="liquid-glass specular-top fixed top-20 left-4 right-4 z-40 rounded-3xl p-6 md:hidden shadow-glass-lg border border-palette-moss/20 bg-white/95"
         >
           <div className="flex flex-col space-y-4">
             {navItems.map((item) => (
@@ -164,27 +158,22 @@ export const Navbar: React.FC = () => {
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-base font-medium tracking-wide transition-colors flex items-center justify-between ${
-                  activeSection === item.id ? "text-palette-sage font-bold" : "text-palette-cream/80"
+                  activeSection === item.id ? "text-palette-forest font-bold" : "text-palette-forest/80"
                 }`}
               >
                 <span>{item.label}</span>
-                {item.badge && (
-                  <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[9px] font-mono text-amber-200 border border-amber-500/40">
-                    {item.badge}
-                  </span>
-                )}
               </a>
             ))}
-            <div className="pt-4 border-t border-palette-sand/20 flex items-center justify-between">
-              <span className="text-xs text-palette-sand">Verified Profiles</span>
+            <div className="pt-4 border-t border-palette-moss/20 flex items-center justify-between">
+              <span className="text-xs text-palette-forest/70">Verified Profiles</span>
               <div className="flex space-x-3">
-                <a href={personalData.github} target="_blank" rel="noreferrer" className="text-palette-cream hover:text-palette-sage">
+                <a href={personalData.github} target="_blank" rel="noreferrer" className="text-palette-forest hover:text-palette-moss">
                   <Github className="h-4 w-4" />
                 </a>
-                <a href={personalData.linkedin} target="_blank" rel="noreferrer" className="text-palette-cream hover:text-palette-sage">
+                <a href={personalData.linkedin} target="_blank" rel="noreferrer" className="text-palette-forest hover:text-palette-moss">
                   <Linkedin className="h-4 w-4" />
                 </a>
-                <a href={`mailto:${personalData.email}`} className="text-palette-cream hover:text-palette-sage">
+                <a href={`mailto:${personalData.email}`} className="text-palette-forest hover:text-palette-moss">
                   <Mail className="h-4 w-4" />
                 </a>
               </div>

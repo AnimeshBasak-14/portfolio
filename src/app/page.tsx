@@ -5,7 +5,6 @@ import { LoadingScreen } from "@/components/sections/LoadingScreen";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
-import { Research } from "@/components/sections/Research";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { Timeline } from "@/components/sections/Timeline";
@@ -31,10 +30,7 @@ export default function Home() {
         {/* Section 2: About & Academic Background */}
         <About />
 
-        {/* Section 3: Research Section (Papers Currently Under Review) */}
-        <Research />
-
-        {/* Section 4: Projects & Systems */}
+        {/* Section 3: Projects & Systems */}
         <Projects />
 
         {/* Section 5: Skills / Tech Stack */}

@@ -19,16 +19,16 @@ const config: Config = {
           forest: "#354a2f",     // (53, 74, 47)
         },
         background: {
-          DEFAULT: "#090d08",    // Deep obsidian forest
-          secondary: "#10170e",  // Deep pine card surface
-          tertiary: "#182316",   // Muted moss acrylic
+          DEFAULT: "#fafaf7",    // Clean warm white gallery canvas
+          secondary: "#f4f3ec",  // Warm cream card surface
+          tertiary: "#eae8de",   // Subtle muted stone
         },
         glass: {
-          border: "rgba(199, 183, 147, 0.18)",
-          "border-bright": "rgba(245, 245, 213, 0.35)",
-          surface: "rgba(53, 74, 47, 0.15)",
-          "surface-hover": "rgba(92, 114, 74, 0.22)",
-          highlight: "rgba(245, 245, 213, 0.25)",
+          border: "rgba(92, 114, 74, 0.16)",
+          "border-bright": "rgba(163, 182, 138, 0.35)",
+          surface: "rgba(255, 255, 255, 0.75)",
+          "surface-hover": "rgba(255, 255, 255, 0.92)",
+          highlight: "rgba(255, 255, 255, 0.95)",
         },
       },
       backdropBlur: {
@@ -37,11 +37,11 @@ const config: Config = {
         "glass-heavy": "40px",
       },
       boxShadow: {
-        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.45)",
-        "glass-lg": "0 16px 48px 0 rgba(0, 0, 0, 0.6)",
-        "glow-sage": "0 0 40px -10px rgba(163, 182, 138, 0.35)",
-        "glow-moss": "0 0 40px -10px rgba(92, 114, 74, 0.35)",
-        "glow-sand": "0 0 35px -8px rgba(199, 183, 147, 0.3)",
+        glass: "0 10px 30px -5px rgba(53, 74, 47, 0.07), 0 4px 12px -2px rgba(53, 74, 47, 0.04)",
+        "glass-lg": "0 20px 45px -10px rgba(53, 74, 47, 0.12), 0 8px 16px -4px rgba(53, 74, 47, 0.05)",
+        "glow-sage": "0 0 35px -5px rgba(163, 182, 138, 0.4)",
+        "glow-moss": "0 0 35px -5px rgba(92, 114, 74, 0.35)",
+        "glow-sand": "0 0 30px -5px rgba(199, 183, 147, 0.4)",
       },
       keyframes: {
         "blob-float": {

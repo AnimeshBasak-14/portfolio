@@ -13,20 +13,20 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-palette-sand/15 bg-background px-4 py-12 md:px-8">
+    <footer className="relative border-t border-palette-moss/15 bg-background px-4 py-12 md:px-8">
       {/* Ambient background light beneath footer */}
-      <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-40 w-3/4 rounded-full bg-palette-moss/10 blur-3xl -z-10" />
+      <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-40 w-3/4 rounded-full bg-palette-sage/15 blur-3xl -z-10" />
 
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
         {/* Identity & Copyright */}
         <div className="flex flex-col items-center text-center md:items-start md:text-left">
-          <span className="text-base font-bold tracking-wider text-palette-cream">
+          <span className="text-base font-bold tracking-wider text-palette-forest">
             {personalData.name}
           </span>
-          <p className="mt-1 text-xs text-palette-sand/80">
+          <p className="mt-1 text-xs text-palette-forest/80">
             Autonomous Driving Perception & Continuous RL • IIT Roorkee
           </p>
-          <p className="mt-1 text-[11px] font-mono text-palette-sand/60">
+          <p className="mt-1 text-[11px] font-mono text-palette-forest/60">
             © {currentYear} Animesh Basak. Supervised by Dr. Neetish Kumar.
           </p>
         </div>
@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
           <Magnetic strength={0.3}>
             <a
               href={`mailto:${personalData.email}`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-sand transition-all hover:border-palette-sage hover:bg-palette-moss/30 hover:text-palette-cream"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-palette-moss/20 bg-white/80 text-palette-forest transition-all hover:bg-palette-forest hover:text-white shadow-sm"
               title="Email Animesh Basak"
               aria-label="Email"
             >
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
               href={personalData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-sand transition-all hover:border-palette-sage hover:bg-palette-moss/30 hover:text-palette-cream"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-palette-moss/20 bg-white/80 text-palette-forest transition-all hover:bg-palette-forest hover:text-white shadow-sm"
               title="LinkedIn Profile"
               aria-label="LinkedIn"
             >
@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
               href={personalData.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-palette-sand/20 bg-palette-forest/20 text-palette-sand transition-all hover:border-palette-sage hover:bg-palette-moss/30 hover:text-palette-cream"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-palette-moss/20 bg-white/80 text-palette-forest transition-all hover:bg-palette-forest hover:text-white shadow-sm"
               title="GitHub Profile"
               aria-label="GitHub"
             >
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
           <Magnetic strength={0.3}>
             <button
               onClick={scrollToTop}
-              className="liquid-glass flex h-10 w-10 items-center justify-center rounded-full border border-palette-sand/30 bg-palette-forest/30 text-palette-sand transition-all hover:border-palette-sage hover:text-palette-cream hover:shadow-glow-sage ml-2"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-palette-moss/20 bg-white/80 text-palette-forest transition-all hover:bg-palette-forest hover:text-white shadow-sm ml-2"
               title="Return to top"
               aria-label="Return to top"
             >

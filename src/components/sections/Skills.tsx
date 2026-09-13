@@ -20,9 +20,9 @@ export const Skills: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full border border-palette-sand/30 bg-palette-forest/30 px-4 py-1 text-xs font-mono tracking-widest text-palette-cream uppercase"
+            className="inline-flex items-center gap-2 rounded-full border border-palette-moss/20 bg-white/80 px-4 py-1 text-xs font-mono tracking-widest text-palette-forest uppercase shadow-sm"
           >
-            <Zap className="h-3.5 w-3.5 text-palette-sage" />
+            <Zap className="h-3.5 w-3.5 text-palette-moss" />
             <span>Technical Capabilities</span>
           </motion.div>
 
@@ -31,11 +31,11 @@ export const Skills: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-3xl font-extrabold tracking-tight text-palette-cream sm:text-4xl md:text-5xl"
+            className="mt-3 text-3xl font-extrabold tracking-tight text-palette-forest sm:text-4xl md:text-5xl"
           >
-            Technologies, <span className="text-transparent bg-clip-text bg-gradient-to-r from-palette-sage via-palette-sand to-palette-cream">Toolchains & Libraries</span>
+            Technologies, <span className="text-transparent bg-clip-text bg-gradient-to-r from-palette-forest via-palette-moss to-palette-sage">Toolchains & Libraries</span>
           </motion.h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-palette-sand/90">
+          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-palette-forest/80">
             A battle-tested stack spanning continuous reinforcement learning in CARLA, RAG architectures with LangChain, and production cloud MLOps on AWS.
           </p>
         </div>
@@ -52,21 +52,21 @@ export const Skills: React.FC = () => {
             <motion.div key={idx} variants={itemVariants}>
               <TiltCard
                 maxTilt={6}
-                spotlightColor="rgba(163, 182, 138, 0.2)"
-                className="h-full p-8 flex flex-col justify-between"
+                spotlightColor="rgba(163, 182, 138, 0.25)"
+                className="h-full p-8 flex flex-col justify-between border border-palette-moss/15 bg-white/85 shadow-glass hover:shadow-glass-lg transition-all"
               >
                 <div>
                   {/* Category Header */}
                   <div className="mb-4 flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-palette-cream">
+                    <h3 className="text-xl font-bold text-palette-forest">
                       {category.category}
                     </h3>
-                    <div className="rounded-lg bg-palette-forest/40 p-2 text-palette-sage border border-palette-sand/30">
+                    <div className="rounded-xl bg-palette-cream/70 p-2.5 text-palette-forest border border-palette-moss/20 shadow-sm">
                       <Cpu className="h-4 w-4" />
                     </div>
                   </div>
 
-                  <p className="mb-6 text-xs text-palette-sand/80 leading-relaxed">
+                  <p className="mb-6 text-xs text-palette-forest/80 leading-relaxed">
                     {category.description}
                   </p>
 
@@ -77,8 +77,8 @@ export const Skills: React.FC = () => {
                         key={sIdx}
                         className={`group relative flex items-center gap-2 rounded-xl px-3.5 py-2 transition-all duration-300 ${
                           skill.highlight
-                            ? "liquid-glass border-palette-sand/30 bg-palette-forest/40 text-palette-cream hover:border-palette-cream hover:shadow-glow-sage"
-                            : "border border-palette-sand/20 bg-palette-forest/20 text-palette-sand hover:border-palette-sand/40 hover:text-palette-cream"
+                            ? "border border-palette-forest/30 bg-palette-cream/80 text-palette-forest font-semibold shadow-sm hover:border-palette-forest hover:bg-white"
+                            : "border border-palette-moss/15 bg-white/70 text-palette-forest/85 hover:border-palette-moss/35 hover:bg-white"
                         }`}
                       >
                         <span className="text-xs font-medium">
@@ -88,10 +88,10 @@ export const Skills: React.FC = () => {
                         <span
                           className={`rounded px-1.5 py-0.2 font-mono text-[9px] uppercase tracking-wider ${
                             skill.level === "Expert"
-                              ? "bg-palette-moss/40 text-palette-cream border border-palette-sage/40"
+                              ? "bg-palette-forest text-white"
                               : skill.level === "Advanced"
-                              ? "bg-palette-forest/60 text-palette-sage border border-palette-sand/30"
-                              : "bg-palette-forest/30 text-palette-sand"
+                              ? "bg-palette-moss/20 text-palette-forest border border-palette-moss/30 font-semibold"
+                              : "bg-palette-sand/25 text-palette-forest"
                           }`}
                         >
                           {skill.level}
@@ -101,8 +101,8 @@ export const Skills: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Subtle shelf bottom accent in sand */}
-                <div className="mt-8 h-0.5 w-full rounded-full bg-gradient-to-r from-transparent via-palette-sand/30 to-transparent" />
+                {/* Subtle shelf bottom accent in sage */}
+                <div className="mt-8 h-0.5 w-full rounded-full bg-gradient-to-r from-transparent via-palette-moss/20 to-transparent" />
               </TiltCard>
             </motion.div>
           ))}
