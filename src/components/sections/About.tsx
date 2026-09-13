@@ -22,24 +22,32 @@ import {
 export const About: React.FC = () => {
   const researchPillars = [
     {
-      icon: <Car className="h-5 w-5 text-white" />,
+      icon: <Car className="h-5 w-5 text-emerald-400" />,
       title: "Continuous RL in CARLA Simulator",
       desc: "Specialized in continuous actor-critic algorithms (Twin Delayed DDPG - TD3, DDPG, SAC) for autonomous left-lane changing, emergency collision avoidance, and sensor fusion in CARLA.",
+      badge: "border-emerald-500/25 bg-emerald-500/10 text-emerald-400",
+      borderHover: "hover:border-emerald-500/40",
     },
     {
-      icon: <Brain className="h-5 w-5 text-white" />,
+      icon: <Brain className="h-5 w-5 text-purple-400" />,
       title: "LLMs, RAG & Conversational AI",
       desc: "Designing low-latency retrieval-augmented generation architectures with FAISS, LangChain, and Streamlit for conversational memory and multi-document research retrieval.",
+      badge: "border-purple-500/25 bg-purple-500/10 text-purple-400",
+      borderHover: "hover:border-purple-500/40",
     },
     {
-      icon: <Cpu className="h-5 w-5 text-white" />,
+      icon: <Cpu className="h-5 w-5 text-amber-400" />,
       title: "Cloud MLOps & Containerization",
       desc: "Deploying containerized machine learning microservices on AWS (EC2, ECR, IAM) with Docker, Flask, and automated CI/CD pipelines to ensure reproducible, cost-effective inference.",
+      badge: "border-amber-500/25 bg-amber-500/10 text-amber-400",
+      borderHover: "hover:border-amber-500/40",
     },
     {
-      icon: <ShieldCheck className="h-5 w-5 text-white" />,
+      icon: <ShieldCheck className="h-5 w-5 text-cyan-400" />,
       title: "Computer Vision & Edge Perception",
       desc: "Real-time webcam inference utilizing MediaPipe 3D hand keypoints and LSTM sequential gesture classification developed for industrial deployment at IOCL (99% accuracy).",
+      badge: "border-cyan-500/25 bg-cyan-500/10 text-cyan-400",
+      borderHover: "hover:border-cyan-500/40",
     },
   ];
 
@@ -101,8 +109,12 @@ export const About: React.FC = () => {
                 </div>
 
                 {/* Institutional Badge */}
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap liquid-glass px-3.5 py-1 rounded-full text-[11px] font-mono text-white border border-white/20 shadow-md font-bold bg-black/90">
-                  IIT Roorkee · Dept. of CSE
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap liquid-glass px-3.5 py-1 rounded-full text-[11px] font-mono text-white border border-white/20 shadow-md font-bold bg-black/90 flex items-center gap-1.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  <span>IIT Roorkee · Dept. of CSE</span>
                 </div>
               </div>
 
@@ -123,7 +135,7 @@ export const About: React.FC = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.02 * idx, duration: 0.3 }}
-                    className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1 text-xs font-semibold text-neutral-200 transition-colors hover:border-white hover:text-white"
+                    className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1 text-xs font-semibold text-neutral-200 transition-colors hover:border-cyan-400/50 hover:text-white"
                   >
                     {tag}
                   </motion.span>
@@ -136,7 +148,7 @@ export const About: React.FC = () => {
                   href={personalData.leetcode}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-[#FFA116] transition-colors"
                   title="LeetCode Profile (1700 Rating, 500+ Solved)"
                 >
                   LeetCode ↗
@@ -145,7 +157,7 @@ export const About: React.FC = () => {
                   href={personalData.huggingface}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-[#FFD21E] transition-colors"
                   title="Hugging Face Profile (rohan700)"
                 >
                   Hugging Face ↗
@@ -154,7 +166,7 @@ export const About: React.FC = () => {
                   href={personalData.gfg}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-[#2F8D46] transition-colors"
                   title="GeeksforGeeks Profile"
                 >
                   GfG ↗
@@ -163,7 +175,7 @@ export const About: React.FC = () => {
                   href={personalData.medium}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-[#29B677] transition-colors"
                   title="Medium Writer (20+ Articles)"
                 >
                   Medium ↗
@@ -180,7 +192,7 @@ export const About: React.FC = () => {
               className="p-8 sm:p-10 flex-1 flex flex-col justify-center bg-[#0B0B0B] border border-white/10 shadow-2xl hover:border-white/30"
             >
               <div className="flex items-center gap-2 text-white text-xs font-mono uppercase tracking-wider mb-2 font-bold">
-                <GraduationCap className="h-4 w-4 text-white" />
+                <GraduationCap className="h-4 w-4 text-emerald-400" />
                 <span>Doctoral Research & Academic Background</span>
               </div>
               
@@ -198,8 +210,8 @@ export const About: React.FC = () => {
 
               {/* Bold Isolated Quantitative Stat Blocks Directly Above/Beside Focus Area */}
               <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="rounded-xl border border-white/15 bg-white/[0.04] p-4 text-center">
-                  <div className="text-2xl font-black text-white tracking-tight font-mono">
+                <div className="rounded-xl border border-emerald-500/25 bg-emerald-950/[0.15] p-4 text-center transition-all hover:border-emerald-500/50 hover:bg-emerald-950/[0.25]">
+                  <div className="text-2xl font-black text-emerald-400 tracking-tight font-mono">
                     +577.7%
                   </div>
                   <div className="mt-1 text-[11px] font-mono text-neutral-300 font-medium leading-tight">
@@ -207,8 +219,8 @@ export const About: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-white/15 bg-white/[0.04] p-4 text-center">
-                  <div className="text-2xl font-black text-white tracking-tight font-mono">
+                <div className="rounded-xl border border-cyan-500/25 bg-cyan-950/[0.15] p-4 text-center transition-all hover:border-cyan-500/50 hover:bg-cyan-950/[0.25]">
+                  <div className="text-2xl font-black text-cyan-400 tracking-tight font-mono">
                     85%+
                   </div>
                   <div className="mt-1 text-[11px] font-mono text-neutral-300 font-medium leading-tight">
@@ -216,8 +228,8 @@ export const About: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-white/15 bg-white/[0.04] p-4 text-center">
-                  <div className="text-2xl font-black text-white tracking-tight font-mono">
+                <div className="rounded-xl border border-purple-500/25 bg-purple-950/[0.15] p-4 text-center transition-all hover:border-purple-500/50 hover:bg-purple-950/[0.25]">
+                  <div className="text-2xl font-black text-purple-400 tracking-tight font-mono">
                     958.5%
                   </div>
                   <div className="mt-1 text-[11px] font-mono text-neutral-300 font-medium leading-tight">
@@ -225,8 +237,8 @@ export const About: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-white/15 bg-white/[0.04] p-4 text-center">
-                  <div className="text-2xl font-black text-white tracking-tight font-mono">
+                <div className="rounded-xl border border-amber-500/25 bg-amber-950/[0.15] p-4 text-center transition-all hover:border-amber-500/50 hover:bg-amber-950/[0.25]">
+                  <div className="text-2xl font-black text-amber-400 tracking-tight font-mono">
                     -20%
                   </div>
                   <div className="mt-1 text-[11px] font-mono text-neutral-300 font-medium leading-tight">
@@ -236,15 +248,15 @@ export const About: React.FC = () => {
               </div>
 
               {/* Prominent Doctoral Research Spotlight Callout */}
-              <div className="mt-6 rounded-2xl border border-white/20 bg-white/[0.06] p-6 shadow-sm">
+              <div className="mt-6 rounded-2xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/20 via-black to-black p-6 shadow-sm">
                 <div className="flex items-center gap-2 mb-2">
-                  <Award className="h-4 w-4 text-white" />
-                  <span className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+                  <Award className="h-4 w-4 text-emerald-400" />
+                  <span className="font-mono text-xs font-bold text-emerald-300 uppercase tracking-wider">
                     Core Doctoral Research Focus (Supervisor: Dr. Neetesh Kumar)
                   </span>
                 </div>
                 <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed">
-                  Investigating continuous control algorithms (TD3 vs. DDPG) in the CARLA autonomous driving simulator with multi-modal sensor fusion (radar, depth perception, obstacle proximity). Benchmarked policies achieved a <strong className="text-white font-bold">+577.7% improvement in average episode reward</strong>, <strong className="text-white font-bold">85%+ lane-change success rate</strong> over 5,000+ simulation episodes, and reduced maneuver execution duration by 20%.
+                  Investigating continuous control algorithms (TD3 vs. DDPG) in the CARLA autonomous driving simulator with multi-modal sensor fusion (radar, depth perception, obstacle proximity). Benchmarked policies achieved a <strong className="text-emerald-400 font-bold">+577.7% improvement in average episode reward</strong>, <strong className="text-cyan-400 font-bold">85%+ lane-change success rate</strong> over 5,000+ simulation episodes, and reduced maneuver execution duration by 20%.
                 </p>
               </div>
 
@@ -253,10 +265,10 @@ export const About: React.FC = () => {
                 {researchPillars.map((pillar, idx) => (
                   <div
                     key={idx}
-                    className="rounded-xl border border-white/15 bg-white/[0.03] p-4 transition-all duration-300 hover:border-white/40 hover:bg-white/[0.06]"
+                    className={`rounded-xl border border-white/15 bg-white/[0.03] p-4 transition-all duration-300 hover:bg-white/[0.06] ${pillar.borderHover}`}
                   >
                     <div className="mb-2 flex items-center gap-2">
-                      <div className="rounded-lg bg-white/10 border border-white/20 p-2 text-white">
+                      <div className={`rounded-lg border p-2 ${pillar.badge}`}>
                         {pillar.icon}
                       </div>
                       <h4 className="text-sm font-bold text-white">

@@ -7,23 +7,47 @@ import { TiltCard } from "@/components/ui/TiltCard";
 import { Zap, Bot, Sparkles, Code2, Cloud } from "lucide-react";
 import { containerVariants, itemVariants } from "@/lib/animations";
 
-// Technical domain categories with icons & editorial taglines (grayscale differentiated)
+// Technical domain categories with icons & cyber-physical accent metadata
 const categoryMeta = [
   {
     icon: Bot,
     tagline: "Continuous Control & Sensor Fusion",
+    badge: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+    iconBg: "bg-emerald-500/15 border-emerald-500/30 text-emerald-400",
+    topLine: "from-transparent via-emerald-500/50 to-transparent",
+    hoverBorder: "hover:border-emerald-500/40",
+    dot: "bg-emerald-400",
+    expertBadge: "bg-emerald-400 text-black shadow-[0_0_10px_rgba(52,211,153,0.3)] font-black",
   },
   {
     icon: Sparkles,
     tagline: "Retrieval-Augmented Generation & Agentic AI",
+    badge: "text-purple-400 border-purple-500/30 bg-purple-500/10",
+    iconBg: "bg-purple-500/15 border-purple-500/30 text-purple-400",
+    topLine: "from-transparent via-purple-500/50 to-transparent",
+    hoverBorder: "hover:border-purple-500/40",
+    dot: "bg-purple-400",
+    expertBadge: "bg-purple-400 text-black shadow-[0_0_10px_rgba(192,132,252,0.3)] font-black",
   },
   {
     icon: Code2,
     tagline: "Deep Learning Foundations & System Core",
+    badge: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
+    iconBg: "bg-cyan-500/15 border-cyan-500/30 text-cyan-400",
+    topLine: "from-transparent via-cyan-500/50 to-transparent",
+    hoverBorder: "hover:border-cyan-500/40",
+    dot: "bg-cyan-400",
+    expertBadge: "bg-cyan-400 text-black shadow-[0_0_10px_rgba(34,211,238,0.3)] font-black",
   },
   {
     icon: Cloud,
     tagline: "Cloud Architecture, Containerization & CI/CD",
+    badge: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+    iconBg: "bg-amber-500/15 border-amber-500/30 text-amber-400",
+    topLine: "from-transparent via-amber-500/50 to-transparent",
+    hoverBorder: "hover:border-amber-500/40",
+    dot: "bg-amber-400",
+    expertBadge: "bg-amber-400 text-black shadow-[0_0_10px_rgba(251,191,36,0.3)] font-black",
   },
 ];
 
@@ -60,7 +84,7 @@ export const Skills: React.FC = () => {
           </p>
         </div>
 
-        {/* 4 Classy Black & White Cards Grid */}
+        {/* 4 Cyber-Physical Domain Cards Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -77,17 +101,17 @@ export const Skills: React.FC = () => {
                 <TiltCard
                   maxTilt={3}
                   spotlightColor="rgba(255, 255, 255, 0.08)"
-                  className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-[#0B0B0B] p-7 sm:p-8 shadow-2xl transition-all duration-300 hover:border-white/40"
+                  className={`group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-[#0B0B0B] p-7 sm:p-8 shadow-2xl transition-all duration-300 ${meta.hoverBorder}`}
                 >
                   {/* Top Hairline Accent Line */}
-                  <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                  <div className={`absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r ${meta.topLine}`} />
 
                   <div>
                     {/* Category Header */}
                     <div className="mb-5 flex items-start justify-between gap-4">
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.05] px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-wider font-semibold text-neutral-300">
+                          <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-wider font-semibold ${meta.badge}`}>
                             <span>{meta.tagline}</span>
                           </span>
                         </div>
@@ -96,7 +120,7 @@ export const Skills: React.FC = () => {
                         </h3>
                       </div>
 
-                      <div className="rounded-2xl p-3 border border-white/20 bg-white/10 text-white shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                      <div className={`rounded-2xl p-3 border shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105 ${meta.iconBg}`}>
                         <Icon className="h-5 w-5" />
                       </div>
                     </div>
@@ -118,20 +142,20 @@ export const Skills: React.FC = () => {
                           >
                             {/* Left: Indicator Dot + Skill Name */}
                             <div className="flex items-center gap-2.5 min-w-0 mr-2">
-                              <span className="h-1.5 w-1.5 rounded-full bg-white shrink-0 shadow-sm transition-transform duration-300 group-hover/skill:scale-125" />
+                              <span className={`h-1.5 w-1.5 rounded-full ${meta.dot} shrink-0 shadow-sm transition-transform duration-300 group-hover/skill:scale-125`} />
                               <span className="text-xs sm:text-sm font-bold text-white transition-colors truncate">
                                 {skill.name}
                               </span>
                             </div>
 
-                            {/* Right: Classy Formal Level Badge */}
+                            {/* Right: Classy Level Badge */}
                             <span
-                              className={`shrink-0 rounded-full px-2.5 py-0.5 font-mono text-[9px] sm:text-[10px] uppercase tracking-wider font-bold transition-all ${
+                              className={`shrink-0 rounded-full px-2.5 py-0.5 font-mono text-[9px] sm:text-[10px] uppercase tracking-wider transition-all ${
                                 isExpert
-                                  ? "bg-white text-black shadow-sm"
+                                  ? meta.expertBadge
                                   : isAdvanced
-                                  ? "border border-white/40 bg-white/10 text-white"
-                                  : "border border-white/20 bg-white/[0.04] text-neutral-300"
+                                  ? "border border-white/40 bg-white/10 text-white font-bold"
+                                  : "border border-white/20 bg-white/[0.04] text-neutral-300 font-semibold"
                               }`}
                             >
                               {skill.level}
@@ -145,7 +169,7 @@ export const Skills: React.FC = () => {
                   {/* Sleek bottom status footer showing skill count */}
                   <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-4 text-[11px] font-mono text-neutral-300">
                     <span className="flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                      <span className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />
                       <span>{category.skills.length} Specializations</span>
                     </span>
                     <span className="font-semibold text-neutral-400">IIT Roorkee Research</span>

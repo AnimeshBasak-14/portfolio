@@ -49,7 +49,7 @@ export const Footer: React.FC = () => {
           <Magnetic strength={0.3}>
             <a
               href={`mailto:${personalData.email}`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-400 shadow-sm"
               title="Email Animesh Basak"
               aria-label="Email"
             >
@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
               href={personalData.huggingface}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-amber-400 hover:bg-amber-500/10 hover:text-[#FFD21E] shadow-sm"
               title="Hugging Face Profile"
               aria-label="Hugging Face"
             >
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
               href={personalData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-sky-500 hover:bg-sky-500/10 hover:text-sky-400 shadow-sm"
               title="LinkedIn Profile"
               aria-label="LinkedIn"
             >

@@ -49,13 +49,24 @@ export const Timeline: React.FC = () => {
 
         {/* Vertical Timeline */}
         <div className="relative">
-          {/* Central Vertical Light Beam in Monochrome Silver */}
-          <div className="absolute top-0 bottom-0 left-4 md:left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-transparent via-white/30 to-transparent" />
+          {/* Central Vertical Light Beam in Subtle Cyan-to-Emerald Laser Gradient */}
+          <div className="absolute top-0 bottom-0 left-4 md:left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent" />
 
           {/* Timeline Nodes */}
           <div className="space-y-12">
             {timelineData.map((item, index) => {
               const isEven = index % 2 === 0;
+
+              // Node color styling
+              const nodeColor = item.current
+                ? "border-emerald-500/50 bg-emerald-950/40 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.35)]"
+                : item.type === "education"
+                ? "border-emerald-500/30 bg-black text-emerald-400"
+                : item.role.toLowerCase().includes("datafoundry") || item.role.toLowerCase().includes("machine learning")
+                ? "border-cyan-500/30 bg-black text-cyan-400"
+                : item.organization.toLowerCase().includes("iocl")
+                ? "border-amber-500/30 bg-black text-amber-400"
+                : "border-purple-500/30 bg-black text-purple-400";
 
               return (
                 <motion.div
@@ -69,18 +80,16 @@ export const Timeline: React.FC = () => {
                   }`}
                 >
                   {/* Center Glass Node */}
-                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-black shadow-lg text-white">
+                  <div className={`absolute left-4 md:left-1/2 -translate-x-1/2 z-20 flex h-9 w-9 items-center justify-center rounded-full border shadow-lg ${nodeColor}`}>
                     {item.type === "education" ? (
-                      <GraduationCap className="h-4 w-4 text-white" />
-                    ) : item.type === "research" ? (
-                      <Briefcase className="h-4 w-4 text-white" />
+                      <GraduationCap className="h-4 w-4" />
                     ) : (
-                      <Briefcase className="h-4 w-4 text-white" />
+                      <Briefcase className="h-4 w-4" />
                     )}
                     {item.current && (
                       <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white" />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                       </span>
                     )}
                   </div>
@@ -90,7 +99,9 @@ export const Timeline: React.FC = () => {
                     <TiltCard
                       maxTilt={4}
                       spotlightColor="rgba(255, 255, 255, 0.08)"
-                      className="p-6 sm:p-7 border border-white/10 bg-[#0B0B0B] shadow-2xl hover:border-white/30 transition-all rounded-3xl"
+                      className={`p-6 sm:p-7 border border-white/10 bg-[#0B0B0B] shadow-2xl transition-all rounded-3xl ${
+                        item.current ? "hover:border-emerald-500/40" : "hover:border-white/30"
+                      }`}
                     >
                       {/* Year badge & location */}
                       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
@@ -100,7 +111,7 @@ export const Timeline: React.FC = () => {
                         </span>
 
                         {item.current ? (
-                          <span className="rounded-full bg-white text-black font-extrabold px-2.5 py-0.5 font-mono text-[10px] shadow-sm">
+                          <span className="rounded-full bg-emerald-400 text-black font-extrabold px-2.5 py-0.5 font-mono text-[10px] shadow-[0_0_12px_rgba(52,211,153,0.4)]">
                             Current Role
                           </span>
                         ) : item.location ? (
@@ -129,9 +140,9 @@ export const Timeline: React.FC = () => {
                             href={item.certificateUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-neutral-300 transition-colors underline decoration-white/30 underline-offset-4"
+                            className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:text-cyan-300 transition-colors underline decoration-cyan-500/30 underline-offset-4"
                           >
-                            <FileCheck className="h-3.5 w-3.5 text-white" />
+                            <FileCheck className="h-3.5 w-3.5 text-cyan-400" />
                             <span>View Verified Certificate ↗</span>
                           </a>
                         </div>

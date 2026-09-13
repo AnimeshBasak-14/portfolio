@@ -198,13 +198,13 @@ function AutonomousVehicle({
           />
         </mesh>
 
-        {/* Left Blinker Indicator (Flashes silver/white light pulse when changing lane to the left) */}
+        {/* Left Blinker Indicator (Flashes vibrant automotive amber gold when changing lane) */}
         <mesh position={[-0.26, 0, 0]}>
           <sphereGeometry args={[0.022, 12, 12]} />
           <meshStandardMaterial
-            color="#FFFFFF"
-            emissive="#FFFFFF"
-            emissiveIntensity={isBlinkingLeft ? 3.5 : 0.2}
+            color="#F59E0B"
+            emissive="#FFA000"
+            emissiveIntensity={isBlinkingLeft ? 4.5 : 0.2}
           />
         </mesh>
 
@@ -230,13 +230,13 @@ function AutonomousVehicle({
             emissiveIntensity={2.5}
           />
         </mesh>
-        {/* Rear Left Indicator */}
+        {/* Rear Left Indicator in Automotive Amber */}
         <mesh position={[-0.25, 0, 0]}>
           <sphereGeometry args={[0.02, 12, 12]} />
           <meshStandardMaterial
-            color="#FFFFFF"
-            emissive="#FFFFFF"
-            emissiveIntensity={isBlinkingLeft ? 3.5 : 0.2}
+            color="#F59E0B"
+            emissive="#FFA000"
+            emissiveIntensity={isBlinkingLeft ? 4.5 : 0.2}
           />
         </mesh>
       </group>
@@ -252,25 +252,25 @@ function AutonomousVehicle({
         {/* Velodyne / Hesai 360° LiDAR Puck */}
         <mesh position={[0, 0.04, 0]}>
           <cylinderGeometry args={[0.07, 0.07, 0.06, 24]} />
-          <meshStandardMaterial color="#282828" roughness={0.3} metalness={0.8} />
+          <meshStandardMaterial color="#222222" roughness={0.3} metalness={0.8} />
         </mesh>
 
-        {/* High-Speed Rotating LiDAR Turret in Matte Chrome */}
+        {/* High-Speed Rotating LiDAR Turret with Electric Cyan Laser Band */}
         <mesh ref={lidarRotor} position={[0, 0.085, 0]}>
           <cylinderGeometry args={[0.065, 0.065, 0.03, 24]} />
           <meshStandardMaterial
-            color="#E0E0E0"
-            emissive="#FFFFFF"
-            emissiveIntensity={2.0}
+            color="#06B6D4"
+            emissive="#00F0FF"
+            emissiveIntensity={2.8}
             metalness={0.9}
-            roughness={0.2}
+            roughness={0.15}
           />
         </mesh>
 
-        {/* Status Indicator LED in Pure White */}
+        {/* Status Indicator LED in Electric Emerald */}
         <mesh position={[0, 0.11, 0]}>
           <sphereGeometry args={[0.015, 12, 12]} />
-          <meshStandardMaterial color="#FFFFFF" emissive="#FFFFFF" emissiveIntensity={3.0} />
+          <meshStandardMaterial color="#10B981" emissive="#00FF9D" emissiveIntensity={3.5} />
         </mesh>
 
         {/* Forward Camera Pod Housing */}
@@ -280,7 +280,7 @@ function AutonomousVehicle({
         </mesh>
         <mesh position={[0, -0.02, 0.215]} rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.012, 0.012, 0.01, 16]} />
-          <meshStandardMaterial color="#FFFFFF" emissive="#FFFFFF" emissiveIntensity={1.8} />
+          <meshStandardMaterial color="#00E5FF" emissive="#00E5FF" emissiveIntensity={2.0} />
         </mesh>
       </group>
 
@@ -308,25 +308,25 @@ function AutonomousVehicle({
       </group>
 
       {/* 6. Active Multi-Modal Sensor Visualizations */}
-      {/* Forward Long-Range Radar Scanning Cone */}
+      {/* Forward Long-Range Radar Scanning Cone in Holographic Cyan */}
       <mesh position={[0, 0.15, 1.4]} rotation={[Math.PI / 2, 0, 0]}>
         <coneGeometry args={[mode === "lidar" ? 1.4 : 0.95, 2.2, 32, 1, true]} />
         <meshBasicMaterial
-          color="#FFFFFF"
+          color="#00E5FF"
           transparent
-          opacity={mode === "lidar" ? 0.3 : 0.12}
+          opacity={mode === "lidar" ? 0.35 : 0.14}
           side={THREE.DoubleSide}
           wireframe
         />
       </mesh>
 
-      {/* 360° LiDAR Point-Cloud Detection Perimeter */}
+      {/* 360° LiDAR Point-Cloud Detection Perimeter in Luminous Emerald/Teal */}
       <mesh position={[0, 0.05, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[mode === "lidar" ? 2.4 : 1.7, mode === "lidar" ? 2.44 : 1.73, 64]} />
         <meshBasicMaterial
-          color="#FFFFFF"
+          color="#00FFC8"
           transparent
-          opacity={0.7}
+          opacity={0.8}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -341,7 +341,7 @@ function AutonomousVehicle({
 }
 
 /**
- * Detailed 5-Spoke Alloy Wheel with Rubber Tire & Brake Caliper
+ * Detailed 5-Spoke Alloy Wheel with Rubber Tire & Brembo Crimson Brake Caliper
  */
 function WheelAssembly({ rotationX }: { rotationX: number }) {
   return (
@@ -352,13 +352,31 @@ function WheelAssembly({ rotationX }: { rotationX: number }) {
         <meshStandardMaterial color="#0A0A0A" roughness={0.8} metalness={0.1} />
       </mesh>
 
+      {/* Ventilated Drilled Steel Brake Disc */}
+      <mesh rotation={[0, 0, Math.PI / 2]} position={[0, 0, 0]}>
+        <cylinderGeometry args={[0.08, 0.08, 0.076, 20]} />
+        <meshStandardMaterial color="#71717A" roughness={0.25} metalness={0.9} />
+      </mesh>
+
+      {/* High-Performance Racing Brake Caliper in Brembo Crimson Red */}
+      <mesh position={[0.045, 0.045, 0]}>
+        <boxGeometry args={[0.024, 0.045, 0.076]} />
+        <meshStandardMaterial
+          color="#EF4444"
+          emissive="#DC2626"
+          emissiveIntensity={0.6}
+          roughness={0.2}
+          metalness={0.7}
+        />
+      </mesh>
+
       {/* Metallic Brushed Silver Alloy Rim */}
       <mesh rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.095, 0.095, 0.082, 16]} />
         <meshStandardMaterial color="#D4D4D8" roughness={0.15} metalness={0.92} />
       </mesh>
 
-      {/* 5-Spoke Rim Geometry */}
+      {/* 5-Spoke Rim Geometry in Polished Aluminium */}
       {[0, 72, 144, 216, 288].map((deg, i) => (
         <mesh
           key={i}
@@ -445,10 +463,10 @@ function TrafficCar({
         <meshStandardMaterial color="#0A0A0A" />
       </mesh>
 
-      {/* Radar Bounding Box Indicator */}
+      {/* Radar Bounding Box Indicator in Amber Warning */}
       <mesh position={[0, 0.02, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.55, 0.58, 24]} />
-        <meshBasicMaterial color="#E4E4E7" transparent opacity={0.4} />
+        <meshBasicMaterial color="#F59E0B" transparent opacity={0.7} />
       </mesh>
     </group>
   );
@@ -639,39 +657,39 @@ function AutonomousVehicleScene({ mode }: VehicleSceneProps) {
           <meshStandardMaterial color="#171717" roughness={0.3} metalness={0.8} />
         </mesh>
 
-        {/* Autonomous Planned S-Curve Trajectory Path Line in Luminous White */}
+        {/* Autonomous Planned S-Curve Trajectory Path Line in Electric Cyan */}
         {/* @ts-ignore */}
         <line geometry={trajectoryGeometry}>
-          <lineBasicMaterial color="#FFFFFF" linewidth={3} />
+          <lineBasicMaterial color="#00F0FF" linewidth={3} />
         </line>
 
-        {/* Dynamic Waypoint Particles along Trajectory with Brilliant White Light Pulses */}
+        {/* Dynamic Waypoint Particles along Trajectory with Glowing Cyan & Emerald Pulses */}
         {trajectoryPoints
           .filter((_, i) => i % 3 === 0)
           .map((pt, i) => (
             <mesh key={`wp-${i}`} position={[pt.x, 0.05, pt.z]}>
-              <sphereGeometry args={[0.04, 14, 14]} />
+              <sphereGeometry args={[0.045, 14, 14]} />
               <meshStandardMaterial
-                color="#FFFFFF"
-                emissive="#FFFFFF"
-                emissiveIntensity={3.0}
+                color={i % 2 === 0 ? "#00F5FF" : "#10B981"}
+                emissive={i % 2 === 0 ? "#00F5FF" : "#10B981"}
+                emissiveIntensity={3.5}
               />
             </mesh>
           ))}
       </group>
 
       {/* 2. Traffic Vehicles (Obstacles for Autonomous Overtake Scenario) */}
-      {/* Lead Slower Vehicle in Right Lane */}
+      {/* Lead Slower Vehicle in Right Lane in Midnight Cobalt */}
       <TrafficCar
         position={[0.95, 0, 2.2]}
-        color="#334155"
+        color="#1E3A8A"
         label="Target Obstacle"
       />
 
       {/* Following Vehicle in Far Left Lane */}
       <TrafficCar
         position={[-1.4, 0, -2.6]}
-        color="#1e293b"
+        color="#1E293B"
         label="Traffic Vehicle"
       />
 
@@ -711,7 +729,7 @@ export const HeroGlassCanvas: React.FC = () => {
           gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
           dpr={[1, 2]}
         >
-          {/* Monochrome Editorial Studio Lighting */}
+          {/* Cyber-Physical Studio Lighting with Subtle Cyan and Warm Rim Accents */}
           <ambientLight intensity={1.1} color="#FFFFFF" />
           <directionalLight
             position={[8, 12, 6]}
@@ -724,8 +742,11 @@ export const HeroGlassCanvas: React.FC = () => {
             intensity={1.0}
             color="#D4D4D4"
           />
+          {/* Electric Cyan Side Rim Light */}
+          <pointLight position={[-4, 3, 2]} intensity={2.2} color="#00E5FF" distance={12} />
+          {/* Subtle Warm Specular Rim Light */}
+          <pointLight position={[4, 2, -3]} intensity={1.5} color="#F43F5E" distance={10} />
           <pointLight position={[0, 4, 2]} intensity={1.5} color="#FFFFFF" />
-          <pointLight position={[0, 1, -3]} intensity={1.0} color="#E0E0E0" />
 
           {/* Gentle Floating Motion */}
           <Float
@@ -755,20 +776,21 @@ export const HeroGlassCanvas: React.FC = () => {
 
       {/* Interactive Mode Switcher & Non-Intrusive Guidance */}
       <div className="absolute bottom-2 z-30 flex flex-col items-center gap-2">
-        <div className="flex items-center gap-1.5 rounded-full border border-white/15 bg-black/85 px-3 py-1.5 backdrop-blur-xl shadow-2xl">
+        <div className="flex items-center gap-1.5 rounded-full border border-white/15 bg-black/90 px-3 py-1.5 backdrop-blur-xl shadow-2xl">
           <button
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               setActiveMode("drive");
             }}
-            className={`rounded-full px-3.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-all ${
+            className={`rounded-full px-3.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-all flex items-center gap-1.5 ${
               activeMode === "drive"
-                ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.25)]"
+                ? "bg-white text-black font-extrabold shadow-[0_0_20px_rgba(6,182,212,0.4)]"
                 : "text-neutral-300 hover:text-white"
             }`}
           >
-            ● CARLA Lane Change
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+            <span>CARLA Lane Change</span>
           </button>
 
           <button
@@ -777,13 +799,14 @@ export const HeroGlassCanvas: React.FC = () => {
               e.stopPropagation();
               setActiveMode("lidar");
             }}
-            className={`rounded-full px-3.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-all ${
+            className={`rounded-full px-3.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-all flex items-center gap-1.5 ${
               activeMode === "lidar"
-                ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.25)]"
+                ? "bg-white text-black font-extrabold shadow-[0_0_20px_rgba(16,185,129,0.4)]"
                 : "text-neutral-300 hover:text-white"
             }`}
           >
-            ● 360° LiDAR Perception
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            <span>360° LiDAR Perception</span>
           </button>
 
           <button
@@ -793,13 +816,14 @@ export const HeroGlassCanvas: React.FC = () => {
               setActiveMode("inspect");
               setIsInteractive(true);
             }}
-            className={`rounded-full px-3.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-all ${
+            className={`rounded-full px-3.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-all flex items-center gap-1.5 ${
               activeMode === "inspect"
-                ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.25)]"
+                ? "bg-white text-black font-extrabold shadow-[0_0_20px_rgba(245,158,11,0.4)]"
                 : "text-neutral-300 hover:text-white"
             }`}
           >
-            ● 3D Orbit View
+            <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+            <span>3D Orbit View</span>
           </button>
         </div>
 

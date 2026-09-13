@@ -349,17 +349,17 @@ export const Projects: React.FC = () => {
         </div>
 
         {/* Video Simulation Showcase Banner */}
-        <div className="mb-10 rounded-3xl liquid-glass specular-top border border-white/15 bg-[#0B0B0B] p-6 sm:p-7 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl hover:border-white/30 transition-all">
+        <div className="mb-10 rounded-3xl liquid-glass specular-top border border-rose-500/25 bg-gradient-to-r from-rose-950/20 via-[#0B0B0B] to-[#0B0B0B] p-6 sm:p-7 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl hover:border-rose-500/40 transition-all">
           <div className="flex items-start gap-4">
-            <div className="hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/[0.06] text-white border border-white/20 shadow-sm">
+            <div className="hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 border border-rose-500/30 shadow-[0_0_20px_rgba(244,63,94,0.2)]">
               <Youtube className="h-6 w-6" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs text-neutral-400 uppercase tracking-wider font-bold">
+                <span className="font-mono text-xs text-rose-400 uppercase tracking-wider font-bold">
                   CARLA Simulation Videos
                 </span>
-                <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] font-mono text-white border border-white/20 font-bold">
+                <span className="rounded-full bg-rose-500/10 px-2.5 py-0.5 text-[10px] font-mono text-rose-300 border border-rose-500/30 font-bold">
                   48 Testcases Recorded
                 </span>
               </div>
@@ -376,7 +376,7 @@ export const Projects: React.FC = () => {
             onClick={() => setShowVideoModal(true)}
             className="flex items-center gap-2 rounded-full border border-white bg-white px-6 py-3 text-xs font-bold text-black transition-all hover:bg-neutral-200 shadow-[0_0_20px_rgba(255,255,255,0.2)] shrink-0"
           >
-            <Play className="h-4 w-4 fill-current text-black" />
+            <Play className="h-4 w-4 fill-current text-rose-600" />
             <span>Play Simulation Playlist</span>
           </button>
         </div>
@@ -389,154 +389,189 @@ export const Projects: React.FC = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
-          {filteredProjects.map((project) => (
-            <motion.div key={project.id} variants={itemVariants}>
-              <TiltCard
-                maxTilt={5}
-                spotlightColor="rgba(255, 255, 255, 0.08)"
-                onClick={() => {
-                  setSelectedProject(project);
-                  setModalTab("overview");
-                }}
-                className="group flex h-full flex-col justify-between p-6 sm:p-7 cursor-pointer border border-white/10 bg-[#0B0B0B] hover:border-white/30 shadow-2xl transition-all rounded-3xl"
-              >
-                <div>
-                  {/* Visual Header Banner */}
-                  <div
-                    className={`relative mb-5 h-36 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#161616] via-[#0F0F0F] to-[#070707] border border-white/10 flex flex-col justify-between p-4`}
-                  >
-                    <div className="absolute -right-8 -bottom-8 h-32 w-32 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-sm transition-transform duration-500 group-hover:scale-125" />
+          {filteredProjects.map((project) => {
+            // Contextual theme per project
+            const isCarla = project.id.includes("carla");
+            const isAws = project.id.includes("aws");
+            const isRag = project.id.includes("rag");
+            const isCv = project.id.includes("sign-sense");
+            const isSec = project.id.includes("security");
 
-                    <div className="relative z-10 flex items-center justify-between">
-                      <span className="font-mono text-xs font-semibold text-neutral-400 uppercase tracking-wider">
-                        {project.subtitle}
-                      </span>
-                      {project.featured && (
-                        <span className="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-[10px] font-mono font-bold text-white">
-                          Featured
+            const bannerGradient = isCarla
+              ? "from-emerald-950/40 via-[#0E1713] to-[#070707] border-emerald-500/20"
+              : isAws
+              ? "from-amber-950/30 via-[#15120B] to-[#070707] border-amber-500/20"
+              : isRag
+              ? "from-purple-950/35 via-[#130D1A] to-[#070707] border-purple-500/20"
+              : isCv
+              ? "from-cyan-950/35 via-[#0A161A] to-[#070707] border-cyan-500/20"
+              : isSec
+              ? "from-rose-950/30 via-[#160B0E] to-[#070707] border-rose-500/20"
+              : "from-[#161616] via-[#0F0F0F] to-[#070707] border-white/10";
+
+            return (
+              <motion.div key={project.id} variants={itemVariants}>
+                <TiltCard
+                  maxTilt={5}
+                  spotlightColor="rgba(255, 255, 255, 0.08)"
+                  onClick={() => {
+                    setSelectedProject(project);
+                    setModalTab("overview");
+                  }}
+                  className="group flex h-full flex-col justify-between p-6 sm:p-7 cursor-pointer border border-white/10 bg-[#0B0B0B] hover:border-white/30 shadow-2xl transition-all rounded-3xl"
+                >
+                  <div>
+                    {/* Visual Header Banner */}
+                    <div
+                      className={`relative mb-5 h-36 w-full overflow-hidden rounded-2xl bg-gradient-to-br ${bannerGradient} border flex flex-col justify-between p-4`}
+                    >
+                      <div className="absolute -right-8 -bottom-8 h-32 w-32 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-sm transition-transform duration-500 group-hover:scale-125" />
+
+                      <div className="relative z-10 flex items-center justify-between">
+                        <span className="font-mono text-xs font-semibold text-neutral-300 uppercase tracking-wider">
+                          {project.subtitle}
                         </span>
-                      )}
+                        {project.featured && (
+                          <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-mono font-bold text-emerald-400">
+                            Featured
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="relative z-10 mt-1 text-xl font-bold text-white group-hover:text-neutral-100 transition-colors">
+                        {project.title}
+                      </h3>
                     </div>
 
-                    <h3 className="relative z-10 mt-1 text-xl font-bold text-white group-hover:text-neutral-200 transition-colors">
-                      {project.title}
-                    </h3>
-                  </div>
+                    {/* BOLD ISOLATED STAT BLOCKS DIRECTLY ABOVE DESCRIPTION */}
+                    {project.metrics && (
+                      <div className="mb-4 grid grid-cols-3 gap-2">
+                        {project.metrics.map((m, i) => {
+                          const isSuccessOrGain = m.value.includes("+") || m.value.includes("%") || m.value.includes("Acc");
+                          const isLatency = m.value.includes("ms") || m.value.includes("s");
+                          const isRed = m.value.includes("Loss") || m.value.includes("-");
 
-                  {/* BOLD ISOLATED STAT BLOCKS DIRECTLY ABOVE DESCRIPTION */}
-                  {project.metrics && (
-                    <div className="mb-4 grid grid-cols-3 gap-2">
-                      {project.metrics.map((m, i) => (
-                        <div
-                          key={i}
-                          className="rounded-xl border border-white/10 bg-[#050505] p-2.5 text-center group-hover:border-white/25 transition-colors"
+                          const valueColor = isRed
+                            ? "text-purple-400"
+                            : isLatency
+                            ? "text-amber-400"
+                            : isSuccessOrGain
+                            ? "text-emerald-400"
+                            : "text-cyan-400";
+
+                          return (
+                            <div
+                              key={i}
+                              className="rounded-xl border border-white/10 bg-[#050505] p-2.5 text-center group-hover:border-white/25 transition-colors"
+                            >
+                              <div className={`text-sm font-black font-mono tracking-tight ${valueColor}`}>
+                                {m.value}
+                              </div>
+                              <div className="text-[10px] font-mono text-neutral-400 truncate mt-0.5">
+                                {m.label}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* Project Description */}
+                    <p className="mb-5 text-sm text-neutral-300 leading-relaxed line-clamp-3">
+                      {project.description}
+                    </p>
+
+                    {/* Tech Stack Pills */}
+                    <div className="mb-5 flex flex-wrap gap-1.5">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-mono text-neutral-300"
                         >
-                          <div className="text-sm font-black text-white font-mono tracking-tight">
-                            {m.value}
-                          </div>
-                          <div className="text-[10px] font-mono text-neutral-400 truncate mt-0.5">
-                            {m.label}
-                          </div>
-                        </div>
+                          {tag}
+                        </span>
                       ))}
                     </div>
-                  )}
-
-                  {/* Project Description */}
-                  <p className="mb-5 text-sm text-neutral-300 leading-relaxed line-clamp-3">
-                    {project.description}
-                  </p>
-
-                  {/* Tech Stack Pills */}
-                  <div className="mb-5 flex flex-wrap gap-1.5">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-mono text-neutral-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
                   </div>
-                </div>
 
-                {/* Card Action Footer */}
-                <div className="flex items-center justify-between border-t border-white/10 pt-4">
-                  {/* Dedicated Architecture Trigger */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedProject(project);
-                      setModalTab("architecture");
-                    }}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-neutral-300 transition-colors group/btn"
-                  >
-                    <Layers className="h-3.5 w-3.5 text-white" />
-                    <span>View Architecture</span>
-                    <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1 text-white" />
-                  </button>
-
-                  {/* External Links */}
-                  <div
-                    className="flex items-center gap-2"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {project.liveUrl && project.liveUrl !== project.githubUrl && !project.liveUrl.includes("youtube.com") && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
-                        title="Launch Live Application"
-                        aria-label="Launch Live Application"
-                      >
-                        <ExternalLink className="h-3.5 w-3.5" />
-                      </a>
-                    )}
-
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
-                      title="GitHub Repository"
-                      aria-label="GitHub Repository"
+                  {/* Card Action Footer */}
+                  <div className="flex items-center justify-between border-t border-white/10 pt-4">
+                    {/* Dedicated Architecture Trigger */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedProject(project);
+                        setModalTab("architecture");
+                      }}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-cyan-400 transition-colors group/btn"
                     >
-                      <Github className="h-3.5 w-3.5" />
-                    </a>
+                      <Layers className="h-3.5 w-3.5 text-cyan-400" />
+                      <span>View Architecture</span>
+                      <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1 text-cyan-400" />
+                    </button>
 
-                    {project.videoUrl && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowVideoModal(true);
-                        }}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
-                        title="Watch Simulation Videos"
-                        aria-label="Watch Simulation Videos"
-                      >
-                        <Youtube className="h-3.5 w-3.5" />
-                      </button>
-                    )}
+                    {/* External Links */}
+                    <div
+                      className="flex items-center gap-2"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {project.liveUrl && project.liveUrl !== project.githubUrl && !project.liveUrl.includes("youtube.com") && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 transition-all hover:border-cyan-400 hover:bg-cyan-400 hover:text-black shadow-sm"
+                          title="Launch Live Application"
+                          aria-label="Launch Live Application"
+                        >
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      )}
 
-                    {project.certificateUrl && (
                       <a
-                        href={project.certificateUrl}
+                        href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
-                        title="View Certificate"
-                        aria-label="View Certificate"
+                        title="GitHub Repository"
+                        aria-label="GitHub Repository"
                       >
-                        <FileCheck className="h-3.5 w-3.5" />
+                        <Github className="h-3.5 w-3.5" />
                       </a>
-                    )}
+
+                      {project.videoUrl && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setShowVideoModal(true);
+                          }}
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-400 transition-all hover:border-rose-500 hover:bg-rose-500 hover:text-white shadow-sm"
+                          title="Watch Simulation Videos"
+                          aria-label="Watch Simulation Videos"
+                        >
+                          <Youtube className="h-3.5 w-3.5" />
+                        </button>
+                      )}
+
+                      {project.certificateUrl && (
+                        <a
+                          href={project.certificateUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 transition-all hover:border-emerald-500 hover:bg-emerald-500 hover:text-black shadow-sm"
+                          title="View Certificate"
+                          aria-label="View Certificate"
+                        >
+                          <FileCheck className="h-3.5 w-3.5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </TiltCard>
-            </motion.div>
-          ))}
+                </TiltCard>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
 
@@ -672,14 +707,15 @@ export const Projects: React.FC = () => {
               </div>
 
               {/* Tab Content 1: System Architecture Diagram */}
+              {/* Tab Content 1: System Architecture Diagram */}
               {modalTab === "architecture" && (
                 <div className="space-y-6">
                   {projectArchitectures[selectedProject.id] ? (
                     <>
                       {/* High-level summary card */}
-                      <div className="rounded-2xl border border-white/15 bg-[#000000] p-5 shadow-sm">
-                        <div className="flex items-center gap-2 text-xs font-mono font-bold text-white uppercase tracking-wider mb-1.5">
-                          <Cpu className="h-4 w-4 text-white" />
+                      <div className="rounded-2xl border border-cyan-500/30 bg-cyan-950/[0.15] p-5 shadow-sm">
+                        <div className="flex items-center gap-2 text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider mb-1.5">
+                          <Cpu className="h-4 w-4 text-cyan-400" />
                           <span>
                             {projectArchitectures[selectedProject.id].pipelineName}
                           </span>
@@ -694,22 +730,22 @@ export const Projects: React.FC = () => {
                         <h4 className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider">
                           Pipeline Flow & Data Transformations
                         </h4>
-                        <div className="relative pl-6 space-y-4 before:absolute before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-white/40 before:via-white/20 before:to-white/5">
+                        <div className="relative pl-6 space-y-4 before:absolute before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-cyan-400/60 before:via-emerald-400/40 before:to-white/5">
                           {projectArchitectures[selectedProject.id].steps.map(
                             (step, sIdx) => (
                               <div
                                 key={sIdx}
-                                className="relative rounded-2xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/25 hover:bg-[#0A0A0A]"
+                                className="relative rounded-2xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-cyan-500/30 hover:bg-[#0A0A0A]"
                               >
                                 {/* Node dot */}
-                                <div className="absolute -left-[23px] top-4 h-3 w-3 rounded-full border-2 border-black bg-white" />
+                                <div className="absolute -left-[23px] top-4 h-3 w-3 rounded-full border-2 border-black bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
 
                                 <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-                                  <span className="font-mono text-[11px] font-bold text-neutral-400 uppercase tracking-wider">
+                                  <span className="font-mono text-[11px] font-bold text-cyan-400 uppercase tracking-wider">
                                     {step.category}
                                   </span>
                                   {step.specs && (
-                                    <span className="rounded-md border border-white/15 bg-white/[0.06] px-2 py-0.5 font-mono text-[10px] text-neutral-300">
+                                    <span className="rounded-md border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] text-emerald-300 font-semibold">
                                       {step.specs}
                                     </span>
                                   )}
@@ -746,19 +782,33 @@ export const Projects: React.FC = () => {
                   {/* Bold Isolated Quantitative Stat Blocks */}
                   {selectedProject.metrics && (
                     <div className="mb-6 grid grid-cols-3 gap-3">
-                      {selectedProject.metrics.map((metric, i) => (
-                        <div
-                          key={i}
-                          className="rounded-2xl border border-white/15 bg-[#000000] p-3.5 text-center"
-                        >
-                          <div className="text-lg sm:text-xl font-black text-white font-mono tracking-tight">
-                            {metric.value}
+                      {selectedProject.metrics.map((metric, i) => {
+                        const isSuccessOrGain = metric.value.includes("+") || metric.value.includes("%") || metric.value.includes("Acc");
+                        const isLatency = metric.value.includes("ms") || metric.value.includes("s");
+                        const isRed = metric.value.includes("Loss") || metric.value.includes("-");
+
+                        const valueColor = isRed
+                          ? "text-purple-400"
+                          : isLatency
+                          ? "text-amber-400"
+                          : isSuccessOrGain
+                          ? "text-emerald-400"
+                          : "text-cyan-400";
+
+                        return (
+                          <div
+                            key={i}
+                            className="rounded-2xl border border-white/15 bg-[#000000] p-3.5 text-center"
+                          >
+                            <div className={`text-lg sm:text-xl font-black font-mono tracking-tight ${valueColor}`}>
+                              {metric.value}
+                            </div>
+                            <div className="text-xs text-neutral-400 font-mono mt-0.5">
+                              {metric.label}
+                            </div>
                           </div>
-                          <div className="text-xs text-neutral-400 font-mono mt-0.5">
-                            {metric.label}
-                          </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   )}
 

@@ -83,12 +83,12 @@ export const Contact: React.FC = () => {
       );
       setFormData({ name: "", email: "", message: "", website_hp: "" });
 
-      // Celebratory confetti burst in monochrome silver and white
+      // Celebratory confetti burst with cyber-physical accents
       confetti({
         particleCount: 90,
         spread: 75,
         origin: { y: 0.7 },
-        colors: ["#FFFFFF", "#F5F5F5", "#E5E5E5", "#D4D4D4", "#A3A3A3"],
+        colors: ["#00F0FF", "#10B981", "#FFFFFF", "#F59E0B", "#A855F7"],
       });
     } catch (err: any) {
       setState("error");
@@ -101,8 +101,8 @@ export const Contact: React.FC = () => {
   return (
     <section id="contact" className="relative py-28 px-4 md:px-8">
       {/* Background ambient glow in subtle monochrome */}
-      <div className="pointer-events-none absolute bottom-1/4 right-10 h-96 w-96 rounded-full bg-white/[0.02] blur-[140px] -z-10" />
-      <div className="pointer-events-none absolute top-1/4 left-10 h-80 w-80 rounded-full bg-white/[0.02] blur-[130px] -z-10" />
+      <div className="pointer-events-none absolute bottom-1/4 right-10 h-96 w-96 rounded-full bg-cyan-500/[0.02] blur-[140px] -z-10" />
+      <div className="pointer-events-none absolute top-1/4 left-10 h-80 w-80 rounded-full bg-emerald-500/[0.02] blur-[130px] -z-10" />
 
       <div className="mx-auto max-w-6xl">
         {/* Section Header */}
@@ -111,7 +111,7 @@ export const Contact: React.FC = () => {
             initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.05] px-4 py-1.5 text-xs font-mono tracking-widest text-neutral-300 uppercase shadow-sm"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.05] px-4 py-1.5 text-xs font-mono tracking-widest text-neutral-300 uppercase shadow-sm font-bold"
           >
             <Sparkles className="h-3.5 w-3.5 text-white" />
             <span>Direct Inquiries & Research Dialogue</span>
@@ -142,7 +142,7 @@ export const Contact: React.FC = () => {
             >
               <div>
                 <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                  <Terminal className="h-4 w-4 text-white" />
+                  <Terminal className="h-4 w-4 text-cyan-400" />
                   <span>Canonical Channels</span>
                 </h3>
                 <p className="text-xs text-neutral-300 mb-8 leading-relaxed">
@@ -154,20 +154,20 @@ export const Contact: React.FC = () => {
                   {/* Email */}
                   <a
                     href={`mailto:${personalData.email}`}
-                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/30 hover:bg-[#0E0E0E] shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-cyan-500/40 hover:bg-cyan-950/20 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white/[0.08] p-2.5 text-white border border-white/15 shadow-sm">
+                      <div className="rounded-xl bg-cyan-500/10 p-2.5 text-cyan-400 border border-cyan-500/30 shadow-sm">
                         <Mail className="h-4 w-4" />
                       </div>
                       <div>
                         <span className="block text-[11px] font-mono text-neutral-400">Direct Email</span>
-                        <span className="text-sm font-bold text-white group-hover:text-neutral-200 transition-colors">
+                        <span className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
                           {personalData.email}
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-cyan-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   {/* Hugging Face */}
@@ -175,20 +175,20 @@ export const Contact: React.FC = () => {
                     href={personalData.huggingface}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/30 hover:bg-[#0E0E0E] shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-amber-500/40 hover:bg-amber-950/20 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white/[0.08] p-2.5 text-white border border-white/15 shadow-sm">
+                      <div className="rounded-xl bg-[#FFD21E]/10 p-2.5 text-[#FFD21E] border border-[#FFD21E]/30 shadow-sm">
                         <HuggingFaceIcon className="h-4 w-4" />
                       </div>
                       <div>
                         <span className="block text-[11px] font-mono text-neutral-400">Hugging Face</span>
-                        <span className="text-sm font-bold text-white group-hover:text-neutral-200 transition-colors">
+                        <span className="text-sm font-bold text-white group-hover:text-amber-300 transition-colors">
                           huggingface.co/rohan700
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-amber-300 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   {/* LinkedIn */}
@@ -196,20 +196,20 @@ export const Contact: React.FC = () => {
                     href={personalData.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/30 hover:bg-[#0E0E0E] shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-sky-500/40 hover:bg-sky-950/20 shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white/[0.08] p-2.5 text-white border border-white/15 shadow-sm">
+                      <div className="rounded-xl bg-sky-500/10 p-2.5 text-sky-400 border border-sky-500/30 shadow-sm">
                         <Linkedin className="h-4 w-4" />
                       </div>
                       <div>
                         <span className="block text-[11px] font-mono text-neutral-400">LinkedIn Profile</span>
-                        <span className="text-sm font-bold text-white group-hover:text-neutral-200 transition-colors">
+                        <span className="text-sm font-bold text-white group-hover:text-sky-300 transition-colors">
                           in/animeshbasak03
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-sky-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   {/* GitHub */}
@@ -217,7 +217,7 @@ export const Contact: React.FC = () => {
                     href={personalData.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/30 hover:bg-[#0E0E0E] shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/40 hover:bg-white/[0.06] shadow-sm"
                   >
                     <div className="flex items-center gap-3">
                       <div className="rounded-xl bg-white/[0.08] p-2.5 text-white border border-white/15 shadow-sm">
@@ -225,7 +225,7 @@ export const Contact: React.FC = () => {
                       </div>
                       <div>
                         <span className="block text-[11px] font-mono text-neutral-400">GitHub Repositories</span>
-                        <span className="text-sm font-bold text-white group-hover:text-neutral-200 transition-colors">
+                        <span className="text-sm font-bold text-white group-hover:text-white transition-colors">
                           github.com/AnimeshBasak-14
                         </span>
                       </div>
@@ -236,8 +236,12 @@ export const Contact: React.FC = () => {
               </div>
 
               {/* Status Badge */}
-              <div className="mt-8 rounded-xl border border-white/10 bg-[#050505] p-4 text-xs font-mono text-neutral-300">
-                <span className="text-white font-bold">● </span> Location: {personalData.location}
+              <div className="mt-8 rounded-xl border border-white/10 bg-[#050505] p-4 text-xs font-mono text-neutral-300 flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span>Location: {personalData.location}</span>
               </div>
             </TiltCard>
           </div>

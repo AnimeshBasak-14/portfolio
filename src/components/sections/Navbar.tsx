@@ -115,7 +115,7 @@ export const Navbar: React.FC = () => {
               href={personalData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:text-white"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-sky-500 hover:text-sky-400"
               aria-label="LinkedIn Profile"
             >
               <Linkedin className="h-3.5 w-3.5" />
@@ -125,7 +125,7 @@ export const Navbar: React.FC = () => {
           <Magnetic strength={0.3}>
             <a
               href="/#contact"
-              className="hidden items-center space-x-1.5 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-black shadow-md transition-all duration-300 hover:bg-neutral-200 sm:flex"
+              className="hidden items-center space-x-1.5 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-black shadow-md transition-all duration-300 hover:bg-neutral-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] sm:flex"
             >
               <Sparkles className="h-3 w-3 text-black fill-current" />
               <span>Get in Touch</span>
