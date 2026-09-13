@@ -88,7 +88,7 @@ export const Contact: React.FC = () => {
         particleCount: 90,
         spread: 75,
         origin: { y: 0.7 },
-        colors: ["#F2F2ED", "#C9C9C9", "#9A9A9A", "#FFFFFF", "#737373"],
+        colors: ["#FFFFFF", "#F5F5F5", "#E5E5E5", "#D4D4D4", "#A3A3A3"],
       });
     } catch (err: any) {
       setState("error");
@@ -111,9 +111,9 @@ export const Contact: React.FC = () => {
             initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs font-mono tracking-widest text-[#9A9A9A] uppercase shadow-sm"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.05] px-4 py-1.5 text-xs font-mono tracking-widest text-neutral-300 uppercase shadow-sm"
           >
-            <Sparkles className="h-3.5 w-3.5 text-[#F2F2ED]" />
+            <Sparkles className="h-3.5 w-3.5 text-white" />
             <span>Direct Inquiries & Research Dialogue</span>
           </motion.div>
 
@@ -122,11 +122,11 @@ export const Contact: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-3xl font-extrabold tracking-tight text-[#F2F2ED] sm:text-4xl md:text-5xl"
+            className="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl md:text-5xl"
           >
-            Let&apos;s build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F2F2ED] via-[#C9C9C9] to-[#9A9A9A]">extraordinary</span>.
+            Let&apos;s build something <span className="text-white">extraordinary</span>.
           </motion.h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-[#9A9A9A]">
+          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-neutral-300">
             Interested in research collaborations, autonomous systems discussions, or engineering roles? Send a message below.
           </p>
         </div>
@@ -137,15 +137,15 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <TiltCard
               maxTilt={6}
-              spotlightColor="rgba(255, 255, 255, 0.05)"
-              className="p-8 h-full flex flex-col justify-between border border-white/[0.08] bg-[#141414] shadow-glass hover:border-white/20 hover:shadow-glass-lg transition-all"
+              spotlightColor="rgba(255, 255, 255, 0.08)"
+              className="p-8 h-full flex flex-col justify-between border border-white/10 bg-[#0B0B0B] shadow-2xl hover:border-white/30 transition-all rounded-3xl"
             >
               <div>
-                <h3 className="text-xl font-bold text-[#F2F2ED] mb-2 flex items-center gap-2">
-                  <Terminal className="h-4 w-4 text-[#F2F2ED]" />
+                <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                  <Terminal className="h-4 w-4 text-white" />
                   <span>Canonical Channels</span>
                 </h3>
-                <p className="text-xs text-[#9A9A9A] mb-8 leading-relaxed">
+                <p className="text-xs text-neutral-300 mb-8 leading-relaxed">
                   Fast response guaranteed. Feel free to connect directly via email, professional profiles, or open-source hubs.
                 </p>
 
@@ -154,20 +154,20 @@ export const Contact: React.FC = () => {
                   {/* Email */}
                   <a
                     href={`mailto:${personalData.email}`}
-                    className="group flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#0A0A0A]/60 p-4 transition-all hover:border-white/20 hover:bg-[#0A0A0A]/90 shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/30 hover:bg-[#0E0E0E] shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white/[0.05] p-2.5 text-[#F2F2ED] border border-white/10 shadow-sm">
+                      <div className="rounded-xl bg-white/[0.08] p-2.5 text-white border border-white/15 shadow-sm">
                         <Mail className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-[#9A9A9A]">Direct Email</span>
-                        <span className="text-sm font-semibold text-[#F2F2ED] group-hover:text-[#C9C9C9] transition-colors">
+                        <span className="block text-[11px] font-mono text-neutral-400">Direct Email</span>
+                        <span className="text-sm font-bold text-white group-hover:text-neutral-200 transition-colors">
                           {personalData.email}
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-[#9A9A9A] group-hover:text-[#F2F2ED] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   {/* Hugging Face */}
@@ -175,20 +175,20 @@ export const Contact: React.FC = () => {
                     href={personalData.huggingface}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#0A0A0A]/60 p-4 transition-all hover:border-white/20 hover:bg-[#0A0A0A]/90 shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/30 hover:bg-[#0E0E0E] shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white/[0.05] p-2.5 text-[#F2F2ED] border border-white/10 shadow-sm">
+                      <div className="rounded-xl bg-white/[0.08] p-2.5 text-white border border-white/15 shadow-sm">
                         <HuggingFaceIcon className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-[#9A9A9A]">Hugging Face</span>
-                        <span className="text-sm font-semibold text-[#F2F2ED] group-hover:text-[#C9C9C9] transition-colors">
+                        <span className="block text-[11px] font-mono text-neutral-400">Hugging Face</span>
+                        <span className="text-sm font-bold text-white group-hover:text-neutral-200 transition-colors">
                           huggingface.co/rohan700
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-[#9A9A9A] group-hover:text-[#F2F2ED] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   {/* LinkedIn */}
@@ -196,20 +196,20 @@ export const Contact: React.FC = () => {
                     href={personalData.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#0A0A0A]/60 p-4 transition-all hover:border-white/20 hover:bg-[#0A0A0A]/90 shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/30 hover:bg-[#0E0E0E] shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white/[0.05] p-2.5 text-[#F2F2ED] border border-white/10 shadow-sm">
+                      <div className="rounded-xl bg-white/[0.08] p-2.5 text-white border border-white/15 shadow-sm">
                         <Linkedin className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-[#9A9A9A]">LinkedIn Profile</span>
-                        <span className="text-sm font-semibold text-[#F2F2ED] group-hover:text-[#C9C9C9] transition-colors">
+                        <span className="block text-[11px] font-mono text-neutral-400">LinkedIn Profile</span>
+                        <span className="text-sm font-bold text-white group-hover:text-neutral-200 transition-colors">
                           in/animeshbasak03
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-[#9A9A9A] group-hover:text-[#F2F2ED] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   {/* GitHub */}
@@ -217,27 +217,27 @@ export const Contact: React.FC = () => {
                     href={personalData.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#0A0A0A]/60 p-4 transition-all hover:border-white/20 hover:bg-[#0A0A0A]/90 shadow-sm"
+                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/30 hover:bg-[#0E0E0E] shadow-sm"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-white/[0.05] p-2.5 text-[#F2F2ED] border border-white/10 shadow-sm">
+                      <div className="rounded-xl bg-white/[0.08] p-2.5 text-white border border-white/15 shadow-sm">
                         <Github className="h-4 w-4" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-[#9A9A9A]">GitHub Repositories</span>
-                        <span className="text-sm font-semibold text-[#F2F2ED] group-hover:text-[#C9C9C9] transition-colors">
+                        <span className="block text-[11px] font-mono text-neutral-400">GitHub Repositories</span>
+                        <span className="text-sm font-bold text-white group-hover:text-neutral-200 transition-colors">
                           github.com/AnimeshBasak-14
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-[#9A9A9A] group-hover:text-[#F2F2ED] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 </div>
               </div>
 
               {/* Status Badge */}
-              <div className="mt-8 rounded-xl border border-white/[0.08] bg-[#0A0A0A]/70 p-4 text-xs font-mono text-[#9A9A9A]">
-                <span className="text-[#F2F2ED] font-bold">● </span> Location: {personalData.location}
+              <div className="mt-8 rounded-xl border border-white/10 bg-[#050505] p-4 text-xs font-mono text-neutral-300">
+                <span className="text-white font-bold">● </span> Location: {personalData.location}
               </div>
             </TiltCard>
           </div>
@@ -246,8 +246,8 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-7">
             <TiltCard
               maxTilt={4}
-              spotlightColor="rgba(255, 255, 255, 0.05)"
-              className="p-8 sm:p-10 border border-white/[0.08] bg-[#141414] shadow-glass hover:border-white/20 hover:shadow-glass-lg transition-all"
+              spotlightColor="rgba(255, 255, 255, 0.08)"
+              className="p-8 sm:p-10 border border-white/10 bg-[#0B0B0B] shadow-2xl hover:border-white/30 transition-all rounded-3xl"
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Honeypot field */}
@@ -272,11 +272,11 @@ export const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder=" "
-                    className="peer w-full rounded-xl border border-white/[0.08] bg-[#0A0A0A]/70 px-4 pt-6 pb-2 text-sm text-[#F2F2ED] placeholder-transparent outline-none transition-all duration-300 focus:border-[#C9C9C9] focus:ring-2 focus:ring-white/10 shadow-sm"
+                    className="peer w-full rounded-xl border border-white/15 bg-[#050505] px-4 pt-6 pb-2 text-sm text-white placeholder-transparent outline-none transition-all duration-300 focus:border-white focus:ring-2 focus:ring-white/20 shadow-sm"
                   />
                   <label
                     htmlFor="name"
-                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-[#9A9A9A] transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#9A9A9A] peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#F2F2ED]"
+                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-neutral-400 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-neutral-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-white"
                   >
                     Your Name *
                   </label>
@@ -292,11 +292,11 @@ export const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder=" "
-                    className="peer w-full rounded-xl border border-white/[0.08] bg-[#0A0A0A]/70 px-4 pt-6 pb-2 text-sm text-[#F2F2ED] placeholder-transparent outline-none transition-all duration-300 focus:border-[#C9C9C9] focus:ring-2 focus:ring-white/10 shadow-sm"
+                    className="peer w-full rounded-xl border border-white/15 bg-[#050505] px-4 pt-6 pb-2 text-sm text-white placeholder-transparent outline-none transition-all duration-300 focus:border-white focus:ring-2 focus:ring-white/20 shadow-sm"
                   />
                   <label
                     htmlFor="email"
-                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-[#9A9A9A] transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#9A9A9A] peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#F2F2ED]"
+                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-neutral-400 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-neutral-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-white"
                   >
                     Your Email Address *
                   </label>
@@ -312,11 +312,11 @@ export const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder=" "
-                    className="peer w-full resize-none rounded-xl border border-white/[0.08] bg-[#0A0A0A]/70 px-4 pt-6 pb-2 text-sm text-[#F2F2ED] placeholder-transparent outline-none transition-all duration-300 focus:border-[#C9C9C9] focus:ring-2 focus:ring-white/10 shadow-sm"
+                    className="peer w-full resize-none rounded-xl border border-white/15 bg-[#050505] px-4 pt-6 pb-2 text-sm text-white placeholder-transparent outline-none transition-all duration-300 focus:border-white focus:ring-2 focus:ring-white/20 shadow-sm"
                   />
                   <label
                     htmlFor="message"
-                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-[#9A9A9A] transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#9A9A9A] peer-focus:top-2 peer-focus:text-xs peer-focus:text-[#F2F2ED]"
+                    className="pointer-events-none absolute top-2 left-4 text-xs font-medium text-neutral-400 transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-neutral-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-white"
                   >
                     Message or Collaboration Details *
                   </label>
@@ -329,40 +329,40 @@ export const Contact: React.FC = () => {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="flex items-center gap-2 rounded-xl p-3.5 text-xs font-medium border border-white/20 bg-white/[0.06] text-[#F2F2ED] shadow-sm"
+                      className="flex items-center gap-2 rounded-xl p-3.5 text-xs font-medium border border-white/20 bg-white/[0.08] text-white shadow-sm"
                     >
                       {state === "success" ? (
-                        <CheckCircle2 className="h-4 w-4 shrink-0 text-[#F2F2ED]" />
+                        <CheckCircle2 className="h-4 w-4 shrink-0 text-white" />
                       ) : (
-                        <AlertCircle className="h-4 w-4 shrink-0 text-[#F2F2ED]" />
+                        <AlertCircle className="h-4 w-4 shrink-0 text-white" />
                       )}
                       <span>{feedbackMessage}</span>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                {/* Submit button in Editorial styling */}
+                {/* Submit button in Stark Solid White */}
                 <div className="pt-2">
                   <Magnetic strength={0.3}>
                     <button
                       type="submit"
                       disabled={state === "submitting"}
-                      className="relative group flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-[#F2F2ED] px-8 py-3.5 text-sm font-bold text-[#0A0A0A] shadow-sm transition-all duration-300 hover:bg-[#C9C9C9] disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="relative group flex w-full items-center justify-center gap-2 rounded-xl border border-white bg-white px-8 py-3.5 text-sm font-extrabold text-black shadow-[0_0_25px_rgba(255,255,255,0.2)] transition-all duration-300 hover:bg-neutral-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {state === "submitting" ? (
                         <>
-                          <Loader2 className="h-4 w-4 animate-spin text-[#0A0A0A]" />
+                          <Loader2 className="h-4 w-4 animate-spin text-black" />
                           <span>Transmitting Signal...</span>
                         </>
                       ) : state === "success" ? (
                         <>
-                          <CheckCircle2 className="h-4 w-4 text-[#0A0A0A]" />
+                          <CheckCircle2 className="h-4 w-4 text-black" />
                           <span>Transmission Dispatched</span>
                         </>
                       ) : (
                         <>
                           <span>Transmit Message</span>
-                          <Send className="h-4 w-4 text-[#0A0A0A] transition-transform group-hover:translate-x-1" />
+                          <Send className="h-4 w-4 text-black transition-transform group-hover:translate-x-1" />
                         </>
                       )}
                     </button>

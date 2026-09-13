@@ -20,13 +20,13 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "space-between",
-          backgroundColor: "#090d08",
+          backgroundColor: "#000000",
           padding: "80px",
           fontFamily: "sans-serif",
           position: "relative",
         }}
       >
-        {/* Ambient Gradient Glows */}
+        {/* Ambient Radial Highlights */}
         <div
           style={{
             position: "absolute",
@@ -35,7 +35,7 @@ export default async function Image() {
             width: "600px",
             height: "600px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(163, 182, 138, 0.3) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%)",
           }}
         />
         <div
@@ -46,7 +46,7 @@ export default async function Image() {
             width: "600px",
             height: "600px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(92, 114, 74, 0.3) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%)",
           }}
         />
 
@@ -57,10 +57,11 @@ export default async function Image() {
             alignItems: "center",
             padding: "10px 24px",
             borderRadius: "9999px",
-            backgroundColor: "rgba(53, 74, 47, 0.4)",
-            border: "1px solid rgba(199, 183, 147, 0.3)",
-            color: "#c7b793",
+            backgroundColor: "rgba(255, 255, 255, 0.08)",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+            color: "#FFFFFF",
             fontSize: "18px",
+            fontWeight: 700,
             letterSpacing: "2px",
             textTransform: "uppercase",
           }}
@@ -74,7 +75,7 @@ export default async function Image() {
             style={{
               fontSize: "76px",
               fontWeight: 900,
-              color: "#f5f5d5",
+              color: "#FFFFFF",
               lineHeight: 1.1,
             }}
           >
@@ -82,9 +83,9 @@ export default async function Image() {
           </div>
           <div
             style={{
-              fontSize: "32px",
+              fontSize: "30px",
               fontWeight: 600,
-              color: "#a3b68a",
+              color: "#D4D4D8",
             }}
           >
             {personalData.title}
@@ -97,9 +98,9 @@ export default async function Image() {
             display: "flex",
             alignItems: "center",
             gap: "30px",
-            color: "#c7b793",
+            color: "#A1A1AA",
             fontSize: "20px",
-            borderTop: "1px solid rgba(199, 183, 147, 0.2)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.12)",
             paddingTop: "24px",
             width: "100%",
           }}

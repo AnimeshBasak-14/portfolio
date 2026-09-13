@@ -10,27 +10,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Monochrome Black-and-White Editorial palette:
+        // Classy, Stylish, Formal Black & White palette:
         editorial: {
-          bg: "#0A0A0A",          // Primary background
-          card: "#141414",        // Elevated/card background
-          text: "#F2F2ED",        // Primary text
-          muted: "#9A9A9A",       // Secondary/muted text
-          border: "rgba(255, 255, 255, 0.08)", // Hairline divider
-          accent: "#C9C9C9",      // Single accent for hover/focus/active
-          subtle: "#737373",      // Subtle text
+          bg: "#000000",          // Deep obsidian black
+          card: "#0D0D0D",        // Elevated obsidian card
+          surface: "#141414",     // Deep glass surface
+          text: "#FFFFFF",        // Pure brilliant white
+          secondary: "#E4E4E7",   // High-contrast platinum silver
+          muted: "#A1A1AA",       // Muted secondary
+          border: "rgba(255, 255, 255, 0.12)", // Razor-sharp hairline divider
+          borderBright: "rgba(255, 255, 255, 0.28)", // Prominent white border
+          accent: "#FFFFFF",      // Pure white accent
+          subtle: "#71717A",      // Subtle text
         },
         background: {
-          DEFAULT: "#0A0A0A",     // Primary background
-          secondary: "#141414",   // Elevated card background
-          tertiary: "#1C1C1C",    // Higher elevated surface
+          DEFAULT: "#000000",     // Pure obsidian background
+          secondary: "#0D0D0D",   // Elevated card background
+          tertiary: "#141414",    // Higher elevated surface
         },
         glass: {
-          border: "rgba(255, 255, 255, 0.08)",
-          "border-bright": "rgba(255, 255, 255, 0.16)",
-          surface: "rgba(255, 255, 255, 0.03)",
-          "surface-hover": "rgba(255, 255, 255, 0.06)",
-          highlight: "rgba(255, 255, 255, 0.05)",
+          border: "rgba(255, 255, 255, 0.12)",
+          "border-bright": "rgba(255, 255, 255, 0.28)",
+          surface: "rgba(255, 255, 255, 0.04)",
+          "surface-hover": "rgba(255, 255, 255, 0.08)",
+          highlight: "rgba(255, 255, 255, 0.12)",
         },
       },
       backdropBlur: {

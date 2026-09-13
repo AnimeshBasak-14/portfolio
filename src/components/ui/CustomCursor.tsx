@@ -159,7 +159,7 @@ export const CustomCursor: React.FC = () => {
 
       {/* 4. Sharp center cursor dot */}
       <motion.div
-        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F2F2ED] shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.7)]"
         style={{
           left: mouseX,
           top: mouseY,

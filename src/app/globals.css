@@ -9,8 +9,8 @@
 /* Base Body and Smooth Scrolling setup */
 html {
   scroll-behavior: initial;
-  background-color: #0A0A0A;
-  color: #F2F2ED;
+  background-color: #000000;
+  color: #FFFFFF;
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
@@ -41,7 +41,7 @@ html.lenis body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
 }
 
-/* Liquid Glass Core Utilities with Monochrome Editorial Palette */
+/* Liquid Glass Core Utilities with High-Contrast Formal Palette */
 @layer components {
   /* Minimalist frosted glassmorphism */
   .liquid-glass {
@@ -49,35 +49,35 @@ html.lenis body {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 
-      0 12px 32px -4px rgba(0, 0, 0, 0.7),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.06);
+      0 16px 36px -4px rgba(0, 0, 0, 0.8),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
   }
 
   .liquid-glass-card {
     position: relative;
-    background: #141414;
+    background: #0B0B0B;
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 
-      0 16px 40px -8px rgba(0, 0, 0, 0.8),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.04);
+      0 16px 40px -8px rgba(0, 0, 0, 0.85),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.06);
     transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .liquid-glass-card:hover {
-    border-color: rgba(201, 201, 201, 0.3);
+    border-color: rgba(255, 255, 255, 0.35);
     box-shadow: 
-      0 24px 50px -10px rgba(0, 0, 0, 0.9),
-      0 0 25px rgba(255, 255, 255, 0.03),
-      inset 0 1px 2px 0 rgba(255, 255, 255, 0.08);
+      0 24px 50px -10px rgba(0, 0, 0, 0.95),
+      0 0 30px rgba(255, 255, 255, 0.05),
+      inset 0 1px 2px 0 rgba(255, 255, 255, 0.12);
   }
 
-  /* Specular Highlight line along top edge with subtle monochrome sheen */
+  /* Specular Highlight line along top edge with brilliant white sheen */
   .specular-top::before {
     content: '';
     position: absolute;
@@ -88,30 +88,30 @@ html.lenis body {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.25) 50%,
+      rgba(255, 255, 255, 0.4) 50%,
       transparent 100%
     );
     pointer-events: none;
   }
 }
 
-/* Custom scrollbar styling in monochrome editorial tones */
+/* Custom scrollbar styling in high-contrast tones */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 9999px;
-  border: 2px solid #0A0A0A;
+  border: 2px solid #000000;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C9C9C9;
+  background: #FFFFFF;
 }
 
 /* Reduced Motion preferences */

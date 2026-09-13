@@ -52,20 +52,20 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`liquid-glass specular-top relative flex items-center justify-between rounded-full px-5 py-2.5 transition-all duration-300 md:px-7 md:py-3 ${
           scrolled
-            ? "w-full max-w-4xl border-white/10 bg-[#141414]/90 shadow-lg backdrop-blur-md"
-            : "w-full max-w-5xl border-white/[0.08] bg-[#141414]/75 backdrop-blur-md shadow-glass"
+            ? "w-full max-w-4xl border-white/15 bg-black/85 shadow-2xl backdrop-blur-xl"
+            : "w-full max-w-5xl border-white/10 bg-black/75 backdrop-blur-xl shadow-2xl"
         }`}
       >
         {/* Brand / Logo */}
         <Magnetic strength={0.25}>
           <Link
             href="/"
-            className="group flex items-center space-x-2 text-sm font-semibold tracking-wide text-[#F2F2ED] transition-colors"
+            className="group flex items-center space-x-2.5 text-sm font-bold tracking-wide text-white transition-colors"
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F2F2ED] text-xs font-bold text-[#0A0A0A] border border-white/20">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-black text-black shadow-sm">
               AB
             </div>
-            <span className="hidden font-semibold text-[#F2F2ED] group-hover:text-[#C9C9C9] sm:inline-block">
+            <span className="hidden font-bold tracking-tight text-white group-hover:text-neutral-300 sm:inline-block">
               {personalData.name}
             </span>
           </Link>
@@ -77,16 +77,16 @@ export const Navbar: React.FC = () => {
             <Magnetic key={item.id} strength={0.3}>
               <a
                 href={item.href}
-                className={`relative px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase transition-colors duration-200 flex items-center gap-1.5 ${
+                className={`relative px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase transition-colors duration-200 flex items-center gap-1.5 ${
                   activeSection === item.id
-                    ? "text-[#F2F2ED] font-bold"
-                    : "text-[#9A9A9A] hover:text-[#F2F2ED]"
+                    ? "text-white font-bold"
+                    : "text-neutral-300 hover:text-white"
                 }`}
               >
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="activeNavIndicator"
-                    className="absolute inset-0 -z-10 rounded-full bg-white/[0.08] border border-white/10 backdrop-blur-xs"
+                    className="absolute inset-0 -z-10 rounded-full bg-white/10 border border-white/20 backdrop-blur-xs"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -103,7 +103,7 @@ export const Navbar: React.FC = () => {
               href={personalData.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#9A9A9A] transition-colors hover:border-[#C9C9C9] hover:text-[#F2F2ED]"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:text-white"
               aria-label="GitHub Profile"
             >
               <Github className="h-3.5 w-3.5" />
@@ -115,7 +115,7 @@ export const Navbar: React.FC = () => {
               href={personalData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#9A9A9A] transition-colors hover:border-[#C9C9C9] hover:text-[#F2F2ED]"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:text-white"
               aria-label="LinkedIn Profile"
             >
               <Linkedin className="h-3.5 w-3.5" />
@@ -125,9 +125,9 @@ export const Navbar: React.FC = () => {
           <Magnetic strength={0.3}>
             <a
               href="/#contact"
-              className="hidden items-center space-x-1.5 rounded-full border border-white/20 bg-[#F2F2ED] px-3.5 py-1 text-xs font-bold text-[#0A0A0A] shadow-sm transition-all duration-300 hover:bg-[#C9C9C9] sm:flex"
+              className="hidden items-center space-x-1.5 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-black shadow-md transition-all duration-300 hover:bg-neutral-200 sm:flex"
             >
-              <Sparkles className="h-3 w-3 text-[#0A0A0A] fill-current" />
+              <Sparkles className="h-3 w-3 text-black fill-current" />
               <span>Get in Touch</span>
             </a>
           </Magnetic>
@@ -135,7 +135,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-[#F2F2ED] md:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] text-white md:hidden"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -149,7 +149,7 @@ export const Navbar: React.FC = () => {
           initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="liquid-glass specular-top fixed top-20 left-4 right-4 z-40 rounded-3xl p-6 md:hidden shadow-2xl border border-white/10 bg-[#141414]/98"
+          className="liquid-glass specular-top fixed top-20 left-4 right-4 z-40 rounded-3xl p-6 md:hidden shadow-2xl border border-white/15 bg-black/95 backdrop-blur-2xl"
         >
           <div className="flex flex-col space-y-4">
             {navItems.map((item) => (
@@ -157,24 +157,24 @@ export const Navbar: React.FC = () => {
                 key={item.id}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-base font-medium tracking-wide transition-colors flex items-center justify-between ${
-                  activeSection === item.id ? "text-[#F2F2ED] font-bold" : "text-[#9A9A9A] hover:text-[#F2F2ED]"
+                className={`text-base font-semibold tracking-wide transition-colors flex items-center justify-between ${
+                  activeSection === item.id ? "text-white font-bold" : "text-neutral-300 hover:text-white"
                 }`}
               >
                 <span>{item.label}</span>
-                {activeSection === item.id && <span className="h-2 w-2 rounded-full bg-[#F2F2ED]" />}
+                {activeSection === item.id && <span className="h-2 w-2 rounded-full bg-white shadow-sm" />}
               </a>
             ))}
-            <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-              <span className="text-xs text-[#9A9A9A] font-mono">Verified Channels</span>
+            <div className="pt-4 border-t border-white/15 flex items-center justify-between">
+              <span className="text-xs text-neutral-400 font-mono">Connect Directly</span>
               <div className="flex space-x-3">
-                <a href={personalData.github} target="_blank" rel="noreferrer" className="text-[#9A9A9A] hover:text-[#F2F2ED]">
+                <a href={personalData.github} target="_blank" rel="noreferrer" className="text-neutral-300 hover:text-white">
                   <Github className="h-4 w-4" />
                 </a>
-                <a href={personalData.linkedin} target="_blank" rel="noreferrer" className="text-[#9A9A9A] hover:text-[#F2F2ED]">
+                <a href={personalData.linkedin} target="_blank" rel="noreferrer" className="text-neutral-300 hover:text-white">
                   <Linkedin className="h-4 w-4" />
                 </a>
-                <a href={`mailto:${personalData.email}`} className="text-[#9A9A9A] hover:text-[#F2F2ED]">
+                <a href={`mailto:${personalData.email}`} className="text-neutral-300 hover:text-white">
                   <Mail className="h-4 w-4" />
                 </a>
               </div>

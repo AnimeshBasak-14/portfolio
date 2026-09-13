@@ -313,9 +313,9 @@ export const Projects: React.FC = () => {
               initial={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs font-mono tracking-widest text-[#9A9A9A] uppercase shadow-sm"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.05] px-4 py-1.5 text-xs font-mono tracking-widest text-neutral-300 uppercase shadow-sm"
             >
-              <Sparkles className="h-3.5 w-3.5 text-[#F2F2ED]" />
+              <Sparkles className="h-3.5 w-3.5 text-white" />
               <span>Verified Engineering & Research Portfolio</span>
             </motion.div>
 
@@ -324,9 +324,9 @@ export const Projects: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="mt-4 text-3xl font-extrabold tracking-tight text-[#F2F2ED] sm:text-4xl md:text-5xl"
+              className="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl md:text-5xl"
             >
-              Projects & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F2F2ED] via-[#C9C9C9] to-[#9A9A9A]">Deployments</span>
+              Projects & <span className="text-white">Deployments</span>
             </motion.h2>
           </div>
 
@@ -338,8 +338,8 @@ export const Projects: React.FC = () => {
                 onClick={() => setActiveFilter(filter.id)}
                 className={`rounded-full px-4 py-1.5 text-xs font-medium tracking-wide transition-all ${
                   activeFilter === filter.id
-                    ? "bg-[#F2F2ED] text-[#0A0A0A] font-bold border border-[#F2F2ED]"
-                    : "border border-white/[0.08] bg-[#141414] text-[#9A9A9A] hover:border-white/20 hover:text-[#F2F2ED]"
+                    ? "bg-white text-black font-extrabold border border-white shadow-sm"
+                    : "border border-white/15 bg-black/60 text-neutral-300 hover:border-white/40 hover:text-white"
                 }`}
               >
                 {filter.label}
@@ -349,24 +349,24 @@ export const Projects: React.FC = () => {
         </div>
 
         {/* Video Simulation Showcase Banner */}
-        <div className="mb-10 rounded-3xl liquid-glass specular-top border border-white/[0.08] bg-[#141414] p-6 sm:p-7 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-glass hover:border-white/20 transition-all">
+        <div className="mb-10 rounded-3xl liquid-glass specular-top border border-white/15 bg-[#0B0B0B] p-6 sm:p-7 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl hover:border-white/30 transition-all">
           <div className="flex items-start gap-4">
-            <div className="hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/[0.04] text-[#F2F2ED] border border-white/10 shadow-sm">
+            <div className="hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/[0.06] text-white border border-white/20 shadow-sm">
               <Youtube className="h-6 w-6" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs text-[#9A9A9A] uppercase tracking-wider font-bold">
+                <span className="font-mono text-xs text-neutral-400 uppercase tracking-wider font-bold">
                   CARLA Simulation Videos
                 </span>
-                <span className="rounded-full bg-white/[0.04] px-2.5 py-0.5 text-[10px] font-mono text-[#F2F2ED] border border-white/10 font-semibold">
+                <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] font-mono text-white border border-white/20 font-bold">
                   48 Testcases Recorded
                 </span>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-[#F2F2ED] mt-1">
+              <h3 className="text-lg sm:text-xl font-bold text-white mt-1">
                 Autonomous Lane Changing & TD3 Policy Visualizations
               </h3>
-              <p className="text-xs sm:text-sm text-[#9A9A9A] mt-1 max-w-2xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 mt-1 max-w-2xl leading-relaxed">
                 Watch full continuous reinforcement learning runs across obstacle avoidance, emergency braking, and highway lane changes directly in the CARLA simulator.
               </p>
             </div>
@@ -374,9 +374,9 @@ export const Projects: React.FC = () => {
 
           <button
             onClick={() => setShowVideoModal(true)}
-            className="flex items-center gap-2 rounded-full border border-white/20 bg-[#F2F2ED] px-6 py-3 text-xs font-bold text-[#0A0A0A] transition-all hover:bg-[#C9C9C9] shrink-0"
+            className="flex items-center gap-2 rounded-full border border-white bg-white px-6 py-3 text-xs font-bold text-black transition-all hover:bg-neutral-200 shadow-[0_0_20px_rgba(255,255,255,0.2)] shrink-0"
           >
-            <Play className="h-4 w-4 fill-current" />
+            <Play className="h-4 w-4 fill-current text-black" />
             <span>Play Simulation Playlist</span>
           </button>
         </div>
@@ -393,32 +393,32 @@ export const Projects: React.FC = () => {
             <motion.div key={project.id} variants={itemVariants}>
               <TiltCard
                 maxTilt={5}
-                spotlightColor="rgba(255, 255, 255, 0.05)"
+                spotlightColor="rgba(255, 255, 255, 0.08)"
                 onClick={() => {
                   setSelectedProject(project);
                   setModalTab("overview");
                 }}
-                className="group flex h-full flex-col justify-between p-6 sm:p-7 cursor-pointer border border-white/[0.08] bg-[#141414] hover:border-white/20 shadow-glass hover:shadow-glass-lg transition-all"
+                className="group flex h-full flex-col justify-between p-6 sm:p-7 cursor-pointer border border-white/10 bg-[#0B0B0B] hover:border-white/30 shadow-2xl transition-all rounded-3xl"
               >
                 <div>
                   {/* Visual Header Banner */}
                   <div
-                    className={`relative mb-5 h-36 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#1C1C1C] via-[#141414] to-[#0F0F0F] border border-white/[0.08] flex flex-col justify-between p-4`}
+                    className={`relative mb-5 h-36 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#161616] via-[#0F0F0F] to-[#070707] border border-white/10 flex flex-col justify-between p-4`}
                   >
-                    <div className="absolute -right-8 -bottom-8 h-32 w-32 rounded-full border border-white/5 bg-white/[0.02] backdrop-blur-sm transition-transform duration-500 group-hover:scale-125" />
+                    <div className="absolute -right-8 -bottom-8 h-32 w-32 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-sm transition-transform duration-500 group-hover:scale-125" />
 
                     <div className="relative z-10 flex items-center justify-between">
-                      <span className="font-mono text-xs font-semibold text-[#9A9A9A] uppercase tracking-wider">
+                      <span className="font-mono text-xs font-semibold text-neutral-400 uppercase tracking-wider">
                         {project.subtitle}
                       </span>
                       {project.featured && (
-                        <span className="rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-0.5 text-[10px] font-mono font-bold text-[#F2F2ED]">
+                        <span className="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-[10px] font-mono font-bold text-white">
                           Featured
                         </span>
                       )}
                     </div>
 
-                    <h3 className="relative z-10 mt-1 text-xl font-bold text-[#F2F2ED] group-hover:text-[#C9C9C9] transition-colors">
+                    <h3 className="relative z-10 mt-1 text-xl font-bold text-white group-hover:text-neutral-200 transition-colors">
                       {project.title}
                     </h3>
                   </div>
@@ -429,12 +429,12 @@ export const Projects: React.FC = () => {
                       {project.metrics.map((m, i) => (
                         <div
                           key={i}
-                          className="rounded-xl border border-white/[0.08] bg-[#0A0A0A]/70 p-2.5 text-center group-hover:border-white/20 transition-colors"
+                          className="rounded-xl border border-white/10 bg-[#050505] p-2.5 text-center group-hover:border-white/25 transition-colors"
                         >
-                          <div className="text-sm font-black text-[#F2F2ED] font-mono tracking-tight">
+                          <div className="text-sm font-black text-white font-mono tracking-tight">
                             {m.value}
                           </div>
-                          <div className="text-[10px] font-mono text-[#9A9A9A] truncate mt-0.5">
+                          <div className="text-[10px] font-mono text-neutral-400 truncate mt-0.5">
                             {m.label}
                           </div>
                         </div>
@@ -443,7 +443,7 @@ export const Projects: React.FC = () => {
                   )}
 
                   {/* Project Description */}
-                  <p className="mb-5 text-sm text-[#9A9A9A] leading-relaxed line-clamp-3">
+                  <p className="mb-5 text-sm text-neutral-300 leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
 
@@ -452,7 +452,7 @@ export const Projects: React.FC = () => {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-md border border-white/[0.06] bg-[#0A0A0A]/60 px-2 py-0.5 text-[11px] font-mono text-[#9A9A9A]"
+                        className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-mono text-neutral-300"
                       >
                         {tag}
                       </span>
@@ -461,7 +461,7 @@ export const Projects: React.FC = () => {
                 </div>
 
                 {/* Card Action Footer */}
-                <div className="flex items-center justify-between border-t border-white/[0.08] pt-4">
+                <div className="flex items-center justify-between border-t border-white/10 pt-4">
                   {/* Dedicated Architecture Trigger */}
                   <button
                     type="button"
@@ -470,11 +470,11 @@ export const Projects: React.FC = () => {
                       setSelectedProject(project);
                       setModalTab("architecture");
                     }}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#F2F2ED] hover:text-[#C9C9C9] transition-colors group/btn"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-neutral-300 transition-colors group/btn"
                   >
-                    <Layers className="h-3.5 w-3.5 text-[#F2F2ED]" />
+                    <Layers className="h-3.5 w-3.5 text-white" />
                     <span>View Architecture</span>
-                    <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
+                    <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1 text-white" />
                   </button>
 
                   {/* External Links */}
@@ -487,7 +487,7 @@ export const Projects: React.FC = () => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/[0.08] text-[#F2F2ED] transition-all hover:border-white/30 hover:bg-white/[0.15] hover:text-white shadow-sm"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
                         title="Launch Live Application"
                         aria-label="Launch Live Application"
                       >
@@ -499,7 +499,7 @@ export const Projects: React.FC = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.08] bg-[#0A0A0A] text-[#9A9A9A] transition-all hover:border-white/20 hover:bg-white/[0.05] hover:text-[#F2F2ED] shadow-sm"
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
                       title="GitHub Repository"
                       aria-label="GitHub Repository"
                     >
@@ -512,7 +512,7 @@ export const Projects: React.FC = () => {
                           e.stopPropagation();
                           setShowVideoModal(true);
                         }}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.08] bg-[#0A0A0A] text-[#9A9A9A] transition-all hover:border-white/20 hover:bg-white/[0.05] hover:text-[#F2F2ED] shadow-sm"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
                         title="Watch Simulation Videos"
                         aria-label="Watch Simulation Videos"
                       >
@@ -525,7 +525,7 @@ export const Projects: React.FC = () => {
                         href={project.certificateUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.08] bg-[#0A0A0A] text-[#9A9A9A] transition-all hover:border-white/20 hover:bg-white/[0.05] hover:text-[#F2F2ED] shadow-sm"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
                         title="View Certificate"
                         aria-label="View Certificate"
                       >
@@ -557,18 +557,18 @@ export const Projects: React.FC = () => {
               exit={{ opacity: 0, scale: 0.95 }}
               data-lenis-prevent
               onWheel={(e) => e.stopPropagation()}
-              className="relative z-10 w-full max-w-4xl overflow-hidden rounded-3xl border border-white/[0.08] bg-[#141414] p-4 sm:p-6 shadow-2xl"
+              className="relative z-10 w-full max-w-4xl overflow-hidden rounded-3xl border border-white/15 bg-[#0B0B0B] p-4 sm:p-6 shadow-2xl"
             >
-              <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-4">
+              <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
                 <div className="flex items-center gap-2">
-                  <Youtube className="h-5 w-5 text-[#F2F2ED]" />
-                  <span className="text-base font-bold text-[#F2F2ED]">
+                  <Youtube className="h-5 w-5 text-white" />
+                  <span className="text-base font-bold text-white">
                     CARLA Autonomous Lane Changing & TD3 Simulation Runs (48 Videos)
                   </span>
                 </div>
                 <button
                   onClick={() => setShowVideoModal(false)}
-                  className="rounded-full p-1.5 text-[#9A9A9A] hover:bg-white/[0.06] hover:text-[#F2F2ED] transition-colors"
+                  className="rounded-full p-1.5 text-neutral-400 hover:bg-white/10 hover:text-white transition-colors"
                   aria-label="Close video player"
                 >
                   <X className="h-5 w-5" />
@@ -576,7 +576,7 @@ export const Projects: React.FC = () => {
               </div>
 
               {/* YouTube Player */}
-              <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-black">
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black">
                 <iframe
                   className="h-full w-full"
                   src="https://www.youtube-nocookie.com/embed/videoseries?list=PLNy_bKEJyhIM&autoplay=1"
@@ -586,13 +586,13 @@ export const Projects: React.FC = () => {
                 />
               </div>
 
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-[#9A9A9A] font-mono">
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-neutral-400 font-mono">
                 <span>Playlist: TD3RCO TESTCASE SCENARIOS</span>
                 <a
                   href="https://youtube.com/playlist?list=PLNy_bKEJyhIM&si=VP8HZBgkaJzIxzbY"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[#F2F2ED] hover:text-[#C9C9C9] flex items-center gap-1 font-semibold"
+                  className="text-white hover:text-neutral-300 flex items-center gap-1 font-bold"
                 >
                   <span>Open Full Playlist on YouTube</span>
                   <ExternalLink className="h-3 w-3" />
@@ -613,7 +613,7 @@ export const Projects: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              className="absolute inset-0 bg-black/85 backdrop-blur-md"
             />
 
             {/* Modal Dialog with data-lenis-prevent to enable native mouse wheel scroll */}
@@ -624,12 +624,12 @@ export const Projects: React.FC = () => {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               data-lenis-prevent
               onWheel={(e) => e.stopPropagation()}
-              className="relative z-10 w-full max-w-3xl max-h-[85vh] overflow-y-auto overscroll-contain rounded-3xl border border-white/10 bg-[#141414]/98 p-6 sm:p-8 shadow-2xl backdrop-blur-xl"
+              className="relative z-10 w-full max-w-3xl max-h-[85vh] overflow-y-auto overscroll-contain rounded-3xl border border-white/15 bg-[#080808]/98 p-6 sm:p-8 shadow-2xl backdrop-blur-2xl"
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="sticky top-0 float-right -mr-2 -mt-2 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-[#9A9A9A] hover:text-[#F2F2ED] hover:border-white/20 shadow-sm transition-colors"
+                className="sticky top-0 float-right -mr-2 -mt-2 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-neutral-400 hover:text-white hover:border-white/30 shadow-sm transition-colors"
                 aria-label="Close dialog"
               >
                 <X className="h-4 w-4" />
@@ -637,22 +637,22 @@ export const Projects: React.FC = () => {
 
               {/* Modal Header */}
               <div className="mb-4 pr-10">
-                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#9A9A9A]">
+                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-neutral-400">
                   {selectedProject.subtitle}
                 </span>
-                <h3 className="mt-1 text-2xl sm:text-3xl font-extrabold text-[#F2F2ED]">
+                <h3 className="mt-1 text-2xl sm:text-3xl font-black text-white">
                   {selectedProject.title}
                 </h3>
               </div>
 
               {/* Tab Switcher: Architecture Diagram vs Overview */}
-              <div className="mt-4 mb-6 flex flex-wrap gap-2 border-b border-white/[0.08] pb-3">
+              <div className="mt-4 mb-6 flex flex-wrap gap-2 border-b border-white/10 pb-3">
                 <button
                   onClick={() => setModalTab("architecture")}
                   className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
                     modalTab === "architecture"
-                      ? "bg-[#F2F2ED] text-[#0A0A0A] font-bold"
-                      : "border border-white/[0.08] bg-white/[0.03] text-[#9A9A9A] hover:border-white/20 hover:text-[#F2F2ED]"
+                      ? "bg-white text-black font-extrabold shadow-sm"
+                      : "border border-white/15 bg-white/[0.04] text-neutral-300 hover:border-white/30 hover:text-white"
                   }`}
                 >
                   <Layers className="h-4 w-4" />
@@ -662,8 +662,8 @@ export const Projects: React.FC = () => {
                   onClick={() => setModalTab("overview")}
                   className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
                     modalTab === "overview"
-                      ? "bg-[#F2F2ED] text-[#0A0A0A] font-bold"
-                      : "border border-white/[0.08] bg-white/[0.03] text-[#9A9A9A] hover:border-white/20 hover:text-[#F2F2ED]"
+                      ? "bg-white text-black font-extrabold shadow-sm"
+                      : "border border-white/15 bg-white/[0.04] text-neutral-300 hover:border-white/30 hover:text-white"
                   }`}
                 >
                   <Activity className="h-4 w-4" />
@@ -677,48 +677,48 @@ export const Projects: React.FC = () => {
                   {projectArchitectures[selectedProject.id] ? (
                     <>
                       {/* High-level summary card */}
-                      <div className="rounded-2xl border border-white/10 bg-[#0A0A0A]/80 p-5 shadow-sm">
-                        <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#F2F2ED] uppercase tracking-wider mb-1.5">
-                          <Cpu className="h-4 w-4 text-[#F2F2ED]" />
+                      <div className="rounded-2xl border border-white/15 bg-[#000000] p-5 shadow-sm">
+                        <div className="flex items-center gap-2 text-xs font-mono font-bold text-white uppercase tracking-wider mb-1.5">
+                          <Cpu className="h-4 w-4 text-white" />
                           <span>
                             {projectArchitectures[selectedProject.id].pipelineName}
                           </span>
                         </div>
-                        <p className="text-xs sm:text-sm text-[#9A9A9A] leading-relaxed">
+                        <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
                           {projectArchitectures[selectedProject.id].pipelineSummary}
                         </p>
                       </div>
 
                       {/* Interactive Flow Stages */}
                       <div className="space-y-3">
-                        <h4 className="text-xs font-mono font-bold text-[#9A9A9A] uppercase tracking-wider">
+                        <h4 className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider">
                           Pipeline Flow & Data Transformations
                         </h4>
-                        <div className="relative pl-6 space-y-4 before:absolute before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-white/30 before:via-white/15 before:to-white/5">
+                        <div className="relative pl-6 space-y-4 before:absolute before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-white/40 before:via-white/20 before:to-white/5">
                           {projectArchitectures[selectedProject.id].steps.map(
                             (step, sIdx) => (
                               <div
                                 key={sIdx}
-                                className="relative rounded-2xl border border-white/[0.08] bg-[#0A0A0A]/60 p-4 transition-all hover:border-white/20 hover:bg-[#0A0A0A]/90"
+                                className="relative rounded-2xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-white/25 hover:bg-[#0A0A0A]"
                               >
                                 {/* Node dot */}
-                                <div className="absolute -left-[23px] top-4 h-3 w-3 rounded-full border-2 border-[#141414] bg-[#F2F2ED]" />
+                                <div className="absolute -left-[23px] top-4 h-3 w-3 rounded-full border-2 border-black bg-white" />
 
                                 <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-                                  <span className="font-mono text-[11px] font-bold text-[#9A9A9A] uppercase tracking-wider">
+                                  <span className="font-mono text-[11px] font-bold text-neutral-400 uppercase tracking-wider">
                                     {step.category}
                                   </span>
                                   {step.specs && (
-                                    <span className="rounded-md border border-white/[0.08] bg-white/[0.04] px-2 py-0.5 font-mono text-[10px] text-[#9A9A9A]">
+                                    <span className="rounded-md border border-white/15 bg-white/[0.06] px-2 py-0.5 font-mono text-[10px] text-neutral-300">
                                       {step.specs}
                                     </span>
                                   )}
                                 </div>
 
-                                <h5 className="text-sm font-bold text-[#F2F2ED] mb-1">
+                                <h5 className="text-sm font-bold text-white mb-1">
                                   {step.title}
                                 </h5>
-                                <p className="text-xs text-[#9A9A9A] leading-relaxed">
+                                <p className="text-xs text-neutral-300 leading-relaxed">
                                   {step.description}
                                 </p>
                               </div>
@@ -728,7 +728,7 @@ export const Projects: React.FC = () => {
                       </div>
                     </>
                   ) : (
-                    <p className="text-xs text-[#9A9A9A]">
+                    <p className="text-xs text-neutral-400">
                       System architecture details currently in compilation.
                     </p>
                   )}
@@ -739,7 +739,7 @@ export const Projects: React.FC = () => {
               {modalTab === "overview" && (
                 <div>
                   {/* Long Description */}
-                  <p className="mb-6 text-sm sm:text-base text-[#9A9A9A] leading-relaxed">
+                  <p className="mb-6 text-sm sm:text-base text-neutral-300 leading-relaxed">
                     {selectedProject.longDescription}
                   </p>
 
@@ -749,12 +749,12 @@ export const Projects: React.FC = () => {
                       {selectedProject.metrics.map((metric, i) => (
                         <div
                           key={i}
-                          className="rounded-2xl border border-white/[0.08] bg-[#0A0A0A]/80 p-3.5 text-center"
+                          className="rounded-2xl border border-white/15 bg-[#000000] p-3.5 text-center"
                         >
-                          <div className="text-lg sm:text-xl font-black text-[#F2F2ED] font-mono tracking-tight">
+                          <div className="text-lg sm:text-xl font-black text-white font-mono tracking-tight">
                             {metric.value}
                           </div>
-                          <div className="text-xs text-[#9A9A9A] font-mono mt-0.5">
+                          <div className="text-xs text-neutral-400 font-mono mt-0.5">
                             {metric.label}
                           </div>
                         </div>
@@ -764,16 +764,16 @@ export const Projects: React.FC = () => {
 
                   {/* Key Technical Capabilities */}
                   <div className="mb-6">
-                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#F2F2ED] mb-3">
+                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-white mb-3">
                       Technical Architecture & Key Results
                     </h4>
                     <div className="space-y-2.5">
                       {selectedProject.keyFeatures.map((feat, i) => (
                         <div
                           key={i}
-                          className="flex items-start gap-2.5 text-sm text-[#9A9A9A]"
+                          className="flex items-start gap-2.5 text-sm text-neutral-300"
                         >
-                          <CheckCircle2 className="h-4 w-4 text-[#C9C9C9] mt-0.5 shrink-0" />
+                          <CheckCircle2 className="h-4 w-4 text-white mt-0.5 shrink-0" />
                           <span>{feat}</span>
                         </div>
                       ))}
@@ -785,7 +785,7 @@ export const Projects: React.FC = () => {
                     {selectedProject.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-lg border border-white/[0.08] bg-[#0A0A0A] px-3 py-1 font-mono text-xs text-[#9A9A9A]"
+                        className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-xs text-neutral-300"
                       >
                         {tag}
                       </span>
@@ -795,14 +795,14 @@ export const Projects: React.FC = () => {
               )}
 
               {/* Action Buttons Footer */}
-              <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-white/[0.08] pt-6">
+              <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-white/10 pt-6">
                 {selectedProject.liveUrl && selectedProject.liveUrl !== selectedProject.githubUrl && !selectedProject.liveUrl.includes("youtube.com") && (
                   <Magnetic strength={0.25}>
                     <a
                       href={selectedProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 rounded-full border border-white/20 bg-[#F2F2ED] px-6 py-2.5 text-sm font-bold text-[#0A0A0A] transition-all hover:bg-[#C9C9C9]"
+                      className="flex items-center gap-2 rounded-full border border-white bg-white px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-neutral-200 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
                     >
                       <ExternalLink className="h-4 w-4" />
                       <span>Launch Live App</span>
@@ -815,7 +815,7 @@ export const Projects: React.FC = () => {
                     href={selectedProject.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-6 py-2.5 text-sm font-bold text-[#F2F2ED] transition-all hover:border-white/20 hover:bg-white/[0.1]"
+                    className="flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.06] px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-white hover:text-black"
                   >
                     <Github className="h-4 w-4" />
                     <span>View GitHub Repository</span>
@@ -828,9 +828,9 @@ export const Projects: React.FC = () => {
                       href={selectedProject.certificateUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-6 py-2.5 text-sm font-semibold text-[#9A9A9A] transition-all hover:border-white/20 hover:bg-white/[0.1] hover:text-[#F2F2ED] shadow-sm"
+                      className="flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-2.5 text-sm font-semibold text-neutral-300 transition-all hover:border-white/30 hover:bg-white/[0.08] hover:text-white shadow-sm"
                     >
-                      <FileCheck className="h-4 w-4 text-[#F2F2ED]" />
+                      <FileCheck className="h-4 w-4 text-white" />
                       <span>View Official Certificate</span>
                     </a>
                   </Magnetic>
@@ -842,9 +842,9 @@ export const Projects: React.FC = () => {
                       setSelectedProject(null);
                       setShowVideoModal(true);
                     }}
-                    className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-6 py-2.5 text-sm font-semibold text-[#9A9A9A] transition-all hover:border-white/20 hover:bg-white/[0.1] hover:text-[#F2F2ED] shadow-sm"
+                    className="flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-2.5 text-sm font-semibold text-neutral-300 transition-all hover:border-white/30 hover:bg-white/[0.08] hover:text-white shadow-sm"
                   >
-                    <Play className="h-4 w-4 fill-current text-[#F2F2ED]" />
+                    <Play className="h-4 w-4 fill-current text-white" />
                     <span>Watch Simulation Videos</span>
                   </button>
                 )}

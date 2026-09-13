@@ -67,14 +67,14 @@ export const Hero: React.FC = () => {
           {/* Institutional Status Capsule */}
           <motion.div
             variants={itemVariants}
-            className="liquid-glass mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold text-[#F2F2ED] shadow-sm border border-white/10 bg-white/[0.04]"
+            className="liquid-glass mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold text-white shadow-sm border border-white/20 bg-white/[0.06]"
           >
-            <GraduationCap className="h-3.5 w-3.5 text-[#C9C9C9]" />
+            <GraduationCap className="h-3.5 w-3.5 text-white" />
             <span>Direct Ph.D. @ IIT Roorkee (Dept. of CSE) · Supervisor: Dr. Neetesh Kumar</span>
           </motion.div>
 
           {/* Staggered Name Reveal */}
-          <h1 className="mb-3 text-5xl font-black tracking-tight text-[#F2F2ED] sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="mb-3 text-5xl font-black tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
             <span className="inline-flex overflow-hidden">
               {nameLetters.map((char, index) => (
                 <motion.span
@@ -97,14 +97,14 @@ export const Hero: React.FC = () => {
           {/* Subtitle */}
           <motion.h2
             variants={itemVariants}
-            className="mb-2 max-w-2xl text-xl font-bold tracking-wide text-[#F2F2ED] sm:text-2xl md:text-3xl"
+            className="mb-2 max-w-2xl text-xl font-bold tracking-tight text-white sm:text-2xl md:text-3xl"
           >
             {personalData.title}
           </motion.h2>
 
           <motion.p
             variants={itemVariants}
-            className="mb-4 font-mono text-xs text-[#9A9A9A] font-semibold"
+            className="mb-4 font-mono text-xs text-neutral-300 font-semibold"
           >
             {personalData.department} · {personalData.institution}
           </motion.p>
@@ -112,7 +112,7 @@ export const Hero: React.FC = () => {
           {/* Tagline */}
           <motion.p
             variants={itemVariants}
-            className="mb-8 max-w-xl text-base text-[#9A9A9A] sm:text-lg leading-relaxed"
+            className="mb-8 max-w-xl text-base text-neutral-200 sm:text-lg leading-relaxed"
           >
             {personalData.tagline}
           </motion.p>
@@ -126,9 +126,9 @@ export const Hero: React.FC = () => {
             <Magnetic strength={0.3}>
               <a
                 href="#projects"
-                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border border-white/20 bg-[#F2F2ED] px-6 py-3 text-sm font-bold text-[#0A0A0A] shadow-md transition-all duration-300 hover:bg-[#C9C9C9]"
+                className="group flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-black shadow-[0_0_25px_rgba(255,255,255,0.2)] transition-all duration-300 hover:bg-neutral-200 hover:scale-[1.02]"
               >
-                <FolderGit2 className="h-4 w-4 text-[#0A0A0A] transition-transform group-hover:scale-110" />
+                <FolderGit2 className="h-4 w-4 text-black transition-transform group-hover:scale-110" />
                 <span>Featured Projects</span>
               </a>
             </Magnetic>
@@ -139,9 +139,9 @@ export const Hero: React.FC = () => {
                 href={personalData.youtubePlaylistUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border border-white/10 bg-[#141414] px-5 py-3 text-sm font-medium text-[#F2F2ED] transition-all duration-300 hover:border-[#C9C9C9] hover:bg-white/[0.06]"
+                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white hover:text-black hover:border-white"
               >
-                <Youtube className="h-4 w-4 text-[#C9C9C9] transition-transform group-hover:scale-110" />
+                <Youtube className="h-4 w-4 text-white group-hover:text-black transition-transform group-hover:scale-110" />
                 <span>48 CARLA Simulations</span>
               </a>
             </Magnetic>
@@ -150,9 +150,9 @@ export const Hero: React.FC = () => {
             <Magnetic strength={0.3}>
               <a
                 href="#contact"
-                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border border-white/10 bg-[#141414] px-5 py-3 text-sm font-medium text-[#F2F2ED] transition-all duration-300 hover:border-[#C9C9C9] hover:bg-white/[0.06]"
+                className="liquid-glass specular-top group flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white hover:text-black hover:border-white"
               >
-                <Mail className="h-4 w-4 text-[#C9C9C9] transition-transform group-hover:scale-110" />
+                <Mail className="h-4 w-4 text-white group-hover:text-black transition-transform group-hover:scale-110" />
                 <span>Contact</span>
               </a>
             </Magnetic>
@@ -165,7 +165,7 @@ export const Hero: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Animesh Basak Hugging Face"
-                  className="liquid-glass flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#141414] text-[#9A9A9A] transition-all duration-300 hover:border-[#C9C9C9] hover:text-[#F2F2ED] hover:scale-105"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all duration-300 hover:border-white hover:text-white hover:scale-105"
                   title="Hugging Face Profile"
                 >
                   <HuggingFaceIcon className="h-4 w-4" />
@@ -178,7 +178,7 @@ export const Hero: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Animesh Basak GitHub"
-                  className="liquid-glass flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#141414] text-[#9A9A9A] transition-all duration-300 hover:border-[#C9C9C9] hover:text-[#F2F2ED] hover:scale-105"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all duration-300 hover:border-white hover:text-white hover:scale-105"
                   title="GitHub Profile"
                 >
                   <Github className="h-4 w-4" />
@@ -191,7 +191,7 @@ export const Hero: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Animesh Basak LinkedIn"
-                  className="liquid-glass flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#141414] text-[#9A9A9A] transition-all duration-300 hover:border-[#C9C9C9] hover:text-[#F2F2ED] hover:scale-105"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all duration-300 hover:border-white hover:text-white hover:scale-105"
                   title="LinkedIn Profile"
                 >
                   <Linkedin className="h-4 w-4" />
@@ -215,14 +215,14 @@ export const Hero: React.FC = () => {
         transition={{ delay: 1.0, duration: 0.8 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden flex-col items-center gap-2 sm:flex"
       >
-        <span className="font-mono text-[10px] tracking-widest text-[#9A9A9A] uppercase font-semibold">
+        <span className="font-mono text-[10px] tracking-widest text-neutral-400 uppercase font-semibold">
           Scroll to Explore
         </span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown className="h-4 w-4 text-[#C9C9C9]" />
+          <ArrowDown className="h-4 w-4 text-white" />
         </motion.div>
       </motion.div>
     </section>

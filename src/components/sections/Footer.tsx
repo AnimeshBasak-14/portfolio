@@ -25,20 +25,20 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-white/[0.08] bg-[#0A0A0A] px-4 py-12 md:px-8">
+    <footer className="relative border-t border-white/10 bg-black px-4 py-12 md:px-8">
       {/* Ambient background light beneath footer */}
       <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-40 w-3/4 rounded-full bg-white/[0.02] blur-3xl -z-10" />
 
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
         {/* Identity & Copyright */}
         <div className="flex flex-col items-center text-center md:items-start md:text-left">
-          <span className="text-base font-bold tracking-wider text-[#F2F2ED]">
+          <span className="text-base font-black tracking-wider text-white">
             {personalData.name}
           </span>
-          <p className="mt-1 text-xs text-[#9A9A9A]">
+          <p className="mt-1 text-xs text-neutral-400">
             Autonomous Driving Perception & Continuous RL • IIT Roorkee
           </p>
-          <p className="mt-1 text-[11px] font-mono text-[#9A9A9A]">
+          <p className="mt-1 text-[11px] font-mono text-neutral-400">
             © {currentYear} Animesh Basak. Supervised by Dr. Neetesh Kumar (Dept. of CSE).
           </p>
         </div>
@@ -49,7 +49,7 @@ export const Footer: React.FC = () => {
           <Magnetic strength={0.3}>
             <a
               href={`mailto:${personalData.email}`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#9A9A9A] transition-all hover:border-white/20 hover:bg-white/[0.08] hover:text-[#F2F2ED] shadow-sm"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
               title="Email Animesh Basak"
               aria-label="Email"
             >
@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
               href={personalData.huggingface}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#9A9A9A] transition-all hover:border-white/20 hover:bg-white/[0.08] hover:text-[#F2F2ED] shadow-sm"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
               title="Hugging Face Profile"
               aria-label="Hugging Face"
             >
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
               href={personalData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#9A9A9A] transition-all hover:border-white/20 hover:bg-white/[0.08] hover:text-[#F2F2ED] shadow-sm"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
               title="LinkedIn Profile"
               aria-label="LinkedIn"
             >
@@ -91,7 +91,7 @@ export const Footer: React.FC = () => {
               href={personalData.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#9A9A9A] transition-all hover:border-white/20 hover:bg-white/[0.08] hover:text-[#F2F2ED] shadow-sm"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm"
               title="GitHub Profile"
               aria-label="GitHub"
             >
@@ -103,7 +103,7 @@ export const Footer: React.FC = () => {
           <Magnetic strength={0.3}>
             <button
               onClick={scrollToTop}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#9A9A9A] transition-all hover:border-white/20 hover:bg-white/[0.08] hover:text-[#F2F2ED] shadow-sm ml-2"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-white hover:bg-white hover:text-black shadow-sm ml-2"
               title="Return to top"
               aria-label="Return to top"
             >

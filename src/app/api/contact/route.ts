@@ -106,16 +106,16 @@ export async function POST(req: NextRequest) {
         replyTo: email,
         subject: `New Portfolio Message from ${name}`,
         html: `
-          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background-color: #0A0A0A; color: #F2F2ED; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
-            <h2 style="color: #F2F2ED; margin-top: 0;">New Inquiry from Animesh Basak Portfolio</h2>
-            <div style="background-color: #141414; padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background-color: #000000; color: #FFFFFF; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
+            <h2 style="color: #FFFFFF; margin-top: 0;">New Inquiry from Animesh Basak Portfolio</h2>
+            <div style="background-color: #0D0D0D; padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);">
               <p style="margin: 6px 0;"><strong>Sender Name:</strong> ${escapeHtml(name)}</p>
-              <p style="margin: 6px 0;"><strong>Sender Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #C9C9C9;">${escapeHtml(email)}</a></p>
+              <p style="margin: 6px 0;"><strong>Sender Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #FFFFFF; text-decoration: underline;">${escapeHtml(email)}</a></p>
               <p style="margin: 6px 0;"><strong>Sender IP:</strong> ${escapeHtml(ip)}</p>
             </div>
-            <h3 style="color: #9A9A9A; margin-bottom: 8px;">Message:</h3>
-            <div style="background-color: #141414; padding: 18px; border-radius: 8px; line-height: 1.6; white-space: pre-wrap; border: 1px solid rgba(255,255,255,0.06);">${escapeHtml(message)}</div>
-            <p style="margin-top: 24px; font-size: 12px; color: #9A9A9A; text-align: center;">Sent via Animesh Basak Portfolio Contact Form</p>
+            <h3 style="color: #A3A3A3; margin-bottom: 8px;">Message:</h3>
+            <div style="background-color: #0D0D0D; padding: 18px; border-radius: 8px; line-height: 1.6; white-space: pre-wrap; border: 1px solid rgba(255,255,255,0.1);">${escapeHtml(message)}</div>
+            <p style="margin-top: 24px; font-size: 12px; color: #A3A3A3; text-align: center;">Sent via Animesh Basak Portfolio Contact Form</p>
           </div>
         `,
       });
