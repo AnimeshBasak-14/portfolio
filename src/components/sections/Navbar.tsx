@@ -174,7 +174,7 @@ export const Navbar: React.FC = () => {
                 <a href={personalData.linkedin} target="_blank" rel="noreferrer" className="text-neutral-300 hover:text-white">
                   <Linkedin className="h-4 w-4" />
                 </a>
-                <a href={`mailto:${personalData.email}`} className="text-neutral-300 hover:text-white">
+                <a href="#contact" title="Direct Transmission" className="text-neutral-300 hover:text-white">
                   <Mail className="h-4 w-4" />
                 </a>
               </div>

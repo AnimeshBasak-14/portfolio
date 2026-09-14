@@ -149,7 +149,7 @@ export const About: React.FC = () => {
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-[#FFA116] transition-colors"
-                  title="LeetCode Profile (1700 Rating, 500+ Solved)"
+                  title="LeetCode Profile"
                 >
                   LeetCode ↗
                 </a>

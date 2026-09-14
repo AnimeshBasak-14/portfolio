@@ -58,7 +58,7 @@ Add your credentials:
 RESEND_API_KEY=re_your_api_key_here
 
 # Recipient email for form submissions
-CONTACT_TO_EMAIL=basakanimesh49@gmail.com
+CONTACT_TO_EMAIL=your_email@domain.com
 
 # Canonical URL
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
@@ -86,7 +86,7 @@ npm run start
 ## 🌐 API Routes
 
 ### `POST /api/contact`
-Accepts contact inquiries, runs server-side Zod validation, enforces IP-based rate limiting (5 requests per 10 minutes), filters out bot spam via honeypot field, and delivers an email to `basakanimesh49@gmail.com` via Resend.
+Accepts contact inquiries, runs server-side Zod validation, enforces IP-based rate limiting (5 requests per 10 minutes), filters out bot spam via honeypot field, and dispatches an email to the researcher inbox via Resend.
 
 ### `GET /api/projects`
 Provides an extensible JSON endpoint serving project records with a clean seam for CMS or database integration.
@@ -96,7 +96,7 @@ Provides an extensible JSON endpoint serving project records with a clean seam f
 ## 👤 Identity & Canonical Links
 
 - **Author**: Animesh Basak
-- **Email**: [basakanimesh49@gmail.com](mailto:basakanimesh49@gmail.com)
+- **Contact**: Direct Transmission Gateway via website form
 - **LinkedIn**: [linkedin.com/in/animeshbasak03](https://linkedin.com/in/animeshbasak03/?skipRedirect=true)
 - **GitHub**: [github.com/AnimeshBasak-14](https://github.com/AnimeshBasak-14)
 

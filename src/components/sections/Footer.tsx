@@ -45,13 +45,13 @@ export const Footer: React.FC = () => {
 
         {/* Canonical Social Links */}
         <div className="flex items-center gap-3">
-          {/* Canonical Email */}
+          {/* Direct Transmission */}
           <Magnetic strength={0.3}>
             <a
-              href={`mailto:${personalData.email}`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-400 shadow-sm"
-              title="Email Animesh Basak"
-              aria-label="Email"
+              href="#contact"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-neutral-300 transition-all hover:border-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-400 shadow-sm"
+              title="Direct Transmission (Encrypted Relay)"
+              aria-label="Direct Transmission"
             >
               <Mail className="h-4 w-4" />
             </a>

@@ -14,9 +14,7 @@ export const skillsData: SkillCategory[] = [
     description: "Continuous control algorithms, multi-modal perception, and autonomous simulation in CARLA.",
     skills: [
       { name: "CARLA Simulator", level: "Expert", highlight: true },
-      { name: "Twin Delayed DDPG (TD3)", level: "Expert", highlight: true },
-      { name: "DDPG & Actor-Critic", level: "Expert", highlight: true },
-      { name: "Soft Actor-Critic (SAC)", level: "Advanced", highlight: true },
+      { name: "RL Models & Algorithms", level: "Expert", highlight: true },
       { name: "Sensor Fusion (Radar/Depth)", level: "Expert", highlight: true },
       { name: "Gymnasium & Custom Envs", level: "Expert", highlight: true },
       { name: "Autonomous Lane Changing", level: "Research", highlight: true },

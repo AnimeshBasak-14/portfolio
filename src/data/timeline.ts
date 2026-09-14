@@ -110,7 +110,7 @@ export const timelineData: TimelineEvent[] = [
     role: "Bachelor of Technology in Computer Science & Engineering",
     organization: "National Institute of Technology Arunachal Pradesh (NITAP)",
     location: "Itanagar, Arunachal Pradesh",
-    description: "Graduated with a CGPA of 8.19 / 10. Completed rigorous foundational coursework in Algorithms, Operating Systems, Database Management, and Artificial Intelligence. Active competitive programmer on LeetCode (1700 contest rating, 500+ solved problems), CodeChef, and Codeforces.",
+    description: "Graduated with a CGPA of 8.19 / 10. Completed rigorous foundational coursework in Algorithms, Operating Systems, Database Management, and Artificial Intelligence.",
     technologies: [
       "C / C++",
       "Java",

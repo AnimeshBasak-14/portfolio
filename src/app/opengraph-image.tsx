@@ -109,7 +109,7 @@ export default async function Image() {
           <span>•</span>
           <span>linkedin.com/in/animeshbasak03</span>
           <span>•</span>
-          <span>{personalData.email}</span>
+          <span>Direct Transmission Relay</span>
         </div>
       </div>
     ),

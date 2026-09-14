@@ -15,7 +15,10 @@ import {
   Loader2,
   Sparkles,
   ArrowUpRight,
+  ArrowDownRight,
   Terminal,
+  Radio,
+  ShieldCheck,
 } from "lucide-react";
 import confetti from "canvas-confetti";
 
@@ -146,29 +149,40 @@ export const Contact: React.FC = () => {
                   <span>Canonical Channels</span>
                 </h3>
                 <p className="text-xs text-neutral-300 mb-8 leading-relaxed">
-                  Fast response guaranteed. Feel free to connect directly via email, professional profiles, or open-source hubs.
+                  Fast response guaranteed. Transmit a direct message via the encrypted dispatch relay or connect via verified research hubs.
                 </p>
 
                 {/* Channels List */}
                 <div className="space-y-3.5">
-                  {/* Email */}
-                  <a
-                    href={`mailto:${personalData.email}`}
-                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-[#050505] p-4 transition-all hover:border-cyan-500/40 hover:bg-cyan-950/20 shadow-sm"
+                  {/* Direct Transmission Relay (Masked & Secure) */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const input = document.getElementById("name") || document.getElementById("message");
+                      input?.focus();
+                      input?.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }}
+                    className="group w-full flex items-center justify-between rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-4 text-left transition-all hover:border-emerald-400 hover:bg-emerald-900/30 shadow-sm cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl bg-cyan-500/10 p-2.5 text-cyan-400 border border-cyan-500/30 shadow-sm">
-                        <Mail className="h-4 w-4" />
+                      <div className="rounded-xl bg-emerald-500/15 p-2.5 text-emerald-400 border border-emerald-500/30 shadow-sm group-hover:scale-105 transition-transform">
+                        <Radio className="h-4 w-4 animate-pulse" />
                       </div>
                       <div>
-                        <span className="block text-[11px] font-mono text-neutral-400">Direct Email</span>
-                        <span className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
-                          {personalData.email}
+                        <div className="flex items-center gap-2">
+                          <span className="block text-[11px] font-mono text-neutral-400">Direct Transmission</span>
+                          <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-mono text-emerald-400 font-bold">
+                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
+                            ACTIVE
+                          </span>
+                        </div>
+                        <span className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
+                          Encrypted Dispatch Channel
                         </span>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-neutral-400 group-hover:text-cyan-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
+                    <ArrowDownRight className="h-4 w-4 text-emerald-400 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform" />
+                  </button>
 
                   {/* Hugging Face */}
                   <a
@@ -254,6 +268,12 @@ export const Contact: React.FC = () => {
               className="p-8 sm:p-10 border border-white/10 bg-[#0B0B0B] shadow-2xl hover:border-white/30 transition-all rounded-3xl"
             >
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Direct Transmission Gateway Badge */}
+                <div className="flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-950/30 px-3.5 py-2 text-xs font-mono text-emerald-300">
+                  <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-400" />
+                  <span>Direct Transmission Relay • Secure server dispatch straight to researcher inbox</span>
+                </div>
+
                 {/* Honeypot field */}
                 <input
                   type="text"
