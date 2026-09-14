@@ -9,9 +9,6 @@ import {
   Layers,
   Eye,
   Radio,
-  Plus,
-  Minus,
-  RotateCcw,
   Zap,
   Check,
 } from "lucide-react";
@@ -922,34 +919,6 @@ export const HeroGlassObject: React.FC = () => {
 
   const controlsRef = useRef<any>(null);
 
-  // Manual Zoom Controls
-  const handleZoomIn = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsInteractive(true);
-    if (controlsRef.current) {
-      const cam = controlsRef.current.object;
-      cam.position.multiplyScalar(0.85);
-      controlsRef.current.update();
-    }
-  };
-
-  const handleZoomOut = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsInteractive(true);
-    if (controlsRef.current) {
-      const cam = controlsRef.current.object;
-      cam.position.multiplyScalar(1.18);
-      controlsRef.current.update();
-    }
-  };
-
-  const handleResetView = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (controlsRef.current) {
-      controlsRef.current.reset();
-    }
-  };
-
   const sensorDescriptions: Record<SensorMode, { label: string; icon: any; desc: string }> = {
     lidar: {
       label: "360° LiDAR Point Cloud",
@@ -1002,36 +971,6 @@ export const HeroGlassObject: React.FC = () => {
         </div>
       </div>
 
-      {/* On-Screen Manual Zoom & Reset Controls */}
-      <div className="absolute right-3 bottom-24 z-20 flex flex-col gap-1.5 rounded-2xl border border-white/15 bg-black/85 p-1.5 backdrop-blur-md shadow-xl">
-        <button
-          type="button"
-          onClick={handleZoomIn}
-          className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white hover:text-black transition-colors"
-          title="Zoom Camera In"
-          aria-label="Zoom Camera In"
-        >
-          <Plus className="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          onClick={handleZoomOut}
-          className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white hover:text-black transition-colors"
-          title="Zoom Camera Out"
-          aria-label="Zoom Camera Out"
-        >
-          <Minus className="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          onClick={handleResetView}
-          className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-neutral-300 hover:bg-white hover:text-black transition-colors"
-          title="Reset Camera View"
-          aria-label="Reset Camera View"
-        >
-          <RotateCcw className="h-3.5 w-3.5" />
-        </button>
-      </div>
 
       {/* 3D WebGL Canvas with data-lenis-prevent and wheel propagation fix */}
       <div
