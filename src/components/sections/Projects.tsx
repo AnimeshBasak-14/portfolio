@@ -39,6 +39,48 @@ const projectArchitectures: Record<
     steps: ArchitectureStep[];
   }
 > = {
+  "documentforge": {
+    pipelineName: "100% Client-Side WebAssembly Document Execution Architecture",
+    pipelineSummary:
+      "Zero-knowledge browser runtime eliminating cloud file ingestion by executing QPDF WebAssembly binaries and complex-script DOM layout shaping directly in the client's tab with zero server bandwidth cost.",
+    steps: [
+      {
+        category: "01 • Ingestion & Privacy Boundary",
+        title: "Air-Gapped Local ArrayBuffer Streaming",
+        description:
+          "User files are loaded directly into browser memory (Uint8Array / ArrayBuffer) using HTML5 File API. Zero bytes of confidential tax returns or contracts are transmitted over the network.",
+        specs: "0 KB Server Transfer • HTML5 File API • Zero-Knowledge",
+      },
+      {
+        category: "02 • WebAssembly Engine",
+        title: "QPDF C++ Compiled to WebAssembly (WASM)",
+        description:
+          "High-performance native document transformation binary compiled via Emscripten. Executes linearization, page extraction, AES-256 decryption/encryption, and object stream restructuring in memory.",
+        specs: "Emscripten WASM • Client-side Sandbox • Linearization",
+      },
+      {
+        category: "03 • Complex-Script Typography",
+        title: "Offscreen DOM & Glyph Shaping Pipeline",
+        description:
+          "Bypasses standard open-source library limitations (which render '????' on Devanagari, Bengali, and ₹) by delegating bidirectional text and complex glyph shaping to native browser layout rendering.",
+        specs: "HarfBuzz/Blink Parity • 1.5B Indic User Support • ₹ Native",
+      },
+      {
+        category: "04 • Edge Distribution",
+        title: "Cloudflare Pages Static Edge Architecture",
+        description:
+          "The web application itself is compiled as static assets deployed across 300+ Cloudflare edge PoPs. Zero server compute or container infrastructure required, resulting in $0 monthly bandwidth cost.",
+        specs: "Cloudflare Pages • $0 Server Cost • Global Edge CDN",
+      },
+      {
+        category: "05 • Local-First Resilience",
+        title: "100% Offline-Capable Progressive Execution",
+        description:
+          "Service Worker caching enables full offline functionality. Users can load https://documentforge.in, turn off Wi-Fi entirely, and continue manipulating confidential documents with zero cloud dependency.",
+        specs: "Offline PWA • Service Worker • Zero Network Latency",
+      },
+    ],
+  },
   "autonomous-lane-changing-carla": {
     pipelineName: "Continuous TD3 Closed-Loop Control & Sensor Fusion Pipeline",
     pipelineSummary:

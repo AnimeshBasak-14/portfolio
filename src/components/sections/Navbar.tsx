@@ -16,7 +16,7 @@ export const Navbar: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const sections = ["hero", "about", "research", "projects", "skills", "timeline", "contact"];
+      const sections = ["hero", "about", "research", "projects", "articles", "skills", "timeline", "contact"];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
@@ -39,6 +39,7 @@ export const Navbar: React.FC = () => {
   const navItems = [
     { label: "About", href: "/#about", id: "about" },
     { label: "Projects", href: "/#projects", id: "projects" },
+    { label: "Articles", href: "/#articles", id: "articles" },
     { label: "Skills", href: "/#skills", id: "skills" },
     { label: "Experience", href: "/#timeline", id: "timeline" },
     { label: "Contact", href: "/#contact", id: "contact" },

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef, useMemo, useState } from "react";
+import React, { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, OrbitControls, Edges } from "@react-three/drei";
+import { Float, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import {
   ChevronDown,
@@ -27,8 +27,8 @@ export type SensorMode = "lidar" | "radar" | "fusion";
 export type DriveMode = "drive" | "inspect";
 
 /**
- * Error boundary for WebGL / Canvas failures.
- * Prevents client-side exceptions from bubbling up and crashing the page.
+ * Robust Error boundary for WebGL / Canvas failures.
+ * Prevents client-side exceptions from bubbling up and crashing the entire page.
  */
 class WebGLBoundary extends React.Component<
   { children: React.ReactNode; fallback?: React.ReactNode },
@@ -44,7 +44,7 @@ class WebGLBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, info: any) {
-    console.warn("[WebGL Perception Simulator Warning]:", error, info);
+    console.error("[WebGL Perception Simulator Error]:", error, info);
   }
 
   render() {
@@ -58,9 +58,14 @@ class WebGLBoundary extends React.Component<
             <h4 className="text-base font-bold text-white mb-1">
               Autonomous Vehicle Telemetry & Perception
             </h4>
-            <p className="text-xs text-neutral-400 max-w-sm mb-4 leading-relaxed font-mono">
+            <p className="text-xs text-neutral-400 max-w-sm mb-2 leading-relaxed font-mono">
               CARLA 60 FPS • Continuous TD3 Agent • 360° LiDAR & Radar Telemetry Active
             </p>
+            {this.state.error && (
+              <p className="text-[10px] text-rose-400/90 font-mono mb-3 max-w-xs break-words px-2">
+                {this.state.error.message || String(this.state.error)}
+              </p>
+            )}
             <button
               type="button"
               onClick={() => this.setState({ hasError: false, error: null })}
@@ -176,6 +181,18 @@ function AutonomousVehicle({
     return new THREE.EdgesGeometry(new THREE.BoxGeometry(0.68, 0.44, 1.42));
   }, []);
 
+  const chassisEdgesGeo = useMemo(() => {
+    return new THREE.EdgesGeometry(new THREE.BoxGeometry(0.58, 0.16, 1.28));
+  }, []);
+
+  const cabinEdgesGeo = useMemo(() => {
+    return new THREE.EdgesGeometry(new THREE.BoxGeometry(0.48, 0.18, 0.62));
+  }, []);
+
+  const hoodEdgesGeo = useMemo(() => {
+    return new THREE.EdgesGeometry(new THREE.BoxGeometry(0.54, 0.1, 0.48));
+  }, []);
+
   const radarAxisGeo = useMemo(() => {
     return new THREE.BufferGeometry().setFromPoints([
       new THREE.Vector3(0, 0, 0),
@@ -199,22 +216,22 @@ function AutonomousVehicle({
       radarSweep.current.rotation.y = Math.sin(t * 3.5) * 0.42;
     }
 
-    // 3. Pulsing radar millimeter-wave arcs expanding forward
+    // 3. Pulsing radar millimeter-wave arcs expanding forward (safely guarded)
     if (radarWave1.current) {
       const scale1 = 0.5 + ((t * 1.5) % 1) * 2.8;
       radarWave1.current.scale.set(scale1, scale1, scale1);
-      (radarWave1.current.material as THREE.MeshBasicMaterial).opacity = Math.max(
-        0,
-        0.7 - ((t * 1.5) % 1) * 0.7
-      );
+      const mat1 = radarWave1.current.material as THREE.MeshBasicMaterial | undefined;
+      if (mat1) {
+        mat1.opacity = Math.max(0, 0.7 - ((t * 1.5) % 1) * 0.7);
+      }
     }
     if (radarWave2.current) {
       const scale2 = 0.5 + (((t * 1.5) + 0.5) % 1) * 2.8;
       radarWave2.current.scale.set(scale2, scale2, scale2);
-      (radarWave2.current.material as THREE.MeshBasicMaterial).opacity = Math.max(
-        0,
-        0.7 - (((t * 1.5) + 0.5) % 1) * 0.7
-      );
+      const mat2 = radarWave2.current.material as THREE.MeshBasicMaterial | undefined;
+      if (mat2) {
+        mat2.opacity = Math.max(0, 0.7 - (((t * 1.5) + 0.5) % 1) * 0.7);
+      }
     }
 
     // 4. Wheels rotation & steering animation directly on meshes
@@ -255,8 +272,10 @@ function AutonomousVehicle({
             roughness={0.25}
             metalness={0.65}
           />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
+        <lineSegments geometry={chassisEdgesGeo} position={[0, 0, 0]}>
+          <lineBasicMaterial color="#10B981" />
+        </lineSegments>
 
         {/* Sculpted Aerodynamic Hood / Bonnet with Green Outline */}
         <mesh position={[0, 0.04, 0.38]} rotation={[-0.12, 0, 0]}>
@@ -266,45 +285,41 @@ function AutonomousVehicle({
             roughness={0.22}
             metalness={0.68}
           />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
+        <lineSegments geometry={hoodEdgesGeo} position={[0, 0.04, 0.38]} rotation={[-0.12, 0, 0]}>
+          <lineBasicMaterial color="#10B981" />
+        </lineSegments>
 
         {/* Front Bumper Air Dam & Splitter */}
         <mesh position={[0, -0.06, 0.62]}>
           <boxGeometry args={[0.56, 0.04, 0.08]} />
           <meshStandardMaterial color="#181E29" roughness={0.4} metalness={0.6} />
-          <Edges threshold={20} color="#10B981" />
         </mesh>
 
         {/* Rear Aerodynamic Trunk & Integrated Lip Spoiler */}
         <mesh position={[0, 0.04, -0.44]} rotation={[0.08, 0, 0]}>
           <boxGeometry args={[0.54, 0.1, 0.38]} />
           <meshStandardMaterial color="#2E3747" roughness={0.22} metalness={0.68} />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
         <mesh position={[0, 0.1, -0.61]}>
           <boxGeometry args={[0.52, 0.02, 0.06]} />
           <meshStandardMaterial color="#FFFFFF" emissive="#FFFFFF" emissiveIntensity={0.8} roughness={0.1} metalness={0.9} />
-          <Edges threshold={20} color="#10B981" />
         </mesh>
 
         {/* Rear Aerodynamic Diffuser */}
         <mesh position={[0, -0.06, -0.61]}>
           <boxGeometry args={[0.56, 0.05, 0.06]} />
           <meshStandardMaterial color="#11161F" roughness={0.5} metalness={0.5} />
-          <Edges threshold={20} color="#10B981" />
         </mesh>
 
         {/* Side Skirts with Green Accent Edge */}
         <mesh position={[-0.295, -0.05, 0]}>
           <boxGeometry args={[0.02, 0.04, 0.92]} />
           <meshStandardMaterial color="#1A202C" roughness={0.3} metalness={0.7} />
-          <Edges threshold={20} color="#10B981" />
         </mesh>
         <mesh position={[0.295, -0.05, 0]}>
           <boxGeometry args={[0.02, 0.04, 0.92]} />
           <meshStandardMaterial color="#1A202C" roughness={0.3} metalness={0.7} />
-          <Edges threshold={20} color="#10B981" />
         </mesh>
       </group>
 
@@ -320,7 +335,6 @@ function AutonomousVehicle({
             transparent
             opacity={0.88}
           />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
 
         {/* Panoramic Roof Glass */}
@@ -333,7 +347,6 @@ function AutonomousVehicle({
             transparent
             opacity={0.9}
           />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
 
         {/* Rear Fastback Window */}
@@ -346,7 +359,6 @@ function AutonomousVehicle({
             transparent
             opacity={0.88}
           />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
 
         {/* Cabin Side Windows */}
@@ -359,7 +371,6 @@ function AutonomousVehicle({
             transparent
             opacity={0.85}
           />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
         <mesh position={[0.235, 0.04, -0.02]}>
           <boxGeometry args={[0.02, 0.14, 0.46]} />
@@ -370,20 +381,22 @@ function AutonomousVehicle({
             transparent
             opacity={0.85}
           />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
 
         {/* Side Mirrors */}
         <mesh position={[-0.32, 0.02, 0.2]}>
           <boxGeometry args={[0.08, 0.04, 0.05]} />
           <meshStandardMaterial color="#1E2530" roughness={0.2} metalness={0.85} />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
         <mesh position={[0.32, 0.02, 0.2]}>
           <boxGeometry args={[0.08, 0.04, 0.05]} />
           <meshStandardMaterial color="#1E2530" roughness={0.2} metalness={0.85} />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
+
+        {/* Cabin Edge Wireframe */}
+        <lineSegments geometry={cabinEdgesGeo} position={[0, 0.06, -0.02]}>
+          <lineBasicMaterial color="#10B981" />
+        </lineSegments>
       </group>
 
       {/* 3. Automotive 3D Bounding Perception Wireframe in Neon Green */}
@@ -454,14 +467,12 @@ function AutonomousVehicle({
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[0.22, 0.02, 0.24]} />
           <meshStandardMaterial color="#1E2633" roughness={0.4} metalness={0.8} />
-          <Edges threshold={15} color="#10B981" />
         </mesh>
 
         {/* Velodyne / Hesai 360° LiDAR Puck */}
         <mesh position={[0, 0.04, 0]}>
           <cylinderGeometry args={[0.07, 0.07, 0.06, 20]} />
           <meshStandardMaterial color="#2B3648" roughness={0.3} metalness={0.8} />
-          <Edges threshold={20} color="#10B981" />
         </mesh>
 
         {/* High-Speed Rotating LiDAR Turret with Electric Cyan Laser Band */}
@@ -681,6 +692,14 @@ function TrafficCar({
     return new THREE.EdgesGeometry(new THREE.BoxGeometry(0.64, 0.42, 1.28));
   }, []);
 
+  const chassisEdgesGeo = useMemo(() => {
+    return new THREE.EdgesGeometry(new THREE.BoxGeometry(0.54, 0.15, 1.15));
+  }, []);
+
+  const cabinEdgesGeo = useMemo(() => {
+    return new THREE.EdgesGeometry(new THREE.BoxGeometry(0.44, 0.13, 0.58));
+  }, []);
+
   const dopplerLineGeo = useMemo(() => {
     return new THREE.BufferGeometry().setFromPoints([
       new THREE.Vector3(0, 0, 0),
@@ -694,8 +713,10 @@ function TrafficCar({
       <mesh position={[0, 0.14, 0]}>
         <boxGeometry args={[0.54, 0.15, 1.15]} />
         <meshStandardMaterial color={color} roughness={0.3} metalness={0.65} />
-        <Edges threshold={15} color="#EF4444" />
       </mesh>
+      <lineSegments geometry={chassisEdgesGeo} position={[0, 0.14, 0]}>
+        <lineBasicMaterial color="#EF4444" />
+      </lineSegments>
 
       {/* 2. Cabin Glass with Red Outline */}
       <mesh position={[0, 0.27, -0.04]}>
@@ -707,8 +728,10 @@ function TrafficCar({
           transparent
           opacity={0.85}
         />
-        <Edges threshold={15} color="#EF4444" />
       </mesh>
+      <lineSegments geometry={cabinEdgesGeo} position={[0, 0.27, -0.04]}>
+        <lineBasicMaterial color="#EF4444" />
+      </lineSegments>
 
       {/* 3. 3D Obstacle Warning Bounding Box in Thin Red */}
       <group position={[0, 0.21, 0]}>
@@ -792,6 +815,11 @@ function AutonomousVehicleScene({
     [trajectoryPoints]
   );
 
+  const trajectoryLineObj = useMemo(() => {
+    const mat = new THREE.LineBasicMaterial({ color: "#00F0FF", linewidth: 2 });
+    return new THREE.Line(trajectoryGeometry, mat);
+  }, [trajectoryGeometry]);
+
   // Highway Lane Markings (Dashed divider segments via LineSegments)
   const highwayMarkings = useMemo(() => {
     const leftEdge: THREE.Vector3[] = [
@@ -820,6 +848,10 @@ function AutonomousVehicleScene({
       divider1: new THREE.BufferGeometry().setFromPoints(divider1),
       divider2: new THREE.BufferGeometry().setFromPoints(divider2),
     };
+  }, []);
+
+  const guardrailEdgesGeo = useMemo(() => {
+    return new THREE.EdgesGeometry(new THREE.BoxGeometry(0.06, 0.18, 12.5));
   }, []);
 
   // Road cat's-eye reflective studs
@@ -863,7 +895,7 @@ function AutonomousVehicleScene({
     []
   );
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     const t = state.clock.getElapsedTime();
 
     // Scene orientation & gentle mouse parallax
@@ -875,14 +907,16 @@ function AutonomousVehicleScene({
           0.05
         );
       } else {
+        const px = state.pointer?.x ?? 0;
+        const py = state.pointer?.y ?? 0;
         sceneGroup.current.rotation.y = THREE.MathUtils.lerp(
           sceneGroup.current.rotation.y,
-          (state.pointer.x * Math.PI) / 14,
+          (px * Math.PI) / 14,
           0.04
         );
         sceneGroup.current.rotation.x = THREE.MathUtils.lerp(
           sceneGroup.current.rotation.x,
-          (-state.pointer.y * Math.PI) / 16,
+          (-py * Math.PI) / 16,
           0.04
         );
       }
@@ -954,18 +988,21 @@ function AutonomousVehicleScene({
         <mesh position={[-2.4, 0.14, 0]}>
           <boxGeometry args={[0.06, 0.18, 12.5]} />
           <meshStandardMaterial color="#334155" roughness={0.3} metalness={0.8} />
-          <Edges threshold={20} color="#475569" />
         </mesh>
+        <lineSegments geometry={guardrailEdgesGeo} position={[-2.4, 0.14, 0]}>
+          <lineBasicMaterial color="#475569" />
+        </lineSegments>
+
         <mesh position={[2.4, 0.14, 0]}>
           <boxGeometry args={[0.06, 0.18, 12.5]} />
           <meshStandardMaterial color="#334155" roughness={0.3} metalness={0.8} />
-          <Edges threshold={20} color="#475569" />
         </mesh>
+        <lineSegments geometry={guardrailEdgesGeo} position={[2.4, 0.14, 0]}>
+          <lineBasicMaterial color="#475569" />
+        </lineSegments>
 
         {/* Planned Continuous RL Trajectory Path Line in Electric Cyan */}
-        <lineSegments geometry={trajectoryGeometry}>
-          <lineBasicMaterial color="#00F0FF" linewidth={2} />
-        </lineSegments>
+        <primitive object={trajectoryLineObj} />
 
         {/* Dynamic Waypoint Particles along Trajectory */}
         {trajectoryPoints
@@ -1007,7 +1044,8 @@ function AutonomousVehicleScene({
 /**
  * Main Hero Glass Canvas Component
  * Fully elevated brightness, green ego outline, red stationary obstacle outlines,
- * sensor dropdown (LiDAR vs. Radar vs. Fusion), and fixed scroll/zoom interactions.
+ * sensor dropdown (LiDAR vs. Radar vs. Fusion) with frosted dark glass background
+ * and outside-click auto-dismissal.
  */
 export const HeroGlassObject: React.FC = () => {
   const [driveMode, setDriveMode] = useState<DriveMode>("drive");
@@ -1016,6 +1054,23 @@ export const HeroGlassObject: React.FC = () => {
   const [sensorDropdownOpen, setSensorDropdownOpen] = useState<boolean>(false);
 
   const controlsRef = useRef<any>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close sensor dropdown when clicking outside
+  useEffect(() => {
+    if (!sensorDropdownOpen) return;
+    const handlePointerDown = (e: MouseEvent | TouchEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setSensorDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+    };
+  }, [sensorDropdownOpen]);
 
   const sensorDescriptions: Record<SensorMode, { label: string; icon: any; desc: string }> = {
     lidar: {
@@ -1041,7 +1096,7 @@ export const HeroGlassObject: React.FC = () => {
       style={{ touchAction: isInteractive ? "none" : "pan-y" }}
     >
       {/* HUD Telemetry Banner in Top Right */}
-      <div className="absolute top-2 right-2 z-20 hidden sm:flex items-center gap-2 rounded-xl border border-white/15 bg-black/85 px-3 py-1.5 font-mono text-[11px] backdrop-blur-md shadow-lg text-neutral-200">
+      <div className="absolute top-2 right-2 z-20 hidden sm:flex items-center gap-2 rounded-xl border border-white/15 bg-black/90 px-3 py-1.5 font-mono text-[11px] backdrop-blur-md shadow-lg text-neutral-200">
         <span className="relative flex h-2 w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -1057,7 +1112,7 @@ export const HeroGlassObject: React.FC = () => {
       </div>
 
       {/* Top Left: Legend for Outlines */}
-      <div className="absolute top-2 left-2 z-20 flex items-center gap-2 rounded-xl border border-white/15 bg-black/85 px-3 py-1.5 font-mono text-[10px] backdrop-blur-md shadow-lg">
+      <div className="absolute top-2 left-2 z-20 flex items-center gap-2 rounded-xl border border-white/15 bg-black/90 px-3 py-1.5 font-mono text-[10px] backdrop-blur-md shadow-lg">
         <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
           <span className="h-2 w-2 rounded-full border border-emerald-400 bg-emerald-500/40" />
           <span>Ego Vehicle (Green)</span>
@@ -1083,8 +1138,12 @@ export const HeroGlassObject: React.FC = () => {
         <WebGLBoundary>
           <Canvas
             camera={{ position: [0, 3.8, 6.8], fov: 40 }}
-            gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-            dpr={[1, 2]}
+            gl={{
+              alpha: true,
+              antialias: true,
+              powerPreference: "default",
+            }}
+            dpr={[1, 1.5]}
           >
             {/* HIGH-VISIBILITY STUDIO LIGHTING SUITE */}
             <ambientLight intensity={1.8} color="#FFFFFF" />
@@ -1179,15 +1238,15 @@ export const HeroGlassObject: React.FC = () => {
             </button>
           </div>
 
-          {/* SENSOR VISUALIZATION DROPDOWN */}
-          <div className="relative">
+          {/* SENSOR VISUALIZATION DROPDOWN WITH SOLID DARK FROSTED GLASS BACKGROUND */}
+          <div className="relative" ref={dropdownRef}>
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 setSensorDropdownOpen((prev) => !prev);
               }}
-              className="flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-wider font-bold text-cyan-300 hover:bg-cyan-900/50 hover:border-cyan-400 transition-all shadow-sm"
+              className="flex items-center gap-2 rounded-xl border border-cyan-500/40 bg-cyan-950/70 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-wider font-bold text-cyan-300 hover:bg-cyan-900/80 hover:border-cyan-400 transition-all shadow-sm"
             >
               <Radio className="h-3.5 w-3.5 text-cyan-400 animate-pulse" />
               <span>Sensor: {sensorDescriptions[sensorMode].label}</span>
@@ -1198,14 +1257,16 @@ export const HeroGlassObject: React.FC = () => {
               />
             </button>
 
-            {/* Dropdown Menu Modal */}
+            {/* Opaque Dark Frosted Glass Dropdown Menu */}
             {sensorDropdownOpen && (
               <div
-                className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-64 rounded-2xl border border-white/20 bg-[#0A0E17]/98 p-2 shadow-2xl backdrop-blur-2xl z-40 space-y-1"
+                className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-72 rounded-2xl border border-cyan-500/30 bg-[#0B0F19] p-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.95)] backdrop-blur-2xl z-50 space-y-1.5"
+                style={{ backgroundColor: "rgba(11, 15, 25, 0.98)" }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="px-2.5 py-1 text-[10px] font-mono text-neutral-400 uppercase tracking-wider border-b border-white/10 font-bold mb-1">
-                  Select Sensor Visualization
+                <div className="px-2.5 py-1 text-[10px] font-mono text-cyan-400 uppercase tracking-wider border-b border-white/10 font-bold mb-1 flex items-center justify-between">
+                  <span>Select Sensor Array</span>
+                  <span className="text-[9px] text-neutral-400 lowercase">click to switch</span>
                 </div>
 
                 {(["lidar", "radar", "fusion"] as SensorMode[]).map((mode) => {
@@ -1223,17 +1284,17 @@ export const HeroGlassObject: React.FC = () => {
                       }}
                       className={`w-full flex items-start gap-2.5 rounded-xl p-2.5 text-left transition-all ${
                         isActive
-                          ? "bg-white/15 border border-cyan-400/40 text-white"
-                          : "hover:bg-white/5 text-neutral-300"
+                          ? "bg-cyan-950/60 border border-cyan-400/50 text-white shadow-inner"
+                          : "hover:bg-white/10 text-neutral-300 border border-transparent"
                       }`}
                     >
                       <Icon className={`h-4 w-4 mt-0.5 shrink-0 ${isActive ? "text-cyan-400" : "text-neutral-400"}`} />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between text-xs font-bold text-white">
                           <span>{meta.label}</span>
-                          {isActive && <Check className="h-3 w-3 text-cyan-400" />}
+                          {isActive && <Check className="h-3.5 w-3.5 text-cyan-400" />}
                         </div>
-                        <p className="text-[10px] text-neutral-400 leading-tight mt-0.5">
+                        <p className="text-[10px] text-neutral-300 leading-tight mt-0.5">
                           {meta.desc}
                         </p>
                       </div>
@@ -1251,8 +1312,8 @@ export const HeroGlassObject: React.FC = () => {
           onClick={() => setIsInteractive((prev) => !prev)}
           className={`rounded-full px-4 py-1 font-mono text-[10px] tracking-wider transition-all border ${
             isInteractive
-              ? "border-emerald-500/40 bg-emerald-950/40 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.3)]"
-              : "border-white/15 bg-black/80 text-neutral-300 hover:text-white hover:border-white/30"
+              ? "border-emerald-500/40 bg-emerald-950/60 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.3)]"
+              : "border-white/15 bg-black/85 text-neutral-300 hover:text-white hover:border-white/30"
           }`}
         >
           {isInteractive

@@ -6,6 +6,7 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
+import { Articles } from "@/components/sections/Articles";
 import { Skills } from "@/components/sections/Skills";
 import { Timeline } from "@/components/sections/Timeline";
 import { Contact } from "@/components/sections/Contact";
@@ -32,6 +33,9 @@ export default function Home() {
 
         {/* Section 3: Projects & Systems */}
         <Projects />
+
+        {/* Section 4: Engineering Articles & Technical Essays */}
+        <Articles />
 
         {/* Section 5: Skills / Tech Stack */}
         <Skills />

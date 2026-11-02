@@ -17,6 +17,30 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    id: "documentforge",
+    title: "DocumentForge: Client-Side WASM Document Engine",
+    subtitle: "Zero-Knowledge Local Processing & Indic Script Shaping",
+    description: "100% in-browser document utility running QPDF and complex typography shaping entirely client-side via WebAssembly with zero server file uploads.",
+    longDescription: "Engineered DocumentForge (https://documentforge.in) to replace legacy cloud document SaaS models with a zero-knowledge, local-first browser architecture. Standard PDF utilities routinely upload sensitive tax returns, contracts, and financial records to third-party S3 buckets while failing to shape complex Indic scripts (Devanagari, Bengali, Tamil, and the ₹ Rupee symbol). DocumentForge solves both challenges by compiling QPDF to WebAssembly for local cryptographic operations and offloading font shaping to the browser's native DOM layout engine. Achieves $0 server bandwidth overhead on Cloudflare Pages static edge and operates seamlessly offline.",
+    tags: ["WebAssembly", "QPDF WASM", "Next.js", "Cloudflare Pages", "Canvas API", "Indic Typography", "Local-First"],
+    githubUrl: "https://documentforge.in/",
+    liveUrl: "https://documentforge.in/",
+    featured: true,
+    accentColor: "from-cyan-500/30 via-emerald-500/25 to-blue-500/20",
+    metrics: [
+      { label: "Server Uploads", value: "0 KB (Zero)" },
+      { label: "Privacy Model", value: "100% Local" },
+      { label: "Edge Bandwidth", value: "$0.00 Cost" },
+      { label: "Indic Scripts", value: "Native Shaping & ₹" },
+    ],
+    keyFeatures: [
+      "100% client-side execution via WebAssembly (QPDF WASM) — files never leave the user's browser",
+      "Solves complex-script breakdown (Devanagari, Bengali, ₹) using offscreen DOM layout pipelines",
+      "Zero server bandwidth overhead distributed globally via Cloudflare Pages static edge network",
+      "Offline-first resilience: load once, disconnect Wi-Fi, and process documents indefinitely without cloud latency",
+    ],
+  },
+  {
     id: "autonomous-lane-changing-carla",
     title: "Autonomous Lane Changing Using Reinforcement Learning",
     subtitle: "Continuous Control & Multi-Modal Perception in CARLA",
