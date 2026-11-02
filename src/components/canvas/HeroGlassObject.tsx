@@ -11,6 +11,7 @@ import {
   Radio,
   Zap,
   Check,
+  RefreshCw,
 } from "lucide-react";
 
 /**
@@ -26,19 +27,123 @@ export type SensorMode = "lidar" | "radar" | "fusion";
 export type DriveMode = "drive" | "inspect";
 
 /**
+ * Error boundary for WebGL / Canvas failures.
+ * Prevents client-side exceptions from bubbling up and crashing the page.
+ */
+class WebGLBoundary extends React.Component<
+  { children: React.ReactNode; fallback?: React.ReactNode },
+  { hasError: boolean; error: Error | null }
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, info: any) {
+    console.warn("[WebGL Perception Simulator Warning]:", error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        this.props.fallback || (
+          <div className="flex h-full w-full flex-col items-center justify-center rounded-3xl border border-white/10 bg-[#0B0B0B] p-6 text-center select-none">
+            <div className="h-12 w-12 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-3 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+              <Zap className="h-6 w-6" />
+            </div>
+            <h4 className="text-base font-bold text-white mb-1">
+              Autonomous Vehicle Telemetry & Perception
+            </h4>
+            <p className="text-xs text-neutral-400 max-w-sm mb-4 leading-relaxed font-mono">
+              CARLA 60 FPS • Continuous TD3 Agent • 360° LiDAR & Radar Telemetry Active
+            </p>
+            <button
+              type="button"
+              onClick={() => this.setState({ hasError: false, error: null })}
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-mono text-white hover:bg-white/20 transition-colors"
+            >
+              <RefreshCw className="h-3 w-3" />
+              <span>Reset 3D Canvas</span>
+            </button>
+          </div>
+        )
+      );
+    }
+    return this.props.children;
+  }
+}
+
+/**
+ * Detailed 5-Spoke Alloy Wheel with Rubber Tire & Brembo Crimson Brake Caliper
+ */
+const WheelAssembly = React.memo(
+  React.forwardRef<THREE.Group, {}>((_, ref) => {
+    return (
+      <group ref={ref}>
+        {/* Outer Rubber Tire */}
+        <mesh rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.135, 0.135, 0.08, 20]} />
+          <meshStandardMaterial color="#11161F" roughness={0.8} metalness={0.1} />
+        </mesh>
+
+        {/* Ventilated Drilled Steel Brake Disc */}
+        <mesh rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.085, 0.085, 0.076, 16]} />
+          <meshStandardMaterial color="#94A3B8" roughness={0.2} metalness={0.9} />
+        </mesh>
+
+        {/* Brembo Crimson Racing Brake Caliper */}
+        <mesh position={[0.045, 0.045, 0]}>
+          <boxGeometry args={[0.024, 0.048, 0.076]} />
+          <meshStandardMaterial
+            color="#EF4444"
+            emissive="#DC2626"
+            emissiveIntensity={0.8}
+            roughness={0.2}
+            metalness={0.7}
+          />
+        </mesh>
+
+        {/* Silver Alloy Rim */}
+        <mesh rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.098, 0.098, 0.082, 16]} />
+          <meshStandardMaterial color="#E2E8F0" roughness={0.15} metalness={0.95} />
+        </mesh>
+
+        {/* 5-Spoke Rim Geometry */}
+        {[0, 72, 144, 216, 288].map((deg, i) => (
+          <mesh key={i} rotation={[0, 0, (deg * Math.PI) / 180]}>
+            <boxGeometry args={[0.018, 0.092, 0.084]} />
+            <meshStandardMaterial color="#F8FAFC" roughness={0.1} metalness={0.95} />
+          </mesh>
+        ))}
+
+        {/* Center Wheel Hub */}
+        <mesh rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.03, 0.03, 0.086, 12]} />
+          <meshStandardMaterial color="#000000" roughness={0.2} metalness={0.8} />
+        </mesh>
+      </group>
+    );
+  })
+);
+WheelAssembly.displayName = "WheelAssembly";
+
+/**
  * Detailed Autonomous Vehicle Model (Chassis, Cabin, Wheels, Lights, Sensors)
- * Ego vehicle outlined in crisp thin green (#10B981) per user specification.
+ * Ego vehicle outlined in crisp thin green (#10B981).
+ * High-performance direct Three.js ref animations (zero setState in useFrame).
  */
 function AutonomousVehicle({
   sensorMode,
-  steeringAngle,
-  wheelRotation,
-  isBlinkingLeft,
+  driveMode,
 }: {
   sensorMode: SensorMode;
-  steeringAngle: number;
-  wheelRotation: number;
-  isBlinkingLeft: boolean;
+  driveMode: DriveMode;
 }) {
   const lidarRotor = useRef<THREE.Mesh>(null);
   const lidarScanBeam = useRef<THREE.Group>(null);
@@ -46,8 +151,42 @@ function AutonomousVehicle({
   const radarWave1 = useRef<THREE.Mesh>(null);
   const radarWave2 = useRef<THREE.Mesh>(null);
 
+  // Direct wheel animation refs (no React state updates in render loop)
+  const frontLeftWheelGroup = useRef<THREE.Group>(null);
+  const frontRightWheelGroup = useRef<THREE.Group>(null);
+  const flWheel = useRef<THREE.Group>(null);
+  const frWheel = useRef<THREE.Group>(null);
+  const rlWheel = useRef<THREE.Group>(null);
+  const rrWheel = useRef<THREE.Group>(null);
+  const wheelRotationAngle = useRef(0);
+
+  // Blinker materials
+  const frontBlinkerMat = useRef<THREE.MeshStandardMaterial>(null);
+  const rearBlinkerMat = useRef<THREE.MeshStandardMaterial>(null);
+
+  // Memoized geometries to eliminate garbage collection & re-allocations
+  const headingLineGeo = useMemo(() => {
+    return new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, 0.24, 0.71),
+      new THREE.Vector3(0, 0.24, 1.15),
+    ]);
+  }, []);
+
+  const boundingBoxEdgesGeo = useMemo(() => {
+    return new THREE.EdgesGeometry(new THREE.BoxGeometry(0.68, 0.44, 1.42));
+  }, []);
+
+  const radarAxisGeo = useMemo(() => {
+    return new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(0, 0, 3.6),
+    ]);
+  }, []);
+
   useFrame((state, delta) => {
-    // 10-15 Hz LiDAR turret rotation
+    const t = state.clock.getElapsedTime();
+
+    // 1. 10-15 Hz LiDAR turret rotation
     if (lidarRotor.current) {
       lidarRotor.current.rotation.y += delta * 14.0;
     }
@@ -55,13 +194,12 @@ function AutonomousVehicle({
       lidarScanBeam.current.rotation.y += delta * 14.0;
     }
 
-    // Radar cone horizontal azimuth sweep (±25 degrees)
+    // 2. Radar cone horizontal azimuth sweep (±25 degrees)
     if (radarSweep.current) {
-      radarSweep.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 3.5) * 0.42;
+      radarSweep.current.rotation.y = Math.sin(t * 3.5) * 0.42;
     }
 
-    // Pulsing radar millimeter-wave arcs expanding forward
-    const t = state.clock.getElapsedTime();
+    // 3. Pulsing radar millimeter-wave arcs expanding forward
     if (radarWave1.current) {
       const scale1 = 0.5 + ((t * 1.5) % 1) * 2.8;
       radarWave1.current.scale.set(scale1, scale1, scale1);
@@ -78,11 +216,36 @@ function AutonomousVehicle({
         0.7 - (((t * 1.5) + 0.5) % 1) * 0.7
       );
     }
+
+    // 4. Wheels rotation & steering animation directly on meshes
+    if (driveMode === "drive") {
+      const loop = (t * 0.32) % 1;
+      const steer = Math.sin(loop * Math.PI * 2) * 0.28;
+      if (frontLeftWheelGroup.current) frontLeftWheelGroup.current.rotation.y = steer;
+      if (frontRightWheelGroup.current) frontRightWheelGroup.current.rotation.y = steer;
+
+      wheelRotationAngle.current += delta * 9.0;
+      const rot = wheelRotationAngle.current;
+      if (flWheel.current) flWheel.current.rotation.x = rot;
+      if (frWheel.current) frWheel.current.rotation.x = rot;
+      if (rlWheel.current) rlWheel.current.rotation.x = rot;
+      if (rrWheel.current) rrWheel.current.rotation.x = rot;
+
+      const isMidManeuver = loop > 0.15 && loop < 0.65;
+      const blinkIntensity = isMidManeuver && Math.sin(t * 10) > 0 ? 5.0 : 0.3;
+      if (frontBlinkerMat.current) frontBlinkerMat.current.emissiveIntensity = blinkIntensity;
+      if (rearBlinkerMat.current) rearBlinkerMat.current.emissiveIntensity = blinkIntensity;
+    } else {
+      if (frontLeftWheelGroup.current) frontLeftWheelGroup.current.rotation.y = 0;
+      if (frontRightWheelGroup.current) frontRightWheelGroup.current.rotation.y = 0;
+      if (frontBlinkerMat.current) frontBlinkerMat.current.emissiveIntensity = 0.3;
+      if (rearBlinkerMat.current) rearBlinkerMat.current.emissiveIntensity = 0.3;
+    }
   });
 
   return (
     <group>
-      {/* 1. Main Aerodynamic Chassis (Visible Metallic Obsidian Titanium) */}
+      {/* 1. Main Aerodynamic Chassis */}
       <group position={[0, 0.16, 0]}>
         {/* Lower Main Body with Crisp Thin Green Outline */}
         <mesh position={[0, 0, 0]}>
@@ -92,7 +255,6 @@ function AutonomousVehicle({
             roughness={0.25}
             metalness={0.65}
           />
-          {/* Thin Green Outline on Main Ego Vehicle Body */}
           <Edges threshold={15} color="#10B981" />
         </mesh>
 
@@ -146,7 +308,7 @@ function AutonomousVehicle({
         </mesh>
       </group>
 
-      {/* 2. Glasshouse / Greenhouse Cabin with Green Outlines */}
+      {/* 2. Glasshouse / Greenhouse Cabin */}
       <group position={[0, 0.31, -0.04]}>
         {/* Front Slanted Windshield */}
         <mesh position={[0, 0.04, 0.22]} rotation={[-0.55, 0, 0]}>
@@ -226,27 +388,16 @@ function AutonomousVehicle({
 
       {/* 3. Automotive 3D Bounding Perception Wireframe in Neon Green */}
       <group position={[0, 0.23, 0]}>
-        {/* @ts-ignore */}
-        <lineSegments>
-          <edgesGeometry args={[new THREE.BoxGeometry(0.68, 0.44, 1.42)]} />
+        <lineSegments geometry={boundingBoxEdgesGeo}>
           <lineBasicMaterial color="#10B981" linewidth={2} />
         </lineSegments>
         {/* Forward Orientation Heading Pointer */}
-        {/* @ts-ignore */}
-        <line>
-          <bufferGeometry
-            attach="geometry"
-            {...new THREE.BufferGeometry().setFromPoints([
-              new THREE.Vector3(0, 0.24, 0.71),
-              new THREE.Vector3(0, 0.24, 1.15),
-            ])}
-          />
+        <lineSegments geometry={headingLineGeo}>
           <lineBasicMaterial color="#10B981" linewidth={2} />
-        </line>
+        </lineSegments>
       </group>
 
       {/* 4. Automotive Lighting System */}
-      {/* Front Dual-Cluster LED Headlights */}
       <group position={[0, 0.17, 0.63]}>
         <mesh position={[-0.21, 0, 0]}>
           <boxGeometry args={[0.1, 0.04, 0.02]} />
@@ -261,15 +412,16 @@ function AutonomousVehicle({
         <mesh position={[-0.27, 0, 0]}>
           <sphereGeometry args={[0.024, 12, 12]} />
           <meshStandardMaterial
+            ref={frontBlinkerMat}
             color="#F59E0B"
             emissive="#FFA000"
-            emissiveIntensity={isBlinkingLeft ? 5.0 : 0.3}
+            emissiveIntensity={0.3}
           />
         </mesh>
 
         {/* Forward Projected Road Illumination Cone */}
         <mesh position={[0, -0.06, 0.9]} rotation={[Math.PI / 2, 0, 0]}>
-          <coneGeometry args={[0.65, 1.8, 24, 1, true]} />
+          <coneGeometry args={[0.65, 1.8, 20, 1, true]} />
           <meshBasicMaterial
             color="#FFFFFF"
             transparent
@@ -288,9 +440,10 @@ function AutonomousVehicle({
         <mesh position={[-0.26, 0, 0]}>
           <sphereGeometry args={[0.022, 12, 12]} />
           <meshStandardMaterial
+            ref={rearBlinkerMat}
             color="#F59E0B"
             emissive="#FFA000"
-            emissiveIntensity={isBlinkingLeft ? 5.0 : 0.3}
+            emissiveIntensity={0.3}
           />
         </mesh>
       </group>
@@ -306,14 +459,14 @@ function AutonomousVehicle({
 
         {/* Velodyne / Hesai 360° LiDAR Puck */}
         <mesh position={[0, 0.04, 0]}>
-          <cylinderGeometry args={[0.07, 0.07, 0.06, 24]} />
+          <cylinderGeometry args={[0.07, 0.07, 0.06, 20]} />
           <meshStandardMaterial color="#2B3648" roughness={0.3} metalness={0.8} />
           <Edges threshold={20} color="#10B981" />
         </mesh>
 
         {/* High-Speed Rotating LiDAR Turret with Electric Cyan Laser Band */}
         <mesh ref={lidarRotor} position={[0, 0.085, 0]}>
-          <cylinderGeometry args={[0.065, 0.065, 0.03, 24]} />
+          <cylinderGeometry args={[0.065, 0.065, 0.03, 20]} />
           <meshStandardMaterial
             color="#00F0FF"
             emissive="#00F0FF"
@@ -335,34 +488,34 @@ function AutonomousVehicle({
           <meshStandardMaterial color="#1E2633" />
         </mesh>
         <mesh position={[0, -0.02, 0.215]} rotation={[Math.PI / 2, 0, 0]}>
-          <cylinderGeometry args={[0.012, 0.012, 0.01, 16]} />
+          <cylinderGeometry args={[0.012, 0.012, 0.01, 12]} />
           <meshStandardMaterial color="#00F0FF" emissive="#00F0FF" emissiveIntensity={2.5} />
         </mesh>
       </group>
 
       {/* 6. Four Detailed Wheels with Crimson Calipers */}
       <group>
-        <group position={[-0.3, 0.11, 0.38]} rotation={[0, steeringAngle, 0]}>
-          <WheelAssembly rotationX={wheelRotation} />
+        <group ref={frontLeftWheelGroup} position={[-0.3, 0.11, 0.38]}>
+          <WheelAssembly ref={flWheel} />
         </group>
-        <group position={[0.3, 0.11, 0.38]} rotation={[0, steeringAngle, 0]}>
-          <WheelAssembly rotationX={wheelRotation} />
+        <group ref={frontRightWheelGroup} position={[0.3, 0.11, 0.38]}>
+          <WheelAssembly ref={frWheel} />
         </group>
         <group position={[-0.3, 0.11, -0.38]}>
-          <WheelAssembly rotationX={wheelRotation} />
+          <WheelAssembly ref={rlWheel} />
         </group>
         <group position={[0.3, 0.11, -0.38]}>
-          <WheelAssembly rotationX={wheelRotation} />
+          <WheelAssembly ref={rrWheel} />
         </group>
       </group>
 
       {/* 7. DEDICATED SENSOR VISUALIZATION 1: 360° LiDAR POINT CLOUD */}
       {(sensorMode === "lidar" || sensorMode === "fusion") && (
         <group>
-          {/* Concentric Distance Range Rings (1.5m, 2.5m, 3.8m) */}
+          {/* Concentric Distance Range Rings (1.4m, 2.5m, 3.8m) */}
           {[1.4, 2.5, 3.8].map((radius, idx) => (
             <mesh key={`lidar-ring-${idx}`} position={[0, 0.03, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-              <ringGeometry args={[radius, radius + 0.03, 64]} />
+              <ringGeometry args={[radius, radius + 0.03, 48]} />
               <meshBasicMaterial
                 color="#00FFC8"
                 transparent
@@ -380,7 +533,7 @@ function AutonomousVehicle({
             </mesh>
           </group>
 
-          {/* Dense 3D LiDAR Point Cloud Matrix */}
+          {/* Dense 3D LiDAR Point Cloud */}
           <LiDARPointCloud />
         </group>
       )}
@@ -391,7 +544,7 @@ function AutonomousVehicle({
           {/* Forward Sweeping Radar Cone in Electric Cyan Wireframe */}
           <group ref={radarSweep} position={[0, 0.14, 0.65]}>
             <mesh position={[0, 0, 1.8]} rotation={[Math.PI / 2, 0, 0]}>
-              <coneGeometry args={[1.4, 3.6, 32, 2, true]} />
+              <coneGeometry args={[1.4, 3.6, 24, 2, true]} />
               <meshBasicMaterial
                 color="#00E5FF"
                 transparent
@@ -402,34 +555,26 @@ function AutonomousVehicle({
             </mesh>
 
             {/* Central Radar Axis Line */}
-            {/* @ts-ignore */}
-            <line>
-              <bufferGeometry
-                attach="geometry"
-                {...new THREE.BufferGeometry().setFromPoints([
-                  new THREE.Vector3(0, 0, 0),
-                  new THREE.Vector3(0, 0, 3.6),
-                ])}
-              />
-              <lineBasicMaterial color="#00F0FF" linewidth={3} />
-            </line>
+            <lineSegments geometry={radarAxisGeo}>
+              <lineBasicMaterial color="#00F0FF" linewidth={2} />
+            </lineSegments>
           </group>
 
           {/* Pulsing Radar Millimeter-Wave Wavefront Arcs */}
           <group position={[0, 0.14, 0.65]}>
             <mesh ref={radarWave1} rotation={[-Math.PI / 2, 0, 0]}>
-              <ringGeometry args={[0.3, 0.35, 32]} />
+              <ringGeometry args={[0.3, 0.35, 24]} />
               <meshBasicMaterial color="#00E5FF" transparent opacity={0.7} side={THREE.DoubleSide} />
             </mesh>
             <mesh ref={radarWave2} rotation={[-Math.PI / 2, 0, 0]}>
-              <ringGeometry args={[0.3, 0.35, 32]} />
+              <ringGeometry args={[0.3, 0.35, 24]} />
               <meshBasicMaterial color="#00E5FF" transparent opacity={0.7} side={THREE.DoubleSide} />
             </mesh>
           </group>
 
           {/* Rear Blind-Spot Radar Warning Arc */}
           <mesh position={[0, 0.12, -1.2]} rotation={[Math.PI / 2, 0, 0]}>
-            <coneGeometry args={[0.9, 1.4, 24, 1, true]} />
+            <coneGeometry args={[0.9, 1.4, 20, 1, true]} />
             <meshBasicMaterial
               color="#F59E0B"
               transparent
@@ -452,11 +597,15 @@ function AutonomousVehicle({
 
 /**
  * 3D LiDAR Point Cloud Simulation
- * Generates hundreds of laser returns reflecting off the ground, curbs, and surrounding vehicles.
+ * High performance point particle cloud (1 single draw call instead of hundreds of separate meshes).
  */
 function LiDARPointCloud() {
-  const points = useMemo(() => {
-    const pts: [number, number, number][] = [];
+  const pointsGeometry = useMemo(() => {
+    const coords: number[] = [];
+    const colors: number[] = [];
+    const cRed = new THREE.Color("#FF4D4D");
+    const cGreen = new THREE.Color("#00FFC8");
+    const cCyan = new THREE.Color("#00F0FF");
 
     // 1. Concentric ground reflection rings
     for (let r = 0.8; r <= 3.8; r += 0.35) {
@@ -465,18 +614,23 @@ function LiDARPointCloud() {
         const theta = (i / numPoints) * Math.PI * 2;
         const jitterX = (Math.random() - 0.5) * 0.06;
         const jitterZ = (Math.random() - 0.5) * 0.06;
-        pts.push([
+        coords.push(
           Math.cos(theta) * r + jitterX,
           0.02 + Math.random() * 0.02,
-          Math.sin(theta) * r + jitterZ,
-        ]);
+          Math.sin(theta) * r + jitterZ
+        );
+        const col = i % 2 === 0 ? cGreen : cCyan;
+        colors.push(col.r, col.g, col.b);
       }
     }
 
     // 2. Road curb / barrier laser reflections
     for (let z = -4.5; z <= 4.5; z += 0.25) {
-      pts.push([-2.2 + (Math.random() - 0.5) * 0.05, 0.12 + Math.random() * 0.04, z]);
-      pts.push([2.2 + (Math.random() - 0.5) * 0.05, 0.12 + Math.random() * 0.04, z]);
+      coords.push(-2.2 + (Math.random() - 0.5) * 0.05, 0.12 + Math.random() * 0.04, z);
+      colors.push(cCyan.r, cCyan.g, cCyan.b);
+
+      coords.push(2.2 + (Math.random() - 0.5) * 0.05, 0.12 + Math.random() * 0.04, z);
+      colors.push(cGreen.r, cGreen.g, cGreen.b);
     }
 
     // 3. Dense points outlining the lead obstacle car at [0.95, 0, 2.2]
@@ -484,105 +638,62 @@ function LiDARPointCloud() {
       const ox = 0.95 + (Math.random() - 0.5) * 0.55;
       const oy = 0.06 + Math.random() * 0.35;
       const oz = 2.2 + (Math.random() - 0.5) * 1.15;
-      pts.push([ox, oy, oz]);
+      coords.push(ox, oy, oz);
+      colors.push(cRed.r, cRed.g, cRed.b);
     }
 
-    return pts;
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute(coords, 3));
+    geo.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+    return geo;
   }, []);
 
   return (
-    <group>
-      {points.map((pt, idx) => (
-        <mesh key={`p-${idx}`} position={pt}>
-          <sphereGeometry args={[0.016, 6, 6]} />
-          <meshBasicMaterial
-            color={pt[2] > 1.6 && pt[0] > 0.6 ? "#FF4D4D" : idx % 2 === 0 ? "#00FFC8" : "#00F0FF"}
-          />
-        </mesh>
-      ))}
-    </group>
-  );
-}
-
-/**
- * Detailed 5-Spoke Alloy Wheel with Rubber Tire & Brembo Crimson Brake Caliper
- */
-function WheelAssembly({ rotationX }: { rotationX: number }) {
-  return (
-    <group rotation={[rotationX, 0, 0]}>
-      {/* Outer Rubber Tire */}
-      <mesh rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.135, 0.135, 0.08, 24]} />
-        <meshStandardMaterial color="#11161F" roughness={0.8} metalness={0.1} />
-      </mesh>
-
-      {/* Ventilated Drilled Steel Brake Disc */}
-      <mesh rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.085, 0.085, 0.076, 20]} />
-        <meshStandardMaterial color="#94A3B8" roughness={0.2} metalness={0.9} />
-      </mesh>
-
-      {/* Brembo Crimson Racing Brake Caliper */}
-      <mesh position={[0.045, 0.045, 0]}>
-        <boxGeometry args={[0.024, 0.048, 0.076]} />
-        <meshStandardMaterial
-          color="#EF4444"
-          emissive="#DC2626"
-          emissiveIntensity={0.8}
-          roughness={0.2}
-          metalness={0.7}
-        />
-      </mesh>
-
-      {/* Silver Alloy Rim */}
-      <mesh rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.098, 0.098, 0.082, 16]} />
-        <meshStandardMaterial color="#E2E8F0" roughness={0.15} metalness={0.95} />
-      </mesh>
-
-      {/* 5-Spoke Rim Geometry */}
-      {[0, 72, 144, 216, 288].map((deg, i) => (
-        <mesh key={i} rotation={[0, 0, (deg * Math.PI) / 180]}>
-          <boxGeometry args={[0.018, 0.092, 0.084]} />
-          <meshStandardMaterial color="#F8FAFC" roughness={0.1} metalness={0.95} />
-        </mesh>
-      ))}
-
-      {/* Center Wheel Hub */}
-      <mesh rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.03, 0.03, 0.086, 12]} />
-        <meshStandardMaterial color="#000000" roughness={0.2} metalness={0.8} />
-      </mesh>
-    </group>
+    <points geometry={pointsGeometry}>
+      <pointsMaterial
+        size={0.035}
+        vertexColors
+        transparent
+        opacity={0.85}
+        sizeAttenuation
+      />
+    </points>
   );
 }
 
 /**
  * Stationary / Traffic Vehicle (Obstacle in Highway Lane)
- * Outlined with thin red (#EF4444) color per user request.
+ * Outlined with thin red (#EF4444).
  */
 function TrafficCar({
   position,
   color,
-  label,
-  distance,
-  ttc,
   showRadarLock,
 }: {
   position: [number, number, number];
   color: string;
-  label: string;
-  distance: string;
-  ttc: string;
+  label?: string;
+  distance?: string;
+  ttc?: string;
   showRadarLock: boolean;
 }) {
+  const obstacleBoxEdgesGeo = useMemo(() => {
+    return new THREE.EdgesGeometry(new THREE.BoxGeometry(0.64, 0.42, 1.28));
+  }, []);
+
+  const dopplerLineGeo = useMemo(() => {
+    return new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(0, 0, -0.65),
+    ]);
+  }, []);
+
   return (
     <group position={position}>
       {/* 1. Chassis with Thin Red Outline */}
       <mesh position={[0, 0.14, 0]}>
         <boxGeometry args={[0.54, 0.15, 1.15]} />
         <meshStandardMaterial color={color} roughness={0.3} metalness={0.65} />
-        {/* User Request: Thin Red Outline for Stationary/Obstacle Cars */}
         <Edges threshold={15} color="#EF4444" />
       </mesh>
 
@@ -601,9 +712,7 @@ function TrafficCar({
 
       {/* 3. 3D Obstacle Warning Bounding Box in Thin Red */}
       <group position={[0, 0.21, 0]}>
-        {/* @ts-ignore */}
-        <lineSegments>
-          <edgesGeometry args={[new THREE.BoxGeometry(0.64, 0.42, 1.28)]} />
+        <lineSegments geometry={obstacleBoxEdgesGeo}>
           <lineBasicMaterial color="#EF4444" linewidth={2} />
         </lineSegments>
       </group>
@@ -632,32 +741,22 @@ function TrafficCar({
         ))
       )}
 
-      {/* 6. Radar Tracking Lock-On Bracket & Doppler Vector (Active when Radar or Fusion selected) */}
+      {/* 6. Radar Tracking Lock-On Bracket & Doppler Vector */}
       {showRadarLock && (
         <group position={[0, 0.5, 0]}>
-          {/* Target Tracking Diamond Bracket in Red / Amber */}
           <mesh rotation={[0, 0, Math.PI / 4]}>
             <ringGeometry args={[0.22, 0.25, 4]} />
             <meshBasicMaterial color="#EF4444" side={THREE.DoubleSide} />
           </mesh>
-          {/* Doppler Relative Velocity Vector pointing rearward */}
-          {/* @ts-ignore */}
-          <line>
-            <bufferGeometry
-              attach="geometry"
-              {...new THREE.BufferGeometry().setFromPoints([
-                new THREE.Vector3(0, 0, 0),
-                new THREE.Vector3(0, 0, -0.65),
-              ])}
-            />
-            <lineBasicMaterial color="#EF4444" linewidth={3} />
-          </line>
+          <lineSegments geometry={dopplerLineGeo}>
+            <lineBasicMaterial color="#EF4444" linewidth={2} />
+          </lineSegments>
         </group>
       )}
 
       {/* Ground Warning Proximity Ring */}
       <mesh position={[0, 0.02, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.62, 0.66, 32]} />
+        <ringGeometry args={[0.62, 0.66, 24]} />
         <meshBasicMaterial color="#EF4444" transparent opacity={0.7} />
       </mesh>
     </group>
@@ -677,10 +776,6 @@ function AutonomousVehicleScene({
   const sceneGroup = useRef<THREE.Group>(null);
   const egoVehicleGroup = useRef<THREE.Group>(null);
 
-  const [steeringAngle, setSteeringAngle] = useState(0);
-  const [wheelRotation, setWheelRotation] = useState(0);
-  const [isBlinkingLeft, setIsBlinkingLeft] = useState(false);
-
   // S-Curve Continuous RL Trajectory Points
   const trajectoryPoints = useMemo(() => {
     const pts: THREE.Vector3[] = [];
@@ -697,18 +792,26 @@ function AutonomousVehicleScene({
     [trajectoryPoints]
   );
 
-  // Highway Lane Markings (3-Lane Highway Corridor)
+  // Highway Lane Markings (Dashed divider segments via LineSegments)
   const highwayMarkings = useMemo(() => {
-    const leftEdge: THREE.Vector3[] = [];
-    const rightEdge: THREE.Vector3[] = [];
+    const leftEdge: THREE.Vector3[] = [
+      new THREE.Vector3(-2.2, 0.015, -5.5),
+      new THREE.Vector3(-2.2, 0.015, 5.5),
+    ];
+    const rightEdge: THREE.Vector3[] = [
+      new THREE.Vector3(2.2, 0.015, -5.5),
+      new THREE.Vector3(2.2, 0.015, 5.5),
+    ];
     const divider1: THREE.Vector3[] = [];
     const divider2: THREE.Vector3[] = [];
 
-    for (let z = -5.5; z <= 5.5; z += 0.4) {
-      leftEdge.push(new THREE.Vector3(-2.2, 0.015, z));
-      rightEdge.push(new THREE.Vector3(2.2, 0.015, z));
+    // Dashed divider segment pairs (start -> end)
+    for (let z = -5.5; z <= 5.5; z += 0.7) {
       divider1.push(new THREE.Vector3(-0.75, 0.015, z));
+      divider1.push(new THREE.Vector3(-0.75, 0.015, Math.min(z + 0.35, 5.5)));
+
       divider2.push(new THREE.Vector3(0.75, 0.015, z));
+      divider2.push(new THREE.Vector3(0.75, 0.015, Math.min(z + 0.35, 5.5)));
     }
 
     return {
@@ -728,6 +831,37 @@ function AutonomousVehicleScene({
     }
     return studs;
   }, []);
+
+  const roadStudGeo = useMemo(() => new THREE.BoxGeometry(0.035, 0.02, 0.035), []);
+  const roadStudMat = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: "#FFFFFF",
+        emissive: "#FFFFFF",
+        emissiveIntensity: 3.5,
+      }),
+    []
+  );
+
+  const waypointSphereGeo = useMemo(() => new THREE.SphereGeometry(0.045, 10, 10), []);
+  const waypointCyanMat = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: "#00F5FF",
+        emissive: "#00F5FF",
+        emissiveIntensity: 3.8,
+      }),
+    []
+  );
+  const waypointEmeraldMat = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: "#10B981",
+        emissive: "#10B981",
+        emissiveIntensity: 3.8,
+      }),
+    []
+  );
 
   useFrame((state, delta) => {
     const t = state.clock.getElapsedTime();
@@ -754,7 +888,7 @@ function AutonomousVehicleScene({
       }
     }
 
-    // Vehicle Dynamic Motion along S-Curve Trajectory
+    // Vehicle Dynamic Motion along S-Curve Trajectory (direct transform mutation)
     if (egoVehicleGroup.current) {
       if (driveMode === "drive") {
         const loop = (t * 0.32) % 1;
@@ -768,35 +902,23 @@ function AutonomousVehicleScene({
 
         if (p1 && p2) {
           egoVehicleGroup.current.position.lerpVectors(p1, p2, alpha);
-
           const heading = Math.atan2(p2.x - p1.x, p2.z - p1.z);
           egoVehicleGroup.current.rotation.y = heading;
-
-          const steer = Math.sin(loop * Math.PI * 2) * 0.28;
-          setSteeringAngle(steer);
-
-          const isMidManeuver = loop > 0.15 && loop < 0.65;
-          setIsBlinkingLeft(isMidManeuver && Math.sin(t * 10) > 0);
         }
-
-        setWheelRotation((prev) => prev + delta * 9.0);
       } else {
-        // Stationary Inspection: Ego vehicle parked in center lane for detailed sensor examination
         egoVehicleGroup.current.position.lerp(new THREE.Vector3(0, 0, 0), 0.06);
         egoVehicleGroup.current.rotation.y = THREE.MathUtils.lerp(
           egoVehicleGroup.current.rotation.y,
           0,
           0.06
         );
-        setSteeringAngle(0);
-        setIsBlinkingLeft(false);
       }
     }
   });
 
   return (
     <group ref={sceneGroup}>
-      {/* 1. Visible Highway Road Surface (Brightened Asphalt Charcoal #181F2C) */}
+      {/* 1. Highway Road Surface */}
       <group position={[0, -0.01, 0]}>
         <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
           <planeGeometry args={[5.0, 12.5]} />
@@ -808,35 +930,24 @@ function AutonomousVehicleScene({
         </mesh>
 
         {/* Road Outer Solid Shoulder Lines in High-Contrast White */}
-        {/* @ts-ignore */}
-        <line geometry={highwayMarkings.leftEdge}>
-          <lineBasicMaterial color="#E2E8F0" linewidth={3} />
-        </line>
-        {/* @ts-ignore */}
-        <line geometry={highwayMarkings.rightEdge}>
-          <lineBasicMaterial color="#E2E8F0" linewidth={3} />
-        </line>
+        <lineSegments geometry={highwayMarkings.leftEdge}>
+          <lineBasicMaterial color="#E2E8F0" linewidth={2} />
+        </lineSegments>
+        <lineSegments geometry={highwayMarkings.rightEdge}>
+          <lineBasicMaterial color="#E2E8F0" linewidth={2} />
+        </lineSegments>
 
         {/* Dashed Lane Dividers in Amber and Platinum */}
-        {/* @ts-ignore */}
-        <line geometry={highwayMarkings.divider1}>
-          <lineDashedMaterial color="#F59E0B" dashSize={0.4} gapSize={0.3} />
-        </line>
-        {/* @ts-ignore */}
-        <line geometry={highwayMarkings.divider2}>
-          <lineDashedMaterial color="#94A3B8" dashSize={0.4} gapSize={0.3} />
-        </line>
+        <lineSegments geometry={highwayMarkings.divider1}>
+          <lineBasicMaterial color="#F59E0B" linewidth={2} />
+        </lineSegments>
+        <lineSegments geometry={highwayMarkings.divider2}>
+          <lineBasicMaterial color="#94A3B8" linewidth={2} />
+        </lineSegments>
 
-        {/* Reflective Road Studs with High-Intensity Sheen */}
+        {/* Reflective Road Studs */}
         {roadStuds.map((pos, i) => (
-          <mesh key={i} position={pos}>
-            <boxGeometry args={[0.035, 0.02, 0.035]} />
-            <meshStandardMaterial
-              color="#FFFFFF"
-              emissive="#FFFFFF"
-              emissiveIntensity={3.5}
-            />
-          </mesh>
+          <mesh key={i} position={pos} geometry={roadStudGeo} material={roadStudMat} />
         ))}
 
         {/* Highway Side Guardrails */}
@@ -852,54 +963,41 @@ function AutonomousVehicleScene({
         </mesh>
 
         {/* Planned Continuous RL Trajectory Path Line in Electric Cyan */}
-        {/* @ts-ignore */}
-        <line geometry={trajectoryGeometry}>
-          <lineBasicMaterial color="#00F0FF" linewidth={3} />
-        </line>
+        <lineSegments geometry={trajectoryGeometry}>
+          <lineBasicMaterial color="#00F0FF" linewidth={2} />
+        </lineSegments>
 
-        {/* Dynamic Waypoint Particles along Trajectory with Glowing Cyan & Emerald Pulses */}
+        {/* Dynamic Waypoint Particles along Trajectory */}
         {trajectoryPoints
           .filter((_, i) => i % 3 === 0)
           .map((pt, i) => (
-            <mesh key={`wp-${i}`} position={[pt.x, 0.055, pt.z]}>
-              <sphereGeometry args={[0.045, 14, 14]} />
-              <meshStandardMaterial
-                color={i % 2 === 0 ? "#00F5FF" : "#10B981"}
-                emissive={i % 2 === 0 ? "#00F5FF" : "#10B981"}
-                emissiveIntensity={3.8}
-              />
-            </mesh>
+            <mesh
+              key={`wp-${i}`}
+              position={[pt.x, 0.055, pt.z]}
+              geometry={waypointSphereGeo}
+              material={i % 2 === 0 ? waypointCyanMat : waypointEmeraldMat}
+            />
           ))}
       </group>
 
-      {/* 2. Stationary Traffic Vehicles (Outlined in Red per User Request) */}
-      {/* Lead Stationary Obstacle Vehicle in Right Lane */}
+      {/* 2. Stationary Traffic Vehicles (Outlined in Red) */}
       <TrafficCar
         position={[0.95, 0, 2.2]}
         color="#3B1D22"
-        label="Target Obstacle"
-        distance="14.8m"
-        ttc="2.45s"
         showRadarLock={sensorMode === "radar" || sensorMode === "fusion"}
       />
 
-      {/* Following Stationary Vehicle in Left Lane */}
       <TrafficCar
         position={[-1.4, 0, -2.6]}
         color="#2D1519"
-        label="Secondary Vehicle"
-        distance="22.1m"
-        ttc="4.10s"
         showRadarLock={sensorMode === "radar" || sensorMode === "fusion"}
       />
 
-      {/* 3. Ego Autonomous Vehicle (Outlined in Green per User Request) */}
+      {/* 3. Ego Autonomous Vehicle (Outlined in Green) */}
       <group ref={egoVehicleGroup} position={[0, 0, 0]}>
         <AutonomousVehicle
           sensorMode={sensorMode}
-          steeringAngle={steeringAngle}
-          wheelRotation={wheelRotation}
-          isBlinkingLeft={isBlinkingLeft}
+          driveMode={driveMode}
         />
       </group>
     </group>
@@ -971,8 +1069,7 @@ export const HeroGlassObject: React.FC = () => {
         </div>
       </div>
 
-
-      {/* 3D WebGL Canvas with data-lenis-prevent and wheel propagation fix */}
+      {/* 3D WebGL Canvas with WebGLBoundary protection */}
       <div
         className="h-full w-full cursor-grab active:cursor-grabbing"
         data-lenis-prevent={isInteractive ? true : undefined}
@@ -983,71 +1080,64 @@ export const HeroGlassObject: React.FC = () => {
         }}
         onClick={() => setIsInteractive(true)}
       >
-        <Canvas
-          camera={{ position: [0, 3.8, 6.8], fov: 40 }}
-          gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-          dpr={[1, 2]}
-        >
-          {/* HIGH-VISIBILITY STUDIO LIGHTING SUITE */}
-          {/* 1. Rich Ambient Lighting so materials are never blacked out */}
-          <ambientLight intensity={1.8} color="#FFFFFF" />
-
-          {/* 2. Top Down Softbox Directional Light for Clear Vehicle Contours */}
-          <directionalLight
-            position={[0, 15, 2]}
-            intensity={3.2}
-            color="#FFFFFF"
-            castShadow
-          />
-
-          {/* 3. Front-Right Key Light for Crisp Reflections on Hood & Windshield */}
-          <directionalLight
-            position={[6, 9, 7]}
-            intensity={2.8}
-            color="#FFFFFF"
-          />
-
-          {/* 4. Rear-Left Fill Light */}
-          <directionalLight
-            position={[-6, 7, -6]}
-            intensity={2.0}
-            color="#CBD5E1"
-          />
-
-          {/* 5. Electric Cyan Studio Rim Light */}
-          <pointLight position={[-4, 3, 2]} intensity={3.5} color="#00E5FF" distance={14} />
-
-          {/* 6. Ruby Specular Rim Light */}
-          <pointLight position={[4, 2, -3]} intensity={2.5} color="#F43F5E" distance={12} />
-
-          {/* 7. Center Road Overhead Spotlight */}
-          <pointLight position={[0, 5, 1]} intensity={2.5} color="#FFFFFF" distance={12} />
-
-          {/* Gentle Floating Motion */}
-          <Float
-            speed={driveMode === "inspect" ? 0 : 1.0}
-            rotationIntensity={0.12}
-            floatIntensity={0.25}
-            floatingRange={[-0.04, 0.04]}
+        <WebGLBoundary>
+          <Canvas
+            camera={{ position: [0, 3.8, 6.8], fov: 40 }}
+            gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+            dpr={[1, 2]}
           >
-            <AutonomousVehicleScene driveMode={driveMode} sensorMode={sensorMode} />
-          </Float>
+            {/* HIGH-VISIBILITY STUDIO LIGHTING SUITE */}
+            <ambientLight intensity={1.8} color="#FFFFFF" />
 
-          {/* OrbitControls with Zoom and Pan Settings */}
-          <OrbitControls
-            ref={controlsRef}
-            enabled={isInteractive}
-            enableZoom={isInteractive}
-            enableRotate={isInteractive}
-            minDistance={1.8}
-            maxDistance={14.0}
-            enablePan={false}
-            dampingFactor={0.08}
-            enableDamping={true}
-            maxPolarAngle={Math.PI / 2.02}
-            minPolarAngle={Math.PI / 8}
-          />
-        </Canvas>
+            <directionalLight
+              position={[0, 15, 2]}
+              intensity={3.2}
+              color="#FFFFFF"
+              castShadow
+            />
+
+            <directionalLight
+              position={[6, 9, 7]}
+              intensity={2.8}
+              color="#FFFFFF"
+            />
+
+            <directionalLight
+              position={[-6, 7, -6]}
+              intensity={2.0}
+              color="#CBD5E1"
+            />
+
+            <pointLight position={[-4, 3, 2]} intensity={3.5} color="#00E5FF" distance={14} />
+            <pointLight position={[4, 2, -3]} intensity={2.5} color="#F43F5E" distance={12} />
+            <pointLight position={[0, 5, 1]} intensity={2.5} color="#FFFFFF" distance={12} />
+
+            {/* Gentle Floating Motion */}
+            <Float
+              speed={driveMode === "inspect" ? 0 : 1.0}
+              rotationIntensity={0.12}
+              floatIntensity={0.25}
+              floatingRange={[-0.04, 0.04]}
+            >
+              <AutonomousVehicleScene driveMode={driveMode} sensorMode={sensorMode} />
+            </Float>
+
+            {/* OrbitControls with Zoom and Pan Settings */}
+            <OrbitControls
+              ref={controlsRef}
+              enabled={isInteractive}
+              enableZoom={isInteractive}
+              enableRotate={isInteractive}
+              minDistance={1.8}
+              maxDistance={14.0}
+              enablePan={false}
+              dampingFactor={0.08}
+              enableDamping={true}
+              maxPolarAngle={Math.PI / 2.02}
+              minPolarAngle={Math.PI / 8}
+            />
+          </Canvas>
+        </WebGLBoundary>
       </div>
 
       {/* INTERACTIVE CONTROLS BAR (BOTTOM) */}
@@ -1089,7 +1179,7 @@ export const HeroGlassObject: React.FC = () => {
             </button>
           </div>
 
-          {/* SENSOR VISUALIZATION DROPDOWN (USER REQUEST) */}
+          {/* SENSOR VISUALIZATION DROPDOWN */}
           <div className="relative">
             <button
               type="button"

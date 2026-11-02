@@ -1,7 +1,9 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://animeshbasak.vercel.app";
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL.startsWith("http"))
+    ? process.env.NEXT_PUBLIC_SITE_URL
+    : "https://animeshbasak14.netlify.app";
   const currentDate = new Date();
 
   return [

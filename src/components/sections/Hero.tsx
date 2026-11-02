@@ -29,6 +29,48 @@ const HuggingFaceIcon: React.FC<{ className?: string }> = ({ className = "h-4 w-
   </svg>
 );
 
+// Error boundary for dynamic 3D Canvas
+class CanvasErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error: any) {
+    console.warn("[Hero 3D Canvas Error Caught]:", error);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex h-full w-full flex-col items-center justify-center rounded-3xl border border-white/10 bg-[#0B0B0B] p-6 text-center">
+          <div className="h-12 w-12 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-3 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+            <Sparkles className="h-6 w-6" />
+          </div>
+          <h4 className="text-base font-bold text-white mb-1">
+            Autonomous Vehicle Perception Simulator
+          </h4>
+          <p className="text-xs text-neutral-400 max-w-sm mb-4 leading-relaxed font-mono">
+            CARLA 60 FPS • Continuous TD3 Agent • Multi-Modal Sensor Fusion
+          </p>
+          <button
+            type="button"
+            onClick={() => this.setState({ hasError: false })}
+            className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-mono text-white hover:bg-white/20 transition-colors"
+          >
+            Retry 3D Simulation
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 // Dynamically import 3D Canvas with ssr: false
 const HeroGlassCanvas = dynamic(
   () => import("@/components/canvas/HeroGlassObject"),
@@ -208,7 +250,9 @@ export const Hero: React.FC = () => {
         {/* Right Column: 3D Autonomous Vehicle Simulator Canvas */}
         <div className="relative flex h-[420px] w-full flex-1 items-center justify-center sm:h-[500px] lg:h-[580px]">
           <div className="absolute h-80 w-80 rounded-full bg-white/[0.02] blur-3xl" />
-          <HeroGlassCanvas />
+          <CanvasErrorBoundary>
+            <HeroGlassCanvas />
+          </CanvasErrorBoundary>
         </div>
       </div>
 

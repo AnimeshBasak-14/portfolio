@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["three"],
+  experimental: {
+    cpus: 1,
+  },
   images: {
     remotePatterns: [
       {

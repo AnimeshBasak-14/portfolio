@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 interface TrailPoint {
@@ -17,8 +17,9 @@ interface TrailPoint {
  * 2. An elastic trailing droplet that fades out over ~0.5s.
  * 3. A large soft ambient spotlight that follows the cursor across the entire viewport.
  * 
- * Physics parameters:
- * - stiffness / damping: controls the snap and trailing delay of the follower droplet.
+ * Performance optimized:
+ * - Disabled automatically on touch screens or reduced-motion.
+ * - Stable listeners without tearing or redundant effect runs.
  */
 export const CustomCursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -40,6 +41,8 @@ export const CustomCursor: React.FC = () => {
   const ambientY = useSpring(mouseY, ambientSpringConfig);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     // Disable on touch devices or small screens
     const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -54,7 +57,7 @@ export const CustomCursor: React.FC = () => {
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
+      setIsVisible((prev) => (prev ? prev : true));
 
       // Check if hovering over clickable elements
       const target = e.target as HTMLElement | null;
@@ -90,7 +93,7 @@ export const CustomCursor: React.FC = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [mouseX, mouseY]);
 
   // Periodic cleanup for fading trail points
   useEffect(() => {
@@ -105,7 +108,7 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
-      {/* 1. Viewport Ambient Spotlight Glow - illuminates glass surfaces from underneath */}
+      {/* 1. Viewport Ambient Spotlight Glow */}
       <motion.div
         className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl transition-opacity duration-300"
         style={{
@@ -120,8 +123,8 @@ export const CustomCursor: React.FC = () => {
 
       {/* 2. Trailing liquid droplets fading out */}
       {trails.map((t, idx) => {
-        const opacity = (idx + 1) / (trails.length + 1) * 0.4;
-        const scale = (idx + 1) / (trails.length + 1) * 0.8;
+        const opacity = ((idx + 1) / (trails.length + 1)) * 0.4;
+        const scale = ((idx + 1) / (trails.length + 1)) * 0.8;
         return (
           <motion.div
             key={t.id}

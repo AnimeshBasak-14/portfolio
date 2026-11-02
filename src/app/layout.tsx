@@ -5,7 +5,9 @@ import { CustomCursor } from "@/components/ui/CustomCursor";
 import { LiquidFilter } from "@/components/ui/LiquidFilter";
 import { personalData } from "@/data/personal";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://animeshbasak.vercel.app";
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL.startsWith("http"))
+  ? process.env.NEXT_PUBLIC_SITE_URL
+  : "https://animeshbasak14.netlify.app";
 
 export const viewport: Viewport = {
   themeColor: "#000000",
