@@ -17,16 +17,16 @@ export interface ResearchPaper {
 export const researchData: ResearchPaper[] = [
   {
     id: "carla-td3-lane-changing",
-    title: "Autonomous Lane-Changing in Dense Traffic Using Twin Delayed DDPG and Multi-Modal Sensor Fusion",
+    title: "Evidential Reinforcement Learning under Continuous POMDPs for Safe Autonomous Navigation",
     status: "Under Review",
     venue: "International Journal / IEEE Conference Submission",
     authors: ["Animesh Basak", "Dr. Neetesh Kumar"],
     supervisor: "Dr. Neetesh Kumar",
     affiliation: "Department of Computer Science and Engineering, Indian Institute of Technology Roorkee",
-    abstract: "Autonomous vehicle lane changing in high-density corridors presents severe safety challenges due to continuous state-action spaces, dynamic surrounding vehicles, and value overestimation in standard actor-critic algorithms. In this work, we design a continuous reinforcement learning framework in the CARLA simulator integrating Twin Delayed DDPG (TD3) with multi-modal sensor fusion (radar, depth cameras, and obstacle proximity sensors). We demonstrate that TD3 significantly mitigates policy degradation and instability, achieving reliable, collision-free maneuvers in complex traffic conditions.",
+    abstract: "Safe autonomous vehicle navigation in continuous partially observable Markov decision processes (POMDPs) presents critical safety challenges due to epistemic sensor uncertainty, dynamic surrounding obstacles, and value overestimation in standard actor-critic algorithms. In this work, we design an Evidential Reinforcement Learning framework under continuous POMDPs in the CARLA simulator integrating Twin Delayed DDPG (TD3) with multi-modal sensor fusion (radar, depth cameras, and obstacle proximity sensors) and evidential uncertainty quantification. We demonstrate that our framework significantly mitigates policy degradation and instability, achieving reliable, provably safe navigation maneuvers in complex traffic environments.",
     contributions: [
-      "Formulated a multi-modal observation space combining 500-ray radar arrays, depth image features, and 9-dimensional ego-vehicle kinematics in CARLA.",
-      "Conducted extensive comparative benchmarking between DDPG and TD3, demonstrating that clipped double Q-learning prevents catastrophic policy collapses during aggressive lane shifts.",
+      "Formulated evidential continuous actor-critic control under partially observable state spaces (continuous POMDPs) for autonomous navigation in CARLA.",
+      "Synthesized epistemic uncertainty quantification over multi-modal LiDAR/radar perceptions to bound risk during high-speed maneuvers.",
       "Achieved a 577.7% improvement in cumulative episode reward (1277.3 vs. -267.4) and a 958.5% reduction in actor gradient loss.",
       "Validated policy robustness over 5,000+ simulation episodes and 48 safety-critical test scenarios including emergency braking and tight merges.",
     ],
@@ -36,9 +36,9 @@ export const researchData: ResearchPaper[] = [
       { label: "Success Rate", value: "85%+" },
       { label: "Execution Time", value: "-20%" },
     ],
-    tags: ["Reinforcement Learning", "CARLA", "TD3", "Autonomous Vehicles", "Sensor Fusion", "PyTorch"],
+    tags: ["Evidential RL", "Continuous POMDPs", "CARLA", "TD3", "Autonomous Vehicles", "Safe Navigation", "PyTorch"],
     videoPlaylistUrl: "https://youtube.com/playlist?list=PLNy_bKEJyhIM&si=VP8HZBgkaJzIxzbY",
-    codeUrl: "https://github.com/AnimeshBasak-14/carla-autonomous-driving-rl",
+    codeUrl: "https://github.com/AnimeshBasak-14/TD3RCO",
   },
   {
     id: "conformance-constraint-discovery",

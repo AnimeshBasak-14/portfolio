@@ -82,9 +82,9 @@ const projectArchitectures: Record<
     ],
   },
   "autonomous-lane-changing-carla": {
-    pipelineName: "Continuous TD3 Closed-Loop Control & Sensor Fusion Pipeline",
+    pipelineName: "Evidential Reinforcement Learning under Continuous POMDPs",
     pipelineSummary:
-      "End-to-end perception to actuation framework utilizing Twin Delayed DDPG (TD3) with clipped target policy smoothing noise to overcome value overestimation in high-speed highway lane changes.",
+      "End-to-end perception to actuation framework utilizing Twin Delayed DDPG (TD3) and evidential uncertainty quantification under continuous partially observable environments (POMDPs) in CARLA.",
     steps: [
       {
         category: "01 • Environment",
@@ -120,48 +120,6 @@ const projectArchitectures: Record<
         description:
           "Dense multi-objective reward R = +v_x - 10|d_lane| - 100·collision - 5·jerk yielding +577.7% reward gain over DDPG, 958.5% lower actor loss, and 85%+ success rate over 5,000+ simulation episodes.",
         specs: "+577.7% Reward Gain • 85%+ Success • 48 Recorded Runs",
-      },
-    ],
-  },
-  "student-performance-prediction-aws": {
-    pipelineName: "Production Machine Learning Deployment on AWS EC2",
-    pipelineSummary:
-      "Scalable containerized ML prediction microservice served via Flask and Docker on AWS EC2, leveraging Amazon ECR and IAM role governance.",
-    steps: [
-      {
-        category: "01 • Client Layer",
-        title: "Interactive Web UI & REST API",
-        description:
-          "Handles incoming academic, demographic, and socioeconomic indicators with automated schema validation and sanity checks.",
-        specs: "REST API Endpoint • JSON Schema Validation",
-      },
-      {
-        category: "02 • Feature Transformation",
-        title: "Scikit-Learn ColumnTransformer",
-        description:
-          "Automated feature engineering pipeline executing median imputation, one-hot categorical encoding, and standard feature scaling.",
-        specs: "ColumnTransformer • Standard Scaler",
-      },
-      {
-        category: "03 • Model Inference",
-        title: "Ensemble Gradient Boosting (87.76% Accuracy)",
-        description:
-          "High-accuracy ensemble classifier evaluated across precision/recall to identify at-risk students for proactive intervention.",
-        specs: "87.76% Accuracy • Low-latency inference",
-      },
-      {
-        category: "04 • Containerization",
-        title: "Multi-Stage Docker Packaging",
-        description:
-          "Lightweight Docker container bundling Flask application, Gunicorn WSGI workers, and serialized joblib model artifacts.",
-        specs: "Docker • Multi-stage Build • Gunicorn WSGI",
-      },
-      {
-        category: "05 • Cloud Hosting",
-        title: "AWS EC2 + Amazon ECR + IAM Roles",
-        description:
-          "Continuous container delivery through Amazon ECR onto AWS EC2 instances, reducing overall infrastructure deployment costs by 40%.",
-        specs: "AWS EC2 • Amazon ECR • 40% Cost Reduction",
       },
     ],
   },
@@ -207,118 +165,6 @@ const projectArchitectures: Record<
       },
     ],
   },
-  "enhanced-qa-chatbot-openai": {
-    pipelineName: "Context-Aware Conversational Intelligence & RAG",
-    pipelineSummary:
-      "Resilient conversational assistant with prompt token optimization, zero error circuit-breaking, and LangChain orchestration.",
-    steps: [
-      {
-        category: "01 • Prompt Engine",
-        title: "Dynamic Prompt Template & Hallucination Guard",
-        description:
-          "Adaptive prompt engineering strategies reducing token overhead to a median of 149 tokens per response.",
-        specs: "Median 149 tokens • Anti-Hallucination Guard",
-      },
-      {
-        category: "02 • Context Buffer",
-        title: "LangChain Conversation Memory",
-        description:
-          "Context-preserving conversational memory buffer preventing context drift across multi-turn interactions.",
-        specs: "ConversationBufferWindow • Turn Memory",
-      },
-      {
-        category: "03 • API Gateway",
-        title: "OpenAI Model Gateway with Exponential Backoff",
-        description:
-          "Engineered with automated retry backoff circuits achieving a 0.0% API failure rate under sustained load.",
-        specs: "0.0% API Error Rate • Automated Retry",
-      },
-      {
-        category: "04 • Performance",
-        title: "Low-Latency Response Generation",
-        description:
-          "Delivers a 1.28s median (P50) response time and 6.18s 99th percentile (P99) latency in production testing.",
-        specs: "P50 Latency: 1.28s • P99: 6.18s",
-      },
-    ],
-  },
-  "sign-sense-recognition": {
-    pipelineName: "Edge Computer Vision & Sequential LSTM Gesture Pipeline",
-    pipelineSummary:
-      "Real-time webcam inference system extracting MediaPipe 3D hand keypoints and classifying sequential gestures for industrial deployment at IOCL.",
-    steps: [
-      {
-        category: "01 • Video Capture",
-        title: "OpenCV 60 FPS Video Stream",
-        description:
-          "Real-time frame ingestion with dynamic contrast normalization and hand region localization.",
-        specs: "60 FPS RGB • OpenCV Capture",
-      },
-      {
-        category: "02 • Landmark Extraction",
-        title: "Google MediaPipe 3D Hand Tracking",
-        description:
-          "Extracts 21 3D hand landmarks (x, y, z coordinates) per frame with robust spatial invariance.",
-        specs: "21 3D Landmarks • Google MediaPipe",
-      },
-      {
-        category: "03 • Sequence Buffer",
-        title: "30-Timestep Temporal Frame Window",
-        description:
-          "Buffers temporal keypoint coordinate sequences to capture dynamic gesture velocities and acceleration.",
-        specs: "T = 30 timesteps • Normalized [0, 1]",
-      },
-      {
-        category: "04 • Recurrent Network",
-        title: "Two-Layer Bidirectional LSTM",
-        description:
-          "Sequential deep recurrent neural network modeling bidirectional dependencies across gesture trajectories.",
-        specs: "Bi-LSTM • 99.0% Accuracy",
-      },
-      {
-        category: "05 • Production Serving",
-        title: "Industrial Deployment at IOCL",
-        description:
-          "Achieved 99.0% classification accuracy and 25% faster inference than legacy TensorFlow models.",
-        specs: "99.0% Accuracy • +25% Speed Gain",
-      },
-    ],
-  },
-  "network-security-phishing": {
-    pipelineName: "High-Dimensional Threat Classification Pipeline",
-    pipelineSummary:
-      "Automated cybersecurity machine learning classifier analyzing high-dimensional network features to accurately identify phishing vectors.",
-    steps: [
-      {
-        category: "01 • Ingestion",
-        title: "Network Packet & URL Stream",
-        description:
-          "Continuous threat intelligence ingestion capturing live URL requests and host headers.",
-        specs: "High-throughput Stream • Threat Intel",
-      },
-      {
-        category: "02 • Feature Engine",
-        title: "High-Dimensional Feature Extraction",
-        description:
-          "Extracts lexical, structural, statistical, and domain security attributes from incoming request metadata.",
-        specs: "30+ High-dimensional features",
-      },
-      {
-        category: "03 • Classification",
-        title: "Tuned XGBoost & Random Forest Ensemble",
-        description:
-          "Ensemble classifier tuned via stratified cross-validation delivering 98.7% classification accuracy.",
-        specs: "98.7% Accuracy • Stratified K-Fold",
-      },
-      {
-        category: "04 • Microservice",
-        title: "Dockerized Container API Serving",
-        description:
-          "Containerized Docker microservice with sub-5ms latency for enterprise security gateway integration.",
-        specs: "< 5ms Latency • Docker Container",
-      },
-    ],
-  },
 };
 
 export const Projects: React.FC = () => {
@@ -329,11 +175,10 @@ export const Projects: React.FC = () => {
 
   const filterOptions = [
     { label: "All Projects", id: "all" },
+    { label: "WebAssembly", id: "WebAssembly" },
     { label: "Reinforcement Learning", id: "Reinforcement Learning" },
-    { label: "CARLA", id: "CARLA" },
-    { label: "RAG & LLMs", id: "RAG" },
-    { label: "AWS & Docker", id: "AWS (EC2, ECR)" },
-    { label: "Computer Vision", id: "Computer Vision" },
+    { label: "CARLA Simulation", id: "CARLA" },
+    { label: "RAG & Document AI", id: "RAG" },
   ];
 
   const filteredProjects =
@@ -433,22 +278,16 @@ export const Projects: React.FC = () => {
         >
           {filteredProjects.map((project) => {
             // Contextual theme per project
+            const isWasm = project.id.includes("documentforge");
             const isCarla = project.id.includes("carla");
-            const isAws = project.id.includes("aws");
             const isRag = project.id.includes("rag");
-            const isCv = project.id.includes("sign-sense");
-            const isSec = project.id.includes("security");
 
-            const bannerGradient = isCarla
+            const bannerGradient = isWasm
+              ? "from-cyan-950/40 via-[#0A161A] to-[#070707] border-cyan-500/25"
+              : isCarla
               ? "from-emerald-950/40 via-[#0E1713] to-[#070707] border-emerald-500/20"
-              : isAws
-              ? "from-amber-950/30 via-[#15120B] to-[#070707] border-amber-500/20"
               : isRag
               ? "from-purple-950/35 via-[#130D1A] to-[#070707] border-purple-500/20"
-              : isCv
-              ? "from-cyan-950/35 via-[#0A161A] to-[#070707] border-cyan-500/20"
-              : isSec
-              ? "from-rose-950/30 via-[#160B0E] to-[#070707] border-rose-500/20"
               : "from-[#161616] via-[#0F0F0F] to-[#070707] border-white/10";
 
             return (

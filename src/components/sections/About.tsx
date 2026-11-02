@@ -23,8 +23,8 @@ export const About: React.FC = () => {
   const researchPillars = [
     {
       icon: <Car className="h-5 w-5 text-emerald-400" />,
-      title: "Continuous RL in CARLA Simulator",
-      desc: "Specialized in continuous actor-critic algorithms (Twin Delayed DDPG - TD3, DDPG, SAC) for autonomous left-lane changing, emergency collision avoidance, and sensor fusion in CARLA.",
+      title: "Evidential RL & Continuous POMDPs",
+      desc: "Evidential Reinforcement Learning under continuous partially observable environments (POMDPs) for safe autonomous vehicle navigation, emergency collision avoidance, and sensor fusion in CARLA.",
       badge: "border-emerald-500/25 bg-emerald-500/10 text-emerald-400",
       borderHover: "hover:border-emerald-500/40",
     },
@@ -145,13 +145,22 @@ export const About: React.FC = () => {
               {/* Verified Profiles */}
               <div className="mt-6 w-full pt-4 border-t border-white/10 flex items-center justify-around text-xs font-mono text-neutral-300 font-semibold">
                 <a
-                  href={personalData.leetcode}
+                  href={personalData.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-[#FFA116] transition-colors"
-                  title="LeetCode Profile"
+                  className="hover:text-white transition-colors"
+                  title="GitHub Profile"
                 >
-                  LeetCode ↗
+                  GitHub ↗
+                </a>
+                <a
+                  href={personalData.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-cyan-400 transition-colors"
+                  title="LinkedIn Profile"
+                >
+                  LinkedIn ↗
                 </a>
                 <a
                   href={personalData.huggingface}
@@ -161,15 +170,6 @@ export const About: React.FC = () => {
                   title="Hugging Face Profile (rohan700)"
                 >
                   Hugging Face ↗
-                </a>
-                <a
-                  href={personalData.gfg}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-[#2F8D46] transition-colors"
-                  title="GeeksforGeeks Profile"
-                >
-                  GfG ↗
                 </a>
                 <a
                   href={personalData.medium}
@@ -197,7 +197,7 @@ export const About: React.FC = () => {
               </div>
               
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-4 tracking-tight">
-                Advancing Autonomous Vehicles & Continuous Reinforcement Learning
+                Evidential Reinforcement Learning under Continuous POMDPs for Safe Autonomous Navigation
               </h3>
               
               <div className="space-y-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
