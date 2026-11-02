@@ -9,9 +9,6 @@ import {
   Car,
   Compass,
   GraduationCap,
-  Cpu,
-  Brain,
-  ShieldCheck,
   Award,
   Zap,
   TrendingUp,
@@ -27,27 +24,6 @@ export const About: React.FC = () => {
       desc: "Evidential Reinforcement Learning under continuous partially observable environments (POMDPs) for safe autonomous vehicle navigation, emergency collision avoidance, and sensor fusion in CARLA.",
       badge: "border-emerald-500/25 bg-emerald-500/10 text-emerald-400",
       borderHover: "hover:border-emerald-500/40",
-    },
-    {
-      icon: <Brain className="h-5 w-5 text-purple-400" />,
-      title: "LLMs, RAG & Conversational AI",
-      desc: "Designing low-latency retrieval-augmented generation architectures with FAISS, LangChain, and Streamlit for conversational memory and multi-document research retrieval.",
-      badge: "border-purple-500/25 bg-purple-500/10 text-purple-400",
-      borderHover: "hover:border-purple-500/40",
-    },
-    {
-      icon: <Cpu className="h-5 w-5 text-amber-400" />,
-      title: "Cloud MLOps & Containerization",
-      desc: "Deploying containerized machine learning microservices on AWS (EC2, ECR, IAM) with Docker, Flask, and automated CI/CD pipelines to ensure reproducible, cost-effective inference.",
-      badge: "border-amber-500/25 bg-amber-500/10 text-amber-400",
-      borderHover: "hover:border-amber-500/40",
-    },
-    {
-      icon: <ShieldCheck className="h-5 w-5 text-cyan-400" />,
-      title: "Computer Vision & Edge Perception",
-      desc: "Real-time webcam inference utilizing MediaPipe 3D hand keypoints and LSTM sequential gesture classification developed for industrial deployment at IOCL (99% accuracy).",
-      badge: "border-cyan-500/25 bg-cyan-500/10 text-cyan-400",
-      borderHover: "hover:border-cyan-500/40",
     },
   ];
 
@@ -260,8 +236,8 @@ export const About: React.FC = () => {
                 </p>
               </div>
 
-              {/* Four Pillars */}
-              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Research Focus Area */}
+              <div className="mt-6 grid grid-cols-1 gap-4">
                 {researchPillars.map((pillar, idx) => (
                   <div
                     key={idx}

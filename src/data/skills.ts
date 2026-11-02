@@ -3,7 +3,7 @@ export interface SkillCategory {
   description: string;
   skills: {
     name: string;
-    level: string;
+    level?: string;
     highlight?: boolean;
   }[];
 }

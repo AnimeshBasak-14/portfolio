@@ -37,7 +37,7 @@ export const personalData: PersonalInfo = {
   linkedin: "https://linkedin.com/in/animeshbasak03/",
   github: "https://github.com/AnimeshBasak-14",
   medium: "https://medium.com/@basakanimesh16",
-  location: "IIT Roorkee, Uttarakhand / South Delhi, India",
+  location: "IIT Roorkee, Uttarakhand, India",
   status: "Direct Ph.D. @ IIT Roorkee (Dept. of CSE) under Dr. Neetesh Kumar",
   youtubePlaylistUrl: "https://youtube.com/playlist?list=PLNy_bKEJyhIM&si=VP8HZBgkaJzIxzbY",
 };

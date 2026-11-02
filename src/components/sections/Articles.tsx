@@ -24,6 +24,18 @@ export const Articles: React.FC = () => {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [copiedLink, setCopiedLink] = useState(false);
 
+  // Lock body scroll when modal is open to ensure mouse wheel scrolls modal content
+  React.useEffect(() => {
+    if (selectedArticle) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedArticle]);
+
   const handleShare = (article: Article) => {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(article.canonicalUrl);
@@ -204,7 +216,11 @@ export const Articles: React.FC = () => {
       {/* FULL ARTICLE MODAL READER */}
       <AnimatePresence>
         {selectedArticle && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+            data-lenis-prevent
+            onWheel={(e) => e.stopPropagation()}
+          >
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -222,6 +238,8 @@ export const Articles: React.FC = () => {
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="relative my-8 w-full max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-[#0C101A] p-6 sm:p-10 shadow-[0_25px_80px_rgba(0,0,0,0.95)] z-10"
               style={{ backgroundColor: "rgba(12, 16, 26, 0.98)" }}
+              data-lenis-prevent
+              onWheel={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
@@ -279,7 +297,11 @@ export const Articles: React.FC = () => {
               </div>
 
               {/* Article Content Scroll Container */}
-              <div className="mt-6 space-y-8 max-h-[65vh] overflow-y-auto pr-2 font-sans text-neutral-200 leading-relaxed text-sm sm:text-base">
+              <div
+                className="mt-6 space-y-8 max-h-[65vh] overflow-y-auto pr-3 sm:pr-5 font-sans text-neutral-200 leading-relaxed text-sm sm:text-base overscroll-contain select-text"
+                data-lenis-prevent
+                onWheel={(e) => e.stopPropagation()}
+              >
                 {/* Intro */}
                 <p className="text-neutral-200 leading-relaxed font-normal first-letter:text-4xl first-letter:font-bold first-letter:text-cyan-400 first-letter:mr-1">
                   {selectedArticle.content.intro}

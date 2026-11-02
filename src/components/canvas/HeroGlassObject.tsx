@@ -1002,7 +1002,7 @@ function AutonomousVehicleScene({
         </lineSegments>
 
         {/* Planned Continuous RL Trajectory Path Line in Electric Cyan */}
-        <primitive object={trajectoryLineObj} />
+        <primitive object={trajectoryLineObj} dispose={null} />
 
         {/* Dynamic Waypoint Particles along Trajectory */}
         {trajectoryPoints
@@ -1056,7 +1056,7 @@ export const HeroGlassObject: React.FC = () => {
   const controlsRef = useRef<any>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close sensor dropdown when clicking outside
+  // Close sensor dropdown when clicking outside or pressing Escape
   useEffect(() => {
     if (!sensorDropdownOpen) return;
     const handlePointerDown = (e: MouseEvent | TouchEvent) => {
@@ -1064,11 +1064,18 @@ export const HeroGlassObject: React.FC = () => {
         setSensorDropdownOpen(false);
       }
     };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSensorDropdownOpen(false);
+      }
+    };
     document.addEventListener("mousedown", handlePointerDown);
     document.addEventListener("touchstart", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("mousedown", handlePointerDown);
       document.removeEventListener("touchstart", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [sensorDropdownOpen]);
 
@@ -1260,8 +1267,12 @@ export const HeroGlassObject: React.FC = () => {
             {/* Opaque Dark Frosted Glass Dropdown Menu */}
             {sensorDropdownOpen && (
               <div
-                className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-72 rounded-2xl border border-cyan-500/30 bg-[#0B0F19] p-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.95)] backdrop-blur-2xl z-50 space-y-1.5"
-                style={{ backgroundColor: "rgba(11, 15, 25, 0.98)" }}
+                className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-72 rounded-2xl border border-cyan-500/40 bg-[#0B0F19] p-2.5 shadow-[0_25px_60px_rgba(0,0,0,0.98)] backdrop-blur-3xl z-50 space-y-1.5"
+                style={{
+                  backgroundColor: "#0B0F19",
+                  backdropFilter: "blur(24px)",
+                  WebkitBackdropFilter: "blur(24px)",
+                }}
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="px-2.5 py-1 text-[10px] font-mono text-cyan-400 uppercase tracking-wider border-b border-white/10 font-bold mb-1 flex items-center justify-between">

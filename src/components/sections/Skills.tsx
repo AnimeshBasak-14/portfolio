@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { skillsData } from "@/data/skills";
 import { TiltCard } from "@/components/ui/TiltCard";
+import { SkillIcon } from "@/components/ui/SkillIcons";
 import { Zap, Bot, Sparkles, Code2, Cloud } from "lucide-react";
 import { containerVariants, itemVariants } from "@/lib/animations";
 
@@ -129,36 +130,22 @@ export const Skills: React.FC = () => {
                       {category.description}
                     </p>
 
-                    {/* Attractive High-Contrast Skill Tiles */}
+                    {/* Attractive High-Contrast Skill Tiles with Official Logos */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {category.skills.map((skill, sIdx) => {
-                        const isExpert = skill.level.toLowerCase().includes("expert");
-                        const isAdvanced = skill.level.toLowerCase().includes("advanced");
-
                         return (
                           <div
                             key={sIdx}
-                            className="group/skill relative flex items-center justify-between rounded-xl border border-white/15 bg-white/[0.03] p-3 sm:p-3.5 transition-all duration-200 hover:border-white/50 hover:bg-white/[0.07]"
+                            className="group/skill relative flex items-center gap-3 rounded-xl border border-white/15 bg-white/[0.03] p-2.5 sm:p-3 transition-all duration-200 hover:border-white/50 hover:bg-white/[0.07] hover:scale-[1.01]"
                           >
-                            {/* Left: Indicator Dot + Skill Name */}
-                            <div className="flex items-center gap-2.5 min-w-0 mr-2">
-                              <span className={`h-1.5 w-1.5 rounded-full ${meta.dot} shrink-0 shadow-sm transition-transform duration-300 group-hover/skill:scale-125`} />
-                              <span className="text-xs sm:text-sm font-bold text-white transition-colors truncate">
-                                {skill.name}
-                              </span>
+                            {/* Official Brand Logo */}
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] border border-white/10 p-1.5 transition-transform duration-300 group-hover/skill:scale-110 shadow-sm">
+                              <SkillIcon name={skill.name} className="h-full w-full object-contain" />
                             </div>
 
-                            {/* Right: Classy Level Badge */}
-                            <span
-                              className={`shrink-0 rounded-full px-2.5 py-0.5 font-mono text-[9px] sm:text-[10px] uppercase tracking-wider transition-all ${
-                                isExpert
-                                  ? meta.expertBadge
-                                  : isAdvanced
-                                  ? "border border-white/40 bg-white/10 text-white font-bold"
-                                  : "border border-white/20 bg-white/[0.04] text-neutral-300 font-semibold"
-                              }`}
-                            >
-                              {skill.level}
+                            {/* Skill Name */}
+                            <span className="text-xs sm:text-sm font-bold text-white transition-colors truncate">
+                              {skill.name}
                             </span>
                           </div>
                         );
