@@ -18,7 +18,6 @@ const categoryMeta = [
     topLine: "from-transparent via-emerald-500/50 to-transparent",
     hoverBorder: "hover:border-emerald-500/40",
     dot: "bg-emerald-400",
-    expertBadge: "bg-emerald-400 text-black shadow-[0_0_10px_rgba(52,211,153,0.3)] font-black",
   },
   {
     icon: Sparkles,
@@ -28,7 +27,6 @@ const categoryMeta = [
     topLine: "from-transparent via-purple-500/50 to-transparent",
     hoverBorder: "hover:border-purple-500/40",
     dot: "bg-purple-400",
-    expertBadge: "bg-purple-400 text-black shadow-[0_0_10px_rgba(192,132,252,0.3)] font-black",
   },
   {
     icon: Code2,
@@ -38,7 +36,6 @@ const categoryMeta = [
     topLine: "from-transparent via-cyan-500/50 to-transparent",
     hoverBorder: "hover:border-cyan-500/40",
     dot: "bg-cyan-400",
-    expertBadge: "bg-cyan-400 text-black shadow-[0_0_10px_rgba(34,211,238,0.3)] font-black",
   },
   {
     icon: Cloud,
@@ -48,7 +45,6 @@ const categoryMeta = [
     topLine: "from-transparent via-amber-500/50 to-transparent",
     hoverBorder: "hover:border-amber-500/40",
     dot: "bg-amber-400",
-    expertBadge: "bg-amber-400 text-black shadow-[0_0_10px_rgba(251,191,36,0.3)] font-black",
   },
 ];
 
@@ -130,22 +126,29 @@ export const Skills: React.FC = () => {
                       {category.description}
                     </p>
 
-                    {/* Attractive High-Contrast Skill Tiles with Official Logos */}
+                    {/* Attractive High-Contrast Skill Tiles with Official Logos & Framework/Language Tags */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {category.skills.map((skill, sIdx) => {
                         return (
                           <div
                             key={sIdx}
-                            className="group/skill relative flex items-center gap-3 rounded-xl border border-white/15 bg-white/[0.03] p-2.5 sm:p-3 transition-all duration-200 hover:border-white/50 hover:bg-white/[0.07] hover:scale-[1.01]"
+                            className="group/skill relative flex items-center justify-between gap-2.5 rounded-xl border border-white/15 bg-white/[0.03] p-2.5 sm:p-3 transition-all duration-200 hover:border-white/50 hover:bg-white/[0.07] hover:scale-[1.01]"
                           >
-                            {/* Official Brand Logo */}
-                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] border border-white/10 p-1.5 transition-transform duration-300 group-hover/skill:scale-110 shadow-sm">
-                              <SkillIcon name={skill.name} className="h-full w-full object-contain" />
+                            <div className="flex items-center gap-3 min-w-0 mr-1">
+                              {/* Official Brand Logo */}
+                              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] border border-white/10 p-1.5 transition-transform duration-300 group-hover/skill:scale-110 shadow-sm">
+                                <SkillIcon name={skill.name} className="h-full w-full object-contain" />
+                              </div>
+
+                              {/* Skill Name */}
+                              <span className="text-xs sm:text-sm font-bold text-white transition-colors truncate">
+                                {skill.name}
+                              </span>
                             </div>
 
-                            {/* Skill Name */}
-                            <span className="text-xs sm:text-sm font-bold text-white transition-colors truncate">
-                              {skill.name}
+                            {/* Framework / Language / Platform Tag */}
+                            <span className="shrink-0 rounded-md border border-white/15 bg-white/[0.05] px-2 py-0.5 font-mono text-[9px] sm:text-[10px] text-neutral-300 font-medium whitespace-nowrap">
+                              {skill.type}
                             </span>
                           </div>
                         );
